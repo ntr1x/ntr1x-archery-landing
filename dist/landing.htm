@@ -1,0 +1,878 @@
+<template id="landing-gallery-page">
+    <div class="ld ld-page ld-secondary-page">
+        <landing-super></landing-super>
+        <landing-header></landing-header>
+        <landing-gallery-full></landing-gallery-full>
+        <landing-footer></landing-footer>
+    </div>
+</template>
+
+<template id="landing-manage-create-page">
+    <div class="ld ld-page ld-fullscreen-page">
+        <landing-super></landing-super>
+        <landing-header></landing-header>
+        <landing-manage-create></landing-manage-create>
+        <landing-footer></landing-footer>
+    </div>
+</template>
+
+<template id="landing-manage-page">
+    <div class="ld ld-page ld-fullscreen-page">
+        <landing-super></landing-super>
+        <landing-header></landing-header>
+        <landing-manage></landing-manage>
+        <landing-footer></landing-footer>
+    </div>
+</template>
+
+<template id="landing-signin-page">
+    <div class="ld ld-page ld-fullscreen-page">
+        <landing-super></landing-super>
+        <landing-header></landing-header>
+        <landing-account-signin></landing-account-signin>
+        <landing-footer></landing-footer>
+    </div>
+</template>
+
+<template id="landing-signup-page">
+    <div class="ld ld-page ld-fullscreen-page">
+        <landing-super></landing-super>
+        <landing-header></landing-header>
+        <landing-account-signup></landing-account-signup>
+        <landing-footer></landing-footer>
+    </div>
+</template>
+
+<template id="landing-storage-page">
+    <div class="ld ld-page ld-secondary-page">
+        <landing-super></landing-super>
+        <landing-header></landing-header>
+        <landing-storage-full></landing-storage-full>
+        <landing-footer></landing-footer>
+    </div>
+</template>
+
+<template id="landing-page">
+    <div class="ld ld-page">
+        <landing-super></landing-super>
+        <landing-header></landing-header>
+        <landing-gallery></landing-gallery>
+        <landing-video></landing-video>
+        <landing-storage></landing-storage>
+        <landing-usecases></landing-usecases>
+        <landing-pricing></landing-pricing>
+        <landing-feedback></landing-feedback>
+        <landing-footer></landing-footer>
+    </div>
+</template>
+
+
+<template id="landing-account-signin">
+    <div class="ld ld-section ld-body ld-account ld-account-signin">
+        <div class="ld ld-table">
+            <div class="ld ld-cell">
+                <validator name="validation">
+                    <form novalidate @submit.prevent="$validation.valid && signin()">
+                        <div class="form-group">
+                            <h3>Sign In</h3>
+                        </dif>
+                        <div class="form-group" :class="{
+                            'has-error': $validation.email.dirty && ($validation.email.required || $validation.email.pattern),
+                            'has-feedback': $validation.email.dirty && ($validation.email.required || $validation.email.pattern),
+                        }">
+                            <input type="text" class="form-control input-lg" placeholder="Email" v-model="form.email" v-validate:email="{
+                                required: { rule: true, message: 'Email is a required field' },
+                                pattern: { rule: validation.email, message: 'Invalid email address' },
+                            }">
+                            <span v-if="$validation.email.dirty && ($validation.email.required || $validation.email.pattern)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <div v-if="$validation.email.dirty && $validation.email.required">{{ $validation.email.required }}</div>
+                            <div v-if="$validation.email.dirty && !$validation.email.required && $validation.email.pattern">{{ $validation.email.pattern }}</div>
+                        </div>
+                        <div class="form-group" :class="{
+                            'has-error': $validation.password.dirty && ($validation.password.required || $validation.password.minlength),
+                            'has-feedback': $validation.password.dirty && ($validation.password.required || $validation.password.minlength),
+                        }">
+                            <input type="password" class="form-control input-lg" :classes="{ invalid: 'has-error' }" placeholder="Password" v-model="form.password" v-validate:password="{
+                                required: { rule: true, message: 'Password is a required field' },
+                                minlength: { rule: 8, message: 'Your password is too short' },
+                            }">
+                            <span v-if="$validation.password.dirty && ($validation.password.required || $validation.password.minlength)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <div v-if="$validation.password.dirty && $validation.password.required">{{ $validation.password.required }}</div>
+                            <div v-if="$validation.password.dirty && !$validation.password.required && $validation.password.minlength">{{ $validation.password.minlength }}</div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg" v-if="$validation.valid" :disabled="">Sign In</button>
+                        </div>
+                    </form>
+                </validator>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="landing-account-signup">
+    <div class="ld ld-section ld-body ld-account ld-account-signup">
+        <div class="ld ld-table">
+            <div class="ld ld-cell">
+                <validator name="validation">
+                    <form novalidate @submit.prevent="$validation.valid && signup()">
+                        <div class="form-group">
+                            <h3>Register</h3>
+                        </dif>
+                        <div class="form-group" :class="{
+                            'has-error': $validation.email.dirty && ($validation.email.required || $validation.email.pattern),
+                            'has-feedback': $validation.email.dirty && ($validation.email.required || $validation.email.pattern),
+                        }">
+                            <input type="text" class="form-control input-lg" placeholder="Email" v-model="form.email" v-validate:email="{
+                                required: { rule: true, message: 'Email is a required field' },
+                                pattern: { rule: validation.email, message: 'Invalid email address' },
+                            }">
+                            <span v-if="$validation.email.dirty && ($validation.email.required || $validation.email.pattern)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <div v-if="$validation.email.dirty && $validation.email.required">{{ $validation.email.required }}</div>
+                            <div v-if="$validation.email.dirty && !$validation.email.required && $validation.email.pattern">{{ $validation.email.pattern }}</div>
+                        </div>
+                        <div class="form-group" :class="{
+                            'has-error': $validation.password.dirty && ($validation.password.required || $validation.password.minlength),
+                            'has-feedback': $validation.password.dirty && ($validation.password.required || $validation.password.minlength),
+                        }">
+                            <input type="password" class="form-control input-lg" :classes="{ invalid: 'has-error' }" placeholder="Password" v-model="form.password" v-validate:password="{
+                                required: { rule: true, message: 'Password is a required field' },
+                                minlength: { rule: 8, message: 'Your password is too short' },
+                            }">
+                            <span v-if="$validation.password.dirty && ($validation.password.required || $validation.password.minlength)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <div v-if="$validation.password.dirty && $validation.password.required">{{ $validation.password.required }}</div>
+                            <div v-if="$validation.password.dirty && !$validation.password.required && $validation.password.minlength">{{ $validation.password.minlength }}</div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg" v-if="$validation.valid" :disabled="">Register</button>
+                        </div>
+                    </form>
+                </validator>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="landing-feedback">
+    <div class="ld ld-section ld-feedback">
+        <div class="ld ld-container">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ld ld-offset-header">
+                            <h3 class="ld ld-decorate ld-decorate-right"><span class="glyphicon glyphicon-user"></span> Feedback</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="ld ld-feedback-item">
+                            <img class="img-circle" style="width: 70px; height: 70px;" src="/bundles/ntr1xlayout/src/landing/feedback/avatars/1.jpg" />
+                            <div class="ld ld-item-details">
+                                <div><b>Homer Simpson</b></div>
+                                <div><i>The Simpsons, Character</i></div>
+                                <div><p>English? Who need that? I'm never going to England.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="ld ld-feedback-item">
+                            <img class="img-circle" style="width: 70px; height: 70px;" src="/bundles/ntr1xlayout/src/landing/feedback/avatars/2.jpg" />
+                            <div class="ld ld-item-details">
+                                <div><b>Bart Simpson</b></div>
+                                <div><i>The Simpsons, Character</i></div>
+                                <div><p>I didn't do it. Nobody saw me do it. You can't prove anything.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="ld ld-feedback-item">
+                            <img class="img-circle" style="width: 70px; height: 70px;" src="/bundles/ntr1xlayout/src/landing/feedback/avatars/3.jpg" />
+                            <div class="ld ld-item-details">
+                                <div><b>Lisa Simpson</b></div>
+                                <div><i>The Simpsons, Character</i></div>
+                                <div><p>Be myself? I've been myself for eight years and it hasn't worked.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="ld ld-feedback-item">
+                            <img class="img-circle" style="width: 70px; height: 70px;" src="/bundles/ntr1xlayout/src/landing/feedback/avatars/4.jpg" />
+                            <div class="ld ld-item-details">
+                                <div><b>Maggie Simpson</b></div>
+                                <div><i>The Simpsons, Character</i></div>
+                                <div><p>It is your fault I can't talk.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="ld ld-feedback-item">
+                            <img class="img-circle" style="width: 70px; height: 70px;" src="/bundles/ntr1xlayout/src/landing/feedback/avatars/5.jpg" />
+                            <div class="ld ld-item-details">
+                                <div><b>Abraham Simpson</b></div>
+                                <div><i>The Simpsons, Character</i></div>
+                                <div><p>One trick is to tell them stories that don't go anywhere...</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="ld ld-feedback-item">
+                            <img class="img-circle" style="width: 70px; height: 70px;" src="/bundles/ntr1xlayout/src/landing/feedback/avatars/6.jpg" />
+                            <div class="ld ld-item-details">
+                                <div><b>Bender Bending Rodriguez</b></div>
+                                <div><i>Futurama, Character</i></div>
+                                <div><p>I don't have emotions and sometimes that makes me very sad.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="landing-benefits">
+    <div class="ld ld-section ld-benefits">
+        <h3>Benefits</h3>
+    </div>
+</template>
+
+<template id="landing-footer">
+    <div class="ld ld-section ld-footer">
+        <div class="ld ld-container">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ld ld-copyright">
+                            &copy; 2016 NTR, LLC. Archery Cloud Platform.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="landing-contacts">
+    <div class="ld ld-section ld-contacts">
+        <h3>Contacts</h3>
+    </div>
+</template>
+
+<template id="landing-gallery-full">
+    <div class="ld ld-section ld-gallery ld-gallery-full">
+        <div class="ld ld-container">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/1/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default btn-lg">Preview</a>
+                                        <a href="#" class="btn btn-primary btn-lg">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/2/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default btn-lg">Preview</a>
+                                        <a href="#" class="btn btn-primary btn-lg">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/3/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default btn-lg">Preview</a>
+                                        <a href="#" class="btn btn-primary btn-lg">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/1/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default">Preview</a>
+                                        <a href="#" class="btn btn-primary">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/2/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default">Preview</a>
+                                        <a href="#" class="btn btn-primary">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/3/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default">Preview</a>
+                                        <a href="#" class="btn btn-primary">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/1/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default">Preview</a>
+                                        <a href="#" class="btn btn-primary">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/2/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default">Preview</a>
+                                        <a href="#" class="btn btn-primary">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/3/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default">Preview</a>
+                                        <a href="#" class="btn btn-primary">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/1/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default">Preview</a>
+                                        <a href="#" class="btn btn-primary">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/2/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default">Preview</a>
+                                        <a href="#" class="btn btn-primary">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/3/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default">Preview</a>
+                                        <a href="#" class="btn btn-primary">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/1/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default">Preview</a>
+                                        <a href="#" class="btn btn-primary">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/2/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default">Preview</a>
+                                        <a href="#" class="btn btn-primary">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/3/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default">Preview</a>
+                                        <a href="#" class="btn btn-primary">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="landing-gallery">
+    <div class="ld ld-section ld-gallery">
+        <div class="ld ld-container">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ld ld-offset-header">
+                            <h3 class="ld ld-decorate ld-decorate-left"><span class="glyphicon glyphicon-eye-open"></span> Featured Templates</h3>
+                            <a href="/gallery" class="btn btn-primary pull-right">Browse Gallery</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/1/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default btn-lg">Preview</a>
+                                        <a href="#" class="btn btn-primary btn-lg">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/2/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default btn-lg">Preview</a>
+                                        <a href="#" class="btn btn-primary btn-lg">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="thumbnail ld ld-thumbnail">
+                            <img src="/bundles/ntr1xlayout/src/landing/gallery/portals/3/thumbnail.jpg" />
+                            <div class="ld ld-thumbnail-overlay">
+                                <div class="ld ld-overlay-content">
+                                    <div class="ld ld-thumbnail-buttons">
+                                        <a href="#" class="btn btn-default btn-lg">Preview</a>
+                                        <a href="#" class="btn btn-primary btn-lg">Start Editing</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="landing-header">
+    <div class="ld ld-section ld-header">
+        <div class="ld ld-header-affix" v-affix="{ offset: { top: 25 } }">
+            <div class="ld ld-container">
+                <div class="container-fluid">
+                    <div class="row">
+                        <ul class="nav nav-pills pull-right">
+                            <li role="presentation"><a v-link="{ path: '/' }">About</a></li>
+                            <li role="presentation"><a v-link="{ path: '/gallery' }">Gallery</a></li>
+                            <li role="presentation"><a v-link="{ path: '/storage' }">Storage</a></li>
+                            <li v-if="$root.principal == null" role="presentation"><a v-link="{ path: '/signup' }">Register</a></li>
+                            <li v-if="$root.principal == null" role="presentation"><a v-link="{ path: '/signin' }">Sign In</a></li>
+                            <li v-if="$root.principal != null" role="presentation"><a href="#" @click.prevent="signout()">Sign Out</a></li>
+                            <li v-if="$root.principal != null" role="presentation" class="primary"><a v-link="{ path: '/manage' }">Control Panel</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ld ld-container">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="ld ld-offer">
+                        <h1>Open your online universe!</h1>
+                        <h2>Archery is the Cloud platform to build business friendly online services.</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="landing-manage-create">
+    <div class="ld ld-section ld-body ld-manage ld-manage-create">
+        <div class="ld ld-table">
+            <div class="ld ld-cell">
+                <validator name="validation">
+                    <form novalidate @submit.prevent="$validation.valid && create()">
+                        <div class="form-group">
+                            <h3>Create Portal</h3>
+                        </dif>
+                        <div class="form-group" :class="{
+                            'has-error': $validation.title.dirty && ($validation.title.required || $validation.title.pattern),
+                            'has-feedback': $validation.title.dirty && ($validation.title.required || $validation.title.pattern),
+                        }">
+                            <input type="text" class="form-control input-lg" placeholder="Title" v-model="form.title" v-validate:title="{
+                                required: { rule: true, message: 'Title is a required field' },
+                            }">
+                            <span v-if="$validation.title.dirty && $validation.title.required" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <div v-if="$validation.title.dirty && $validation.title.required">{{ $validation.title.required }}</div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg" v-if="$validation.valid" :disabled="">Create</button>
+                        </div>
+                    </form>
+                </validator>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="landing-manage">
+    <div class="ld ld-section ld-manage">
+        <div class="ld ld-container">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="ld ld-offset-header">
+                            <h3 class="ld ld-decorate ld-decorate-left"><span class="glyphicon glyphicon-globe"></span> Portals</h3>
+                        </div>
+                        <div class="ld ld-portals">
+                            <div class="ld ld-portal" v-for="portal in portals">
+                                <div class="ld ld-portal-data">
+                                    <div class="ld ld-data-title">{{ portal.title }}</div>
+                                    <div class="ld ld-data-ref"><a :href="url + '/view/' + portal.id">{{ url }}/view/{{ portal.id }}</a></div>
+                                </div>
+                                <div class="ld ld-portal-buttons">
+                                    <button class="btn btn-primary" v-link="{ path: '/manage/' + portal.id }">Edit</button>
+                                    <div class="btn-group">
+                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Advanced <span class="caret"></span></button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Publish</a></li>
+                                            <li><a href="#">Clone</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="#" @click.prevent="remove(portal.id)">Remove</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ld ld-portal">
+                                <div class="ld ld-portal-buttons">
+                                    <a v-link="{ path: '/gallery' }" class="btn btn-primary">Browse Gallery</a>
+                                    <a v-link="{ path: '/manage-create' }" class="btn btn-default">Create Blank</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="landing-pricing">
+    <div class="ld ld-section ld-pricing">
+        <div class="ld ld-container">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ld ld-offset-header">
+                            <h3 class="ld ld-decorate ld-decorate-left"><span class="glyphicon glyphicon-hdd"></span> Pricing</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ld ld-pricing-offers">
+                            <div class="ld ld-pricing-offer">
+                                <h4>Starter</h4>
+                                <div class="ld ld-offer-price">$10 / month</div>
+                                <div class="ld ld-offer-discount">30% discount for 1 year subscription</div>
+                                <ul class="ld ld-offer-options">
+                                    <li>One portal</li>
+                                    <li>Unlimited number of pages</li>
+                                    <li>500 Mb Storage</li>
+                                </ul>
+                                <div class="ld ld-offer-promo">
+                                    <p>Better suited for personal, event and product pages.</p>
+                                    <a href="#" class="btn btn-primary">Create Portal</a>
+                                </div>
+                            </div>
+                            <div class="ld ld-pricing-offer">
+                                <h4>Business</h4>
+                                <div class="ld ld-offer-price">$100 / month</div>
+                                <div class="ld ld-offer-discount">30% discount for 1 year subscription</div>
+                                <ul class="ld ld-offer-options">
+                                    <li>Up to 10 portals</li>
+                                    <li>Unlimited number of pages</li>
+                                    <li>2 Gb Storage per each portal</li>
+                                </ul>
+                                <div class="ld ld-offer-promo">
+                                    <p>Better suited for small campanies and startups.</p>
+                                    <a href="#" class="btn btn-primary">Create Portal</a>
+                                </div>
+                            </div>
+                            <div class="ld ld-pricing-offer">
+                                <h4>Server</h4>
+                                <div class="ld ld-offer-price">$5000</div>
+                                <div class="ld ld-offer-discount">30% discount for each additional server licence</div>
+                                <ul class="ld ld-offer-options">
+                                    <li>Up to 100 portals</li>
+                                    <li>1 year subscription for updates</li>
+                                    <li>Deploy to your own hardrare</li>
+                                </ul>
+                                <div class="ld ld-offer-promo">
+                                    <p>Better suited for web-developers and service providers.</p>
+                                    <a href="#" class="btn btn-primary">Apply</a>
+                                </div>
+                            </div>
+                            <div class="ld ld-pricing-offer">
+                                <h4>Advanced</h4>
+                                <div class="ld ld-offer-price">Price on request</div>
+                                <div class="ld ld-offer-discount">Do not see a suitable plan? Need a special offer?</div>
+                                <ul class="ld ld-offer-options">
+                                    <li>Branding</li>
+                                    <li>Integrations</li>
+                                    <li>Custom setup</li>
+                                </ul>
+                                <div class="ld ld-offer-promo">
+                                    <p>We are welcome you as a partner. Please mail us.</p>
+                                    <a href="#" class="btn btn-primary">Apply</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="landing-super">
+    <div class="ld ld-section ld-super">
+        <div class="ld ld-container">
+            <ul class="nav nav-pills pull-left">
+                <li role="presentation"><a href="#">NTR1X</a></li>
+                <li role="presentation"><a v-link="{ path: '/' }">Archery</a></li>
+                <li role="presentation"><a href="#">Blog</a></li>
+            </ul>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation"><a href="#">FAQ</a></li>
+                <li role="presentation"><a v-link="{ path: '/' }">About</a></li>
+                <li role="presentation"><a href="#">Contacts</a></li>
+                <li role="presentation"><a href="#">Documentation</a></li>
+            </ul>
+        </div>
+    </div>
+</template>
+
+<template id="landing-storage-full">
+    <div class="ld ld-section ld-storage ld-storage-full">
+        <div class="ld ld-container">
+            <div class="container-fluid">
+                <div class="row">
+                    <div style="height: 1200px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="landing-storage">
+    <div class="ld ld-section ld-storage">
+        <div class="ld ld-container">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ld ld-offset-header">
+                            <h3 class="ld ld-decorate ld-decorate-left"><span class="glyphicon glyphicon-hdd"></span> Data Storage</h3>
+                            <a href="/storage" class="btn btn-primary pull-right">Explore Catalog</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ld ld-features">
+                            <div class="ld ld-feature">
+                                Goods &amp; Prices
+                            </div>
+                            <div class="ld ld-feature">
+                                Features &amp; Benefits
+                            </div>
+                            <div class="ld ld-feature">
+                                Booking &amp; Orders
+                            </div>
+                            <div class="ld ld-feature">
+                                News &amp; Events
+                            </div>
+                            <div class="ld ld-feature">
+                                Communication &amp; Collaboration
+                            </div>
+                            <div class="ld ld-feature">
+                                Users &amp; Personalities
+                            </div>
+                            <div class="ld ld-feature">
+                                Photo &amp; Video Galleries
+                            </div>
+                            <div class="ld ld-feature">
+                                Geospatial Data
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="landing-usecases">
+    <div class="ld ld-section ld-usecases">
+        <div class="ld ld-container">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ld ld-offset-header">
+                            <h3 class="ld ld-decorate ld-decorate-right"><span class="glyphicon glyphicon-briefcase"></span> Use Cases</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <div class="ld ld-usecase">
+                            <img class="img-circle" style="width: 140px; height: 140px;" src="/bundles/ntr1xlayout/src/landing/usecases/options/1.jpg" />
+                            <div>
+                                <h4>Need a styled well landing page</h4>
+                                <p>
+                                    Use our Gallery to find a suitable template. Then update page content.
+                                    Use our well designed widgets to make your user interface better.
+                                    Be sure you will be able to update your site data, design and structure any time you want.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="ld ld-usecase">
+                            <img class="img-circle" style="width: 140px; height: 140px;" src="/bundles/ntr1xlayout/src/landing/usecases/options/2.jpg" />
+                            <div>
+                                <h4>Need a portal with anvanced services</h4>
+                                <p>
+                                    Build a Portal with our powerful visual editor. Wire portal data with our public storage
+                                    services, we made them to solve 90% of your needs. Feel free to use your own storages for
+                                    least 10%.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="ld ld-usecase">
+                            <img class="img-circle" style="width: 140px; height: 140px;" src="/bundles/ntr1xlayout/src/landing/usecases/options/3.jpg" />
+                            <div>
+                                <h4>Need a data &amp; flow control panel</h4>
+                                <p>
+                                    Archery may connect to any REST storage worldwide. Use our storage services of wire your
+                                    own services. Use our special widgets: tables, grids, charts and input controls to build
+                                    a powerful dashboard.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="landing-video">
+    <div class="ld ld-section ld-video">
+        <div class="ld ld-container">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ld ld-offset-header">
+                            <h3 class="ld ld-decorate ld-decorate-right"><span class="glyphicon glyphicon-facetime-video"></span> Video Tutorial</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="ld ld-video">
+                            <iframe width="530" height="260" src="https://www.youtube.com/embed/aqRBN7qvyxs" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="ld ld-message">
+                            <p>
+                                Archery is made to be simple and agile.
+                                No extra skills required, you can start in several clicks.
+                            </p>
+                            <p>
+                                Create project from scratch or use any template from the gallery.
+                                With a little effort you will get a functional online service in a few minutes.
+                            </p>
+                            <p>
+                                You can publish your portal immediately and update it any time you want.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

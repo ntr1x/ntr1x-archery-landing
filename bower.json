@@ -1,0 +1,28 @@
+{
+  "name": "ntr1x-archery-landing",
+  "authors": [
+    "ipavlenko <ipavlenko@inbox.ru>"
+  ],
+  "description": "Core",
+  "main": [
+    "./dist/landing.css",
+    "./dist/landing.js",
+    "./dist/landing.htm"
+  ],
+  "moduleType": [],
+  "keywords": [
+    "ntr1x",
+    "archery",
+    "landing"
+  ],
+  "license": "MIT",
+  "homepage": "archery.ntr1x.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
