@@ -1,5 +1,5 @@
 .ld.ld-header {
-  background: transparent url('/bundles/ntr1xlayout/src/landing/header/header.jpg') no-repeat center center;
+  background: transparent url('/assets/vendor/ntr1x-archery-landing/src/landing/header/header.jpg') no-repeat center center;
   background-size: cover;
   height: 400px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
