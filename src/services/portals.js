@@ -22,7 +22,7 @@
 
             remove: (data) => new Promise((resolve, reject) => {
 
-                owner.$http.delete('/ws/portals', data).then(
+                owner.$http.delete(`/ws/portals/${data.id}`).then(
                     (d) => { resolve(d); },
                     (e) => { reject(e); }
                 );
