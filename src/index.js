@@ -7,6 +7,11 @@ var Landing =
 
         $('[data-vue-app]').each(function(index, element) {
 
+            $('script[type="archery/template"]').each((index, el) => {
+                console.log(el, $(el).html());
+                $(document.body).append($(el).html());
+            });
+
             var data = $(element).data();
 
             var App = Vue.extend({
