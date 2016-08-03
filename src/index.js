@@ -1,7 +1,7 @@
-var Landing =
+window.Landing =
 (function($, Vue, Core, Shell) {
 
-    Landing = {};
+    var Landing = {};
 
     $(document).ready(function() {
 
