@@ -66,6 +66,10 @@ window.Landing =
                     component: Landing.LandingManageCreatePage,
                     auth: true,
                 },
+                '/manage-publish/:portal': {
+                    component: Landing.LandingManagePublishPage,
+                    auth: true,
+                },
                 '/site/:portal/:page': {
                     component: Shell.ShellPublic,
                     auth: true,

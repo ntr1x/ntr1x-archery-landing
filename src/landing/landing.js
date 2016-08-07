@@ -40,4 +40,9 @@
         template: '#landing-manage-create-page',
     });
 
+    Landing.LandingManagePublishPage =
+    Vue.component('landing-manage-publish-page', {
+        template: '#landing-manage-publish-page',
+    });
+
 })(jQuery, Vue, Core, Shell, Landing);

@@ -18,7 +18,7 @@
                                     <div class="btn-group">
                                         <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Advanced <span class="caret"></span></button>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#">Publish</a></li>
+                                            <li><a v-link="{ path: '/manage-publish/' + portal.id }">Publish</a></li>
                                             <li><a href="#">Clone</a></li>
                                             <li role="separator" class="divider"></li>
                                             <li><a href="#" @click.prevent="remove(portal.id)">Remove</a></li>

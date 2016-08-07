@@ -44,3 +44,43 @@
   display: table-cell;
   vertical-align: middle;
 }
+.ld.ld-manage .ld.ld-thumbnail {
+  position: relative;
+  overflow: auto;
+  height: 205px;
+  width: 370px;
+  margin: 0px 0px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: top center;
+}
+.ld.ld-manage .ld.ld-thumbnail > .ld.ld-thumbnail-inner {
+  width: 360px;
+  height: 195px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+}
+.ld.ld-manage .ld.ld-relative {
+  position: relative;
+  overflow: hidden;
+}
+.ld.ld-manage .ld.ld-upload {
+  position: relative;
+  display: table;
+  overflow: hidden;
+  width: 100%;
+  border: 2px dashed #484855;
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.ld.ld-manage .ld.ld-upload > input {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  font-size: 500px;
+  opacity: 0;
+  cursor: pointer;
+}

@@ -61,4 +61,53 @@
         }
     });
 
+    Landing.ManagePublish =
+    Vue.component('landing-manage-publish', {
+        template: '#landing-manage-publish',
+        data: function() {
+            return {
+                form: this.form,
+                image: this.image,
+                file: this.file,
+            }
+        },
+        created: function() {
+
+            this.file = null;
+            this.image = null;
+
+            this.$set('form', {
+                title: null,
+            });
+        },
+        attached: function() {
+
+            $('input[type="file"]').on('change', (e) => {
+
+                this.file = e.target.files[0];
+
+                var reader = new FileReader();
+                reader.onload = (e) => {
+                    this.image = e.target.result;
+                }
+                reader.readAsDataURL(this.file);
+            });
+        },
+        methods: {
+
+            publish: function() {
+
+                Vue.service('portals').publish({
+                    title: this.form.title,
+                    portal: this.$route.params.portal,
+                    thumbnail: this.file,
+                })
+                .then(
+                    (d) => { console.log(d); this.$router.go('/manage'); },
+                    (e) => { console.log(e); }
+                );
+            },
+        }
+    });
+
 })(jQuery, Vue, Core, Shell, Landing);
