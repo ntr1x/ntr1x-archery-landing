@@ -5,10 +5,9 @@ window.Landing =
 
     $(document).ready(function() {
 
-        $('[data-vue-app]').each(function(index, element) {
+        $('[data-vue-landing]').each(function(index, element) {
 
             $('script[type="archery/template"]').each((index, el) => {
-                console.log(el, $(el).html());
                 $(document.body).append($(el).html());
             });
 
@@ -22,6 +21,7 @@ window.Landing =
 
                     Vue.service('security', Core.SecurityFactory(this));
                     Vue.service('portals', Core.PortalsFactory(this));
+                    Vue.service('publications', Core.PublicationsFactory(this));
                 },
             });
 
@@ -66,45 +66,15 @@ window.Landing =
                     component: Landing.LandingManageCreatePage,
                     auth: true,
                 },
-                '/manage-publish/:portal': {
+                '/publications-create': {
                     component: Landing.LandingManagePublishPage,
                     auth: true,
                 },
-                '/site/:portal/:page': {
-                    component: Shell.ShellPublic,
+                '/publications/:id/update': {
+                    component: Landing.LandingManagePublishPage,
                     auth: true,
-                },
-                '/manage/:portal': {
-                    component: Shell.Loader,
-                    auth: true,
-                    private: true,
-                },
-                '/manage/:portal/:page': {
-                    component: Shell.Loader,
-                    auth: true,
-                    private: true,
                 },
             };
-
-            function createRoute(page) {
-                return {
-                    component: Shell.ShellPublic.extend({
-                        data: function() {
-                            return {
-                                page: page,
-                            };
-                        }
-                    }),
-                };
-            }
-
-            if (data.model) {
-                for (var i = 0; i < data.model.pages.length; i++) {
-
-                    var page = data.model.pages[i];
-                    routes[page.name] = createRoute(page);
-                }
-            }
 
             router.map(routes);
 

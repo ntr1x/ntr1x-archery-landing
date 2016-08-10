@@ -67,18 +67,35 @@
         data: function() {
             return {
                 form: this.form,
-                image: this.image,
-                file: this.file,
             }
         },
         created: function() {
 
             this.file = null;
-            this.image = null;
 
-            this.$set('form', {
-                title: null,
-            });
+            if (this.$route.params.id) {
+
+                Vue.service('publications').get({
+                    id: this.$route.params.id
+                })
+                .then(
+                    (d) => {
+
+                        var publication = d.data.publication;
+
+                        this.$set('form', {
+                            id: publication.id,
+                            title: publication.title,
+                            image: `/uploads/${publication.thumbnail.dir}/${publication.thumbnail.path}`,
+                        });
+                    },
+                    (e) => { console.log(e); }
+                )
+            } else {
+                this.$set('form', {
+                    title: null,
+                });
+            }
         },
         attached: function() {
 
@@ -88,7 +105,7 @@
 
                 var reader = new FileReader();
                 reader.onload = (e) => {
-                    this.image = e.target.result;
+                    this.$set('form.image', e.target.result);
                 }
                 reader.readAsDataURL(this.file);
             });
@@ -97,15 +114,31 @@
 
             publish: function() {
 
-                Vue.service('portals').publish({
-                    title: this.form.title,
-                    portal: this.$route.params.portal,
-                    thumbnail: this.file,
-                })
-                .then(
-                    (d) => { console.log(d); this.$router.go('/manage'); },
-                    (e) => { console.log(e); }
-                );
+                if (this.form.id) {
+
+                    Vue.service('publications').create({
+                        title: this.form.title,
+                        portal: this.$route.params.portal,
+                        thumbnail: this.file,
+                    })
+                    .then(
+                        (d) => { this.$router.go('/manage'); },
+                        (e) => { console.log(e); }
+                    );
+
+                } else {
+
+                    Vue.service('publications').update({
+                        id: this.form.id,
+                        title: this.form.title,
+                        portal: this.$route.params.portal,
+                        thumbnail: this.file,
+                    })
+                    .then(
+                        (d) => { this.$router.go('/manage'); },
+                        (e) => { console.log(e); }
+                    );
+                }
             },
         }
     });

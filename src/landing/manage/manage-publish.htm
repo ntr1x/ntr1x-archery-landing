@@ -3,7 +3,7 @@
         <div class="ld ld-table">
             <div class="ld ld-cell">
                 <validator name="validation">
-                    <form novalidate @submit.prevent="$validation.valid && publish()">
+                    <form v-if="form" novalidate @submit.prevent="$validation.valid && publish()">
                         <div class="form-group">
                             <h3>Publish Portal</h3>
                         </dif>
@@ -19,18 +19,18 @@
                         </div>
                         <div class="form-group">
                             <div class="ld ld-upload">
-                                <div class="thumbnail ld ld-thumbnail" v-if="image">
+                                <div class="thumbnail ld ld-thumbnail" v-if="form.image">
                                     <div class="ld ld-thumbnail-inner" :style="{
-                                        'background-image': 'url(' + image + ')'
+                                        'background-image': 'url(' + form.image + ')'
                                     }">
                                     </div>
                                 </div>
-                                <div class="btn btn-default btn-block" v-if="!image">Upload Thumbnail</div>
+                                <div class="btn btn-default btn-block" v-if="!form.image">Upload Thumbnail</div>
                                 <input type="file" name="thumbnail" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg" v-if="$validation.valid && image">Publish</button>
+                            <button type="submit" class="btn btn-primary btn-lg" v-if="$validation.valid && form.image">Publish</button>
                         </div>
                     </form>
                 </validator>
