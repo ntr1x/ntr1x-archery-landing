@@ -32,10 +32,19 @@
 
                 var fd = new FormData();
                 fd.append('title', data.title);
-                fd.append('portal', data.portal);
                 fd.append('thumbnail', data.thumbnail);
 
-                owner.$http.post(`/ws/publications`, fd).then(
+                owner.$http.post(`/ws/portals/${data.id}/publication`, fd).then(
+                    (d) => { resolve(d); },
+                    (e) => { reject(e); }
+                );
+            }),
+
+            unpublish: (data) => new Promise((resolve, reject) => {
+
+                var fd = new FormData();
+
+                owner.$http.delete(`/ws/portals/${data.id}/publication`, fd).then(
                     (d) => { resolve(d); },
                     (e) => { reject(e); }
                 );

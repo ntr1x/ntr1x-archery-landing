@@ -31,6 +31,16 @@
                     (e) => { }
                 );
             },
+
+            unpublish: function(id) {
+                Vue.service('portals').unpublish({
+                    id: id,
+                })
+                .then(
+                    (d) => { this.refresh(); },
+                    (e) => { }
+                );
+            }
         }
     });
 
@@ -73,33 +83,27 @@
 
             this.file = null;
 
-            if (this.$route.params.id) {
+            Vue.service('portals').get({
+                id: this.$route.params.portal
+            })
+            .then(
+                (d) => {
 
-                Vue.service('publications').get({
-                    id: this.$route.params.id
-                })
-                .then(
-                    (d) => {
+                    var portal = d.data.portal;
+                    var publication = portal.publication;
 
-                        var publication = d.data.publication;
-
-                        this.$set('form', {
-                            id: publication.id,
-                            title: publication.title,
-                            image: `/uploads/${publication.thumbnail.dir}/${publication.thumbnail.path}`,
-                        });
-                    },
-                    (e) => { console.log(e); }
-                )
-            } else {
-                this.$set('form', {
-                    title: null,
-                });
-            }
+                    this.$set('form', {
+                        id: portal.id,
+                        title: publication ? publication.title : '',
+                        image: publication ? `/uploads/${publication.thumbnail.dir}/${publication.thumbnail.path}` : null,
+                    });
+                },
+                (e) => { console.log(e); }
+            )
         },
         attached: function() {
 
-            $('input[type="file"]').on('change', (e) => {
+            $(this.$el).on('change', 'input[type="file"]', (e) => {
 
                 this.file = e.target.files[0];
 
@@ -114,31 +118,15 @@
 
             publish: function() {
 
-                if (this.form.id) {
-
-                    Vue.service('publications').create({
-                        title: this.form.title,
-                        portal: this.$route.params.portal,
-                        thumbnail: this.file,
-                    })
-                    .then(
-                        (d) => { this.$router.go('/manage'); },
-                        (e) => { console.log(e); }
-                    );
-
-                } else {
-
-                    Vue.service('publications').update({
-                        id: this.form.id,
-                        title: this.form.title,
-                        portal: this.$route.params.portal,
-                        thumbnail: this.file,
-                    })
-                    .then(
-                        (d) => { this.$router.go('/manage'); },
-                        (e) => { console.log(e); }
-                    );
-                }
+                Vue.service('portals').publish({
+                    id: this.form.id,
+                    title: this.form.title,
+                    thumbnail: this.file,
+                })
+                .then(
+                    (d) => { this.$router.go('/manage'); },
+                    (e) => { console.log(e); }
+                );
             },
         }
     });

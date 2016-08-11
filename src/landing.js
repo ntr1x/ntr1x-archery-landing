@@ -21,7 +21,6 @@ window.Landing =
 
                     Vue.service('security', Core.SecurityFactory(this));
                     Vue.service('portals', Core.PortalsFactory(this));
-                    Vue.service('publications', Core.PublicationsFactory(this));
                 },
             });
 
@@ -62,15 +61,11 @@ window.Landing =
                     component: Landing.LandingManagePage,
                     auth: true,
                 },
-                '/manage-create': {
+                '/manage/create': {
                     component: Landing.LandingManageCreatePage,
                     auth: true,
                 },
-                '/publications-create': {
-                    component: Landing.LandingManagePublishPage,
-                    auth: true,
-                },
-                '/publications/:id/update': {
+                '/manage/i/:portal/publish': {
                     component: Landing.LandingManagePublishPage,
                     auth: true,
                 },
