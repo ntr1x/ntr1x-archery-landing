@@ -21,7 +21,6 @@ window.Landing =
 
                     Vue.service('security', Core.SecurityFactory(this));
                     Vue.service('portals', Core.PortalsFactory(this));
-                    Vue.service('publications', Core.PublicationsFactory(this));
                 },
             });
 

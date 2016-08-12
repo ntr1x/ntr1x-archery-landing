@@ -13,7 +13,16 @@
         background-size: cover;
         background-position: top center;
 
-        .ld.ld-thumbnail-overlay {
+        >.ld.ld-thumbnail-inner {
+            width: 360px;
+            height: 195px;
+            overflow: hidden;
+            background-repeat: no-repeat;
+            background-position: top center;
+            background-size: cover;
+        }
+
+        >.ld.ld-thumbnail-overlay {
 
             display: none;
             position: absolute;
@@ -44,5 +53,9 @@
                 display: block;
             }
         }
+    }
+
+    &.ld-gallery-full {
+        min-height: 1500px;
     }
 }

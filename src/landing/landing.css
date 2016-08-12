@@ -9,6 +9,9 @@
   background: none;
   box-shadow: none;
 }
+.ld.ld-page.ld-secondary-page .ld.ld-header > .ld.ld-container {
+  display: none;
+}
 .ld.ld-page.ld-fullscreen-page {
   position: absolute;
   top: 0px;

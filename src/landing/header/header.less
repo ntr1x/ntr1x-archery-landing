@@ -13,11 +13,18 @@
 
     .ld.ld-header-affix {
 
+        position: absolute;
+        width: 1200px;
+        margin-left: -600px;
+        left: 50%;
+
         &.affix {
             position: fixed;
             top: 0px;
             left: 0px;
             right: 0px;
+            width: auto;
+            margin-left: 0px;
             z-index: 10000;
             background: rgba(20,20,34,.95);
             border: 1px solid #262633;
@@ -74,7 +81,7 @@
 
         position: relative;
         text-align: center;
-        margin-top: 80px;
+        margin-top: 130px;
 
         h1 {
             color: #F9EFC1;
