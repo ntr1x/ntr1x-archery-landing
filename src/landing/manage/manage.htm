@@ -15,13 +15,13 @@
                                 </div>
                                 <div class="ld ld-portal-buttons">
                                     <a class="btn btn-primary" v-if="!portal.publication" :href="'/edit/' + portal.id + '/'">Edit</a>
-                                    <button class="btn btn-default" v-if="portal.publication" v-link="{ path: '/manage/i/' + portal.id + '/clone' }">Clone</button>
+                                    <button class="btn btn-default" v-if="portal.publication" :href="'/view/' + portal.id + '/'">View</button>
                                     <div class="btn-group pull-right">
                                         <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Advanced <span class="caret"></span></button>
                                         <ul class="dropdown-menu">
                                             <li><a v-link="{ path: '/manage/i/' + portal.id + '/publish' }">Publish</a></li>
                                             <li><a v-if="portal.publication" @click.prevent="unpublish(portal.id)">Unpublish</a></li>
-                                            <!--<li><a href="#">Clone</a></li>-->
+                                            <li><a v-if="portal.publication" v-link="{ path: '/manage/i/' + portal.id + '/clone' }">Clone</a></li>
                                             <li role="separator" class="divider"></li>
                                             <li><a href="#" @click.prevent="remove(portal.id)">Remove</a></li>
                                         </ul>

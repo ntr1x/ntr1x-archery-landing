@@ -65,6 +65,10 @@ window.Landing =
                     component: Landing.LandingManageCreatePage,
                     auth: true,
                 },
+                '/manage/i/:portal/clone': {
+                    component: Landing.LandingManageClonePage,
+                    auth: true,
+                },
                 '/manage/i/:portal/publish': {
                     component: Landing.LandingManagePublishPage,
                     auth: true,

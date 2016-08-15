@@ -40,6 +40,11 @@
         template: '#landing-manage-create-page',
     });
 
+    Landing.LandingManageClonePage =
+    Vue.component('landing-manage-clone-page', {
+        template: '#landing-manage-clone-page',
+    });
+
     Landing.LandingManagePublishPage =
     Vue.component('landing-manage-publish-page', {
         template: '#landing-manage-publish-page',

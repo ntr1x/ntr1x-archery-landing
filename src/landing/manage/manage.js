@@ -53,6 +53,7 @@
             }
         },
         created: function() {
+
             this.$set('form', {
                 title: null,
             });
@@ -66,6 +67,51 @@
                 .then(
                     (d) => { this.$router.go('/manage')},
                     (e) => { }
+                );
+            },
+        }
+    });
+
+    Landing.ManageClone =
+    Vue.component('landing-manage-clone', {
+        template: '#landing-manage-clone',
+        data: function() {
+            return {
+                form: this.form,
+            }
+        },
+        created: function() {
+
+            Vue.service('portals').get({
+                id: this.$route.params.portal
+            })
+            .then(
+                (d) => {
+
+                    var portal = d.data.portal;
+                    var publication = portal.publication;
+
+                    this.$set('form', {
+                        id: d.data.portal.id,
+                        title: null,
+                        image: publication ? `/uploads/${publication.thumbnail.dir}/${publication.thumbnail.path}` : null,
+                    });
+                },
+                (e) => {
+
+                }
+            );
+        },
+        methods: {
+
+            clone: function() {
+                Vue.service('portals').create({
+                    clone: this.form.id,
+                    title: this.form.title,
+                })
+                .then(
+                    (d) => { this.$router.go('/manage')},
+                    (e) => { console.log(e); }
                 );
             },
         }
