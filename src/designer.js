@@ -1,14 +1,13 @@
 window.Landing =
 (function($, Vue, Core, Shell) {
 
-    var Landing = {};
+    var Designer = {};
 
     $(document).ready(function() {
 
-        $('[data-vue-app]').each(function(index, element) {
+        $('[data-vue-designer]').each(function(index, element) {
 
             $('script[type="archery/template"]').each((index, el) => {
-                console.log(el, $(el).html());
                 $(document.body).append($(el).html());
             });
 
@@ -27,6 +26,7 @@ window.Landing =
 
             var router = new VueRouter({
                 history: true,
+                root: `/edit/${data.portal.id}/`
             });
 
             router.beforeEach(function(transition) {
@@ -42,44 +42,11 @@ window.Landing =
 
             var routes = {
                 '/': {
-                    component: Landing.LandingPage,
-                },
-                '/gallery': {
-                    component: Landing.LandingGalleryPage,
-                },
-                '/storage': {
-                    component: Landing.LandingStoragePage,
-                },
-                '/signin': {
-                    component: Landing.LandingSigninPage,
-                    anon: true,
-                },
-                '/signup': {
-                    component: Landing.LandingSignupPage,
-                    anon: true,
-                },
-                '/manage': {
-                    component: Landing.LandingManagePage,
-                    auth: true,
-                },
-                '/manage-create': {
-                    component: Landing.LandingManageCreatePage,
-                    auth: true,
-                },
-                '/manage-publish/:portal': {
-                    component: Landing.LandingManagePublishPage,
-                    auth: true,
-                },
-                '/site/:portal/:page': {
-                    component: Shell.ShellPublic,
-                    auth: true,
-                },
-                '/manage/:portal': {
                     component: Shell.Loader,
                     auth: true,
                     private: true,
                 },
-                '/manage/:portal/:page': {
+                '/:page': {
                     component: Shell.Loader,
                     auth: true,
                     private: true,
@@ -112,6 +79,6 @@ window.Landing =
         });
     });
 
-    return Landing;
+    return Designer;
 
 })(jQuery, Vue, Core, Shell);

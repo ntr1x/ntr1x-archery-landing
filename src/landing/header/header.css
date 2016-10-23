@@ -7,11 +7,20 @@
 .ld.ld-header .ld.ld-container {
   padding: 15px 0px;
 }
+.ld.ld-header .ld.ld-header-affix {
+  position: absolute;
+  width: 1200px;
+  margin-left: -600px;
+  left: 50%;
+  z-index: 10000;
+}
 .ld.ld-header .ld.ld-header-affix.affix {
   position: fixed;
   top: 0px;
   left: 0px;
   right: 0px;
+  width: auto;
+  margin-left: 0px;
   z-index: 10000;
   background: rgba(20, 20, 34, 0.95);
   border: 1px solid #262633;
@@ -44,7 +53,7 @@
 .ld.ld-header .ld.ld-offer {
   position: relative;
   text-align: center;
-  margin-top: 80px;
+  margin-top: 130px;
 }
 .ld.ld-header .ld.ld-offer h1 {
   color: #F9EFC1;

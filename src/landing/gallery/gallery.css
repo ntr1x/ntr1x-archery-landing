@@ -8,7 +8,15 @@
   background-size: cover;
   background-position: top center;
 }
-.ld.ld-gallery .ld.ld-thumbnail .ld.ld-thumbnail-overlay {
+.ld.ld-gallery .ld.ld-thumbnail > .ld.ld-thumbnail-inner {
+  width: 360px;
+  height: 195px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+}
+.ld.ld-gallery .ld.ld-thumbnail > .ld.ld-thumbnail-overlay {
   display: none;
   position: absolute;
   top: 5px;
@@ -19,16 +27,19 @@
   vertical-align: middle;
   text-align: center;
 }
-.ld.ld-gallery .ld.ld-thumbnail .ld.ld-thumbnail-overlay .ld.ld-overlay-content {
+.ld.ld-gallery .ld.ld-thumbnail > .ld.ld-thumbnail-overlay .ld.ld-overlay-content {
   display: table;
   width: 100%;
   height: 100%;
   text-align: center;
 }
-.ld.ld-gallery .ld.ld-thumbnail .ld.ld-thumbnail-overlay .ld.ld-overlay-content .ld.ld-thumbnail-buttons {
+.ld.ld-gallery .ld.ld-thumbnail > .ld.ld-thumbnail-overlay .ld.ld-overlay-content .ld.ld-thumbnail-buttons {
   display: table-cell;
   vertical-align: middle;
 }
 .ld.ld-gallery .ld.ld-thumbnail:hover .ld.ld-thumbnail-overlay {
   display: block;
+}
+.ld.ld-gallery.ld-gallery-full {
+  min-height: 1500px;
 }

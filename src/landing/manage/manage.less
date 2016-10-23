@@ -43,6 +43,16 @@
                 .ld.ld-data-title {
                     font-size: 1.2em;
                     color: #D0D0D2;
+
+                    >.label.label-success {
+                        font-size: 11px;
+                        vertical-align: bottom;
+                        margin-bottom: 5px;
+                        display: inline-block;
+                        padding: 0px 3px;
+                        line-height: 16px;
+                        font-weight: normal;
+                    }
                 }
 
                 .ld.ld-data-ref {
@@ -52,8 +62,15 @@
             }
 
             .ld.ld-portal-buttons {
+                min-width: 200px;
                 display: table-cell;
                 vertical-align: middle;
+                text-align: right;
+                white-space: nowrap;
+
+                >.btn, >.btn-group {
+                    margin-left: 5px;
+                }
             }
 
             background-color: #141422;

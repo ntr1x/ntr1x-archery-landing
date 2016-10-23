@@ -31,6 +31,16 @@
                     (e) => { }
                 );
             },
+
+            unpublish: function(id) {
+                Vue.service('portals').unpublish({
+                    id: id,
+                })
+                .then(
+                    (d) => { this.refresh(); },
+                    (e) => { }
+                );
+            }
         }
     });
 
@@ -43,6 +53,7 @@
             }
         },
         created: function() {
+
             this.$set('form', {
                 title: null,
             });
@@ -61,34 +72,90 @@
         }
     });
 
+    Landing.ManageClone =
+    Vue.component('landing-manage-clone', {
+        template: '#landing-manage-clone',
+        data: function() {
+            return {
+                form: this.form,
+            }
+        },
+        created: function() {
+
+            Vue.service('portals').get({
+                id: this.$route.params.portal
+            })
+            .then(
+                (d) => {
+
+                    var portal = d.data.portal;
+                    var publication = portal.publication;
+
+                    this.$set('form', {
+                        id: d.data.portal.id,
+                        title: null,
+                        image: publication ? `/uploads/${publication.thumbnail.dir}/${publication.thumbnail.path}` : null,
+                    });
+                },
+                (e) => {
+
+                }
+            );
+        },
+        methods: {
+
+            clone: function() {
+                Vue.service('portals').create({
+                    clone: this.form.id,
+                    title: this.form.title,
+                })
+                .then(
+                    (d) => { this.$router.go('/manage')},
+                    (e) => { console.log(e); }
+                );
+            },
+        }
+    });
+
     Landing.ManagePublish =
     Vue.component('landing-manage-publish', {
         template: '#landing-manage-publish',
         data: function() {
             return {
                 form: this.form,
-                image: this.image,
-                file: this.file,
             }
         },
         created: function() {
 
             this.file = null;
-            this.image = null;
 
-            this.$set('form', {
-                title: null,
-            });
+            Vue.service('portals').get({
+                id: this.$route.params.portal
+            })
+            .then(
+                (d) => {
+
+                    var portal = d.data.portal;
+                    var publication = portal.publication;
+
+                    this.$set('form', {
+                        id: portal.id,
+                        title: publication ? publication.title : '',
+                        image: publication ? `/uploads/${publication.thumbnail.dir}/${publication.thumbnail.path}` : null,
+                    });
+                },
+                (e) => { console.log(e); }
+            )
         },
         attached: function() {
 
-            $('input[type="file"]').on('change', (e) => {
+            $(this.$el).on('change', 'input[type="file"]', (e) => {
 
                 this.file = e.target.files[0];
 
                 var reader = new FileReader();
                 reader.onload = (e) => {
-                    this.image = e.target.result;
+                    this.$set('form.image', e.target.result);
                 }
                 reader.readAsDataURL(this.file);
             });
@@ -98,12 +165,12 @@
             publish: function() {
 
                 Vue.service('portals').publish({
+                    id: this.form.id,
                     title: this.form.title,
-                    portal: this.$route.params.portal,
                     thumbnail: this.file,
                 })
                 .then(
-                    (d) => { console.log(d); this.$router.go('/manage'); },
+                    (d) => { this.$router.go('/manage'); },
                     (e) => { console.log(e); }
                 );
             },

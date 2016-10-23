@@ -36,13 +36,29 @@
   font-size: 1.2em;
   color: #D0D0D2;
 }
+.ld.ld-manage .ld.ld-portals .ld.ld-portal .ld.ld-portal-data .ld.ld-data-title > .label.label-success {
+  font-size: 11px;
+  vertical-align: bottom;
+  margin-bottom: 5px;
+  display: inline-block;
+  padding: 0px 3px;
+  line-height: 16px;
+  font-weight: normal;
+}
 .ld.ld-manage .ld.ld-portals .ld.ld-portal .ld.ld-portal-data .ld.ld-data-ref {
   font-size: 0.9em;
   color: #D0D0D2;
 }
 .ld.ld-manage .ld.ld-portals .ld.ld-portal .ld.ld-portal-buttons {
+  min-width: 200px;
   display: table-cell;
   vertical-align: middle;
+  text-align: right;
+  white-space: nowrap;
+}
+.ld.ld-manage .ld.ld-portals .ld.ld-portal .ld.ld-portal-buttons > .btn,
+.ld.ld-manage .ld.ld-portals .ld.ld-portal .ld.ld-portal-buttons > .btn-group {
+  margin-left: 5px;
 }
 .ld.ld-manage .ld.ld-thumbnail {
   position: relative;
