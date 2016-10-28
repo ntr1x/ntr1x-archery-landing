@@ -1,11 +1,11 @@
-window.Landing =
+window.Viewer =
 (function($, Vue, Core, Shell) {
 
-    var Landing = {};
+    var Viewer = {};
 
     $(document).ready(function() {
 
-        $('[data-vue-landing]').each(function(index, element) {
+        $('[data-vue-viewer]').each(function(index, element) {
 
             var data = $(element).data();
 
@@ -22,6 +22,7 @@ window.Landing =
 
             var router = new VueRouter({
                 history: true,
+                root: `/view/${data.portal.id}/`
             });
 
             router.beforeEach(function(transition) {
@@ -37,39 +38,38 @@ window.Landing =
 
             var routes = {
                 '/': {
-                    component: Landing.LandingPage,
-                },
-                '/gallery': {
-                    component: Landing.LandingGalleryPage,
-                },
-                '/storage': {
-                    component: Landing.LandingStoragePage,
-                },
-                '/signin': {
-                    component: Landing.LandingSigninPage,
-                    anon: true,
-                },
-                '/signup': {
-                    component: Landing.LandingSignupPage,
-                    anon: true,
-                },
-                '/manage': {
-                    component: Landing.LandingManagePage,
+                    component: Shell.LoaderPublic,
                     auth: true,
+                    // private: true,
+                    mode: 'public',
                 },
-                '/manage/create': {
-                    component: Landing.LandingManageCreatePage,
+                '/:page': {
+                    component: Shell.LoaderPublic,
                     auth: true,
-                },
-                '/manage/i/:portal/clone': {
-                    component: Landing.LandingManageClonePage,
-                    auth: true,
-                },
-                '/manage/i/:portal/publish': {
-                    component: Landing.LandingManagePublishPage,
-                    auth: true,
+                    // private: true,
+                    mode: 'public',
                 },
             };
+
+            // function createRoute(page) {
+            //     return {
+            //         component: Shell.ShellPublic.extend({
+            //             data: function() {
+            //                 return {
+            //                     page: page,
+            //                 };
+            //             }
+            //         }),
+            //     };
+            // }
+            //
+            // if (data.model) {
+            //     for (var i = 0; i < data.model.pages.length; i++) {
+            //
+            //         var page = data.model.pages[i];
+            //         routes[page.name] = createRoute(page);
+            //     }
+            // }
 
             router.map(routes);
 
@@ -77,6 +77,6 @@ window.Landing =
         });
     });
 
-    return Landing;
+    return Viewer;
 
 })(jQuery, Vue, Core, Shell);

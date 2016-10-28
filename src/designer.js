@@ -1,4 +1,4 @@
-window.Landing =
+window.Designer =
 (function($, Vue, Core, Shell) {
 
     var Designer = {};
@@ -6,10 +6,6 @@ window.Landing =
     $(document).ready(function() {
 
         $('[data-vue-designer]').each(function(index, element) {
-
-            $('script[type="archery/template"]').each((index, el) => {
-                $(document.body).append($(el).html());
-            });
 
             var data = $(element).data();
 
@@ -42,36 +38,38 @@ window.Landing =
 
             var routes = {
                 '/': {
-                    component: Shell.Loader,
+                    component: Shell.LoaderPrivate,
                     auth: true,
-                    private: true,
+                    // private: true,
+                    mode: 'private',
                 },
                 '/:page': {
-                    component: Shell.Loader,
+                    component: Shell.LoaderPrivate,
                     auth: true,
-                    private: true,
+                    // private: true,
+                    mode: 'private',
                 },
             };
 
-            function createRoute(page) {
-                return {
-                    component: Shell.ShellPublic.extend({
-                        data: function() {
-                            return {
-                                page: page,
-                            };
-                        }
-                    }),
-                };
-            }
-
-            if (data.model) {
-                for (var i = 0; i < data.model.pages.length; i++) {
-
-                    var page = data.model.pages[i];
-                    routes[page.name] = createRoute(page);
-                }
-            }
+            // function createRoute(page) {
+            //     return {
+            //         component: Shell.ShellPublic.extend({
+            //             data: function() {
+            //                 return {
+            //                     page: page,
+            //                 };
+            //             }
+            //         }),
+            //     };
+            // }
+            //
+            // if (data.model) {
+            //     for (var i = 0; i < data.model.pages.length; i++) {
+            //
+            //         var page = data.model.pages[i];
+            //         routes[page.name] = createRoute(page);
+            //     }
+            // }
 
             router.map(routes);
 
