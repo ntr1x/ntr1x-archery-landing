@@ -40,14 +40,12 @@ window.Designer =
                 '/': {
                     component: Shell.LoaderPrivate,
                     auth: true,
-                    // private: true,
-                    mode: 'private',
+                    private: true,
                 },
                 '/:page': {
                     component: Shell.LoaderPrivate,
                     auth: true,
-                    // private: true,
-                    mode: 'private',
+                    private: true,
                 },
             };
 

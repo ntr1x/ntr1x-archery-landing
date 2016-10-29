@@ -36,21 +36,34 @@ window.Viewer =
                 }
             });
 
-            var routes = {
-                '/': {
-                    component: Shell.LoaderPublic,
-                    auth: true,
-                    // private: true,
-                    mode: 'public',
-                },
-                '/:page': {
-                    component: Shell.LoaderPublic,
-                    auth: true,
-                    // private: true,
-                    mode: 'public',
-                },
-            };
 
+            var routes = {};
+
+            // console.log(data.pages);
+
+            for (let page of data.pages) {
+                routes[page.name || '/'] = {
+                    component: Vue.component(`shell-loader-public-${page.id}`, {
+                        mixins: [ Shell.LoaderPublic ]
+                    }),
+                    auth: false,
+                    private: false,
+                    page: page,
+                }
+            }
+            //
+            // var routes = {
+            //     '/': {
+            //         component: Shell.LoaderPublic,
+            //         auth: true,
+            //         private: false,
+            //     },
+            //     '/:page': {
+            //         component: Shell.LoaderPublic,
+            //         auth: true,
+            //         private: false,
+            //     },
+            // };
             // function createRoute(page) {
             //     return {
             //         component: Shell.ShellPublic.extend({
