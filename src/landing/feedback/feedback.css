@@ -5,6 +5,8 @@
   color: #D0D0D2;
   display: table;
   border-spacing: 10px;
+  margin-bottom: 20px;
+  min-height: 110px;
 }
 .ld.ld-feedback .ld.ld-feedback-item img {
   display: table-cell;

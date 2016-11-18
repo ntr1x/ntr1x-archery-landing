@@ -1,5 +1,5 @@
 window.Viewer =
-(function($, Vue, Core, Shell) {
+(function($, Vue, VueRouter, Core, Shell) {
 
     var Viewer = {};
 
@@ -25,21 +25,7 @@ window.Viewer =
                 root: `/view/${data.portal.id}/`
             });
 
-            router.beforeEach(function(transition) {
-
-                if (transition.to.auth && !router.app.principal) {
-                    transition.abort();
-                } else if (transition.to.anon && router.app.principal) {
-                    transition.abort();
-                } else {
-                    transition.next();
-                }
-            });
-
-
             var routes = {};
-
-            // console.log(data.pages);
 
             for (let page of data.pages) {
                 routes[page.name || '/'] = {
@@ -51,38 +37,6 @@ window.Viewer =
                     page: page,
                 }
             }
-            //
-            // var routes = {
-            //     '/': {
-            //         component: Shell.LoaderPublic,
-            //         auth: true,
-            //         private: false,
-            //     },
-            //     '/:page': {
-            //         component: Shell.LoaderPublic,
-            //         auth: true,
-            //         private: false,
-            //     },
-            // };
-            // function createRoute(page) {
-            //     return {
-            //         component: Shell.ShellPublic.extend({
-            //             data: function() {
-            //                 return {
-            //                     page: page,
-            //                 };
-            //             }
-            //         }),
-            //     };
-            // }
-            //
-            // if (data.model) {
-            //     for (var i = 0; i < data.model.pages.length; i++) {
-            //
-            //         var page = data.model.pages[i];
-            //         routes[page.name] = createRoute(page);
-            //     }
-            // }
 
             router.map(routes);
 
@@ -92,4 +46,4 @@ window.Viewer =
 
     return Viewer;
 
-})(jQuery, Vue, Core, Shell);
+})(jQuery, Vue, VueRouter, Core, Shell);

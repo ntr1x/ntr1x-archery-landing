@@ -4,6 +4,7 @@
 .ld.ld-usecases .ld.ld-usecase {
   text-align: center;
   color: #D0D0D2;
+  margin-bottom: 30px;
 }
 .ld.ld-usecases .ld.ld-usecase img {
   border: 0.3em solid #FFFFFF;

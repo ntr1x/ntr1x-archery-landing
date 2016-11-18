@@ -1,4 +1,4 @@
-(function($, Vue, Core, Shell, Landing) {
+(function($, Vue, Core) {
 
     Core.PortalsFactory = function(owner) {
 
@@ -60,4 +60,4 @@
         };
     }
 
-})(jQuery, Vue, Core, Shell, Landing);
+})(jQuery, Vue, Core);

@@ -51,10 +51,24 @@
   border-color: #E2D16B;
 }
 .ld.ld-page .ld.ld-container {
-  width: 1200px;
+  width: 100%;
   margin: 0px auto;
   position: relative;
   overflow: visible;
+}
+.ld.ld-page .ld.ld-section {
+  padding: 0px 40px;
+}
+.ld.ld-page .ld.ld-section.ld-header {
+  padding: 0px;
+}
+@media (min-width: 1240px) {
+  .ld.ld-page .ld.ld-section {
+    padding: 0px 0px;
+  }
+  .ld.ld-page .ld.ld-container {
+    width: 1200px;
+  }
 }
 .ld.ld-page .ld.ld-section {
   position: relative;
@@ -129,14 +143,11 @@
 .ld.ld-page .ld.ld-section .ld.ld-features {
   position: relative;
   overflow: visible;
-  margin-left: -10px;
+  margin-left: -5px;
+  margin-right: -5px;
 }
 .ld.ld-page .ld.ld-section .ld.ld-feature {
-  position: relative;
-  float: left;
-  overflow: visible;
-  margin: 0px 0px 10px 10px;
-  width: 580px;
+  margin: 0px -10px 10px -10px;
   color: #D0D0D2;
   font-size: 1.4em;
   font-weight: 300;
@@ -148,14 +159,11 @@
 .ld.ld-page .ld.ld-section .ld.ld-pricing-offers {
   position: relative;
   overflow: visible;
-  margin-left: -10px;
+  margin-left: -5px;
+  margin-right: -5px;
 }
 .ld.ld-page .ld.ld-section .ld.ld-pricing-offer {
-  position: relative;
-  float: left;
-  overflow: visible;
-  margin: 0px 0px 10px 10px;
-  width: 285px;
+  margin: 0px -10px 10px -10px;
   color: #D0D0D2;
   font-size: 1.4em;
   font-weight: 300;
@@ -163,6 +171,7 @@
   background-color: #141422;
   border-radius: 0.6em;
   padding: 1em;
+  min-height: 340px;
 }
 .ld.ld-page .ld.ld-section .ld.ld-pricing-offer .ld.ld-offer-price {
   font-size: 1.1em;

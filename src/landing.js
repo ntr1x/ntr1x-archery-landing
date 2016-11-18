@@ -2,7 +2,7 @@ window.Landing =
 (function($, Vue, Core, Shell) {
 
     var Landing = {};
-
+    
     $(document).ready(function() {
 
         $('[data-vue-landing]').each(function(index, element) {

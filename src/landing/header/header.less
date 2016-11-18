@@ -6,18 +6,20 @@
     background-size: cover;
     height: 400px;
     box-shadow: 0 3px 6px rgba(0,0,0,.15);
+    padding: 0px;
 
     .ld.ld-container {
-        padding: 15px 0px;
+        // padding-top: 15px 0px;
     }
 
     .ld.ld-header-affix {
+        // position: absolute;
+        // width: 100%;
+        // z-index: 10000;
 
-        position: absolute;
-        width: 1200px;
-        margin-left: -600px;
-        left: 50%;
-        z-index: 10000;
+        >.ld.ld-container {
+            padding: 15px 0px;
+        }
 
         &.affix {
             position: fixed;
@@ -29,6 +31,12 @@
             z-index: 10000;
             background: rgba(20,20,34,.95);
             border: 1px solid #262633;
+
+            ~ .ld.ld-container {
+                .ld.ld-offer {
+                    margin-top: 115px;
+                }
+            }
         }
     }
 
@@ -82,7 +90,8 @@
 
         position: relative;
         text-align: center;
-        margin-top: 130px;
+        margin-top: 50px;
+        padding: 0px 50px;
 
         h1 {
             color: #F9EFC1;

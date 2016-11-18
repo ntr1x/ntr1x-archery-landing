@@ -1,4 +1,4 @@
-(function($, Vue, Core, Shell, Landing) {
+(function($, Vue, Core) {
 
     Core.SecurityFactory = function(owner) {
 
@@ -30,4 +30,4 @@
         };
     }
 
-})(jQuery, Vue, Core, Shell, Landing);
+})(jQuery, Vue, Core);
