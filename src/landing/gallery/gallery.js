@@ -20,7 +20,6 @@
             }).then(
                 (d) => {
                     this.portals = d.data.portals;
-                    console.log(this.portals);
                 },
                 (e) => {
                     console.log(e);
