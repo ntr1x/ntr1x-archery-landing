@@ -40,13 +40,6 @@ window.Viewer =
 
             router.map(routes);
 
-            Vue.service('app', {
-                modal: (name) => {
-                    let r = routes[name];
-                    return r == null ? null : r.page;
-                }
-            });
-
             router.start(App, $('[data-vue-body]', element).get(0));
         });
     });
