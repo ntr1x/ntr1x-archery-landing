@@ -12,10 +12,18 @@ window.Store =
     };
 
     const mutations = {
-        
+
         model: (state, model) => {
             state.model = model
-        }
+        },
+
+        // showModal: (state, modal) => {
+        //     state.modals.push(modal);
+        // },
+        //
+        // closeModal: (state) => {
+        //     state.modals.pop();
+        // }
     }
 
     const actions = {
@@ -46,10 +54,10 @@ window.Store =
 
         },
 
-        action: ({ commit, state}, expression) => {
+        action: ({ commit, state }, expression) => {
             console.log('action', expression);
             eval(expression);
-        }
+        },
     }
 
     const getters = {

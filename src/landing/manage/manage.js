@@ -51,13 +51,32 @@
         data: function() {
             return {
                 form: this.form,
+                validation: this.validation,
             }
         },
         created: function() {
 
-            this.$set('form', {
+            this.validation = {
+                title: { dirty: false },
+            }
+
+            this.form = {
                 title: null,
-            });
+            }
+
+            this.$watch('form', () => {
+
+                this.validation.title = {
+                    dirty: true,
+                    required: this.form.title == null || this.form.title == '',
+                }
+
+                this.validation.valid =
+                       !this.validation.title.required
+                ;
+
+            }, { deep: true })
+
         },
         methods: {
 
@@ -66,7 +85,7 @@
                     title: this.form.title,
                 })
                 .then(
-                    () => { this.$router.go('/manage')},
+                    () => { this.$router.push({ path: '/manage' })},
                     () => { }
                 );
             },
@@ -92,11 +111,11 @@
                     var portal = d.data.portal;
                     var publication = portal.publication;
 
-                    this.$set('form', {
+                    this.form = {
                         id: d.data.portal.id,
                         title: null,
                         image: publication ? `/uploads/${publication.thumbnail.dir}/${publication.thumbnail.path}` : null,
-                    });
+                    };
                 },
                 () => {
 
@@ -139,11 +158,11 @@
                     var portal = d.data.portal;
                     var publication = portal.publication;
 
-                    this.$set('form', {
+                    this.form = {
                         id: portal.id,
                         title: publication ? publication.title : '',
                         image: publication ? `/uploads/${publication.thumbnail.dir}/${publication.thumbnail.path}` : null,
-                    });
+                    };
                 },
                 (e) => { console.log(e); }
             )
@@ -156,7 +175,7 @@
 
                 var reader = new FileReader();
                 reader.onload = (e) => {
-                    this.$set('form.image', e.target.result);
+                    this.form.image = e.target.result;
                 }
                 reader.readAsDataURL(this.file);
             });

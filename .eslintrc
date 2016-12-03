@@ -12,6 +12,7 @@
         "VueRouter": false,
         "Core": true,
         "Shell": true,
+        "Store": true,
         "Landing": true,
     },
     "extends": "eslint:recommended",
