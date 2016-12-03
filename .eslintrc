@@ -8,6 +8,7 @@
         "jQuery": false,
         "require": false,
         "Vue": false,
+        "Vuex": false,
         "VueRouter": false,
         "Core": true,
         "Shell": true,

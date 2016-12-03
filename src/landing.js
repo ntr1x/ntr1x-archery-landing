@@ -1,82 +1,100 @@
 window.Landing =
-(function($, Vue, Core, Shell) {
+(function($, Vue, Core) {
 
-    var Landing = {};
-    
+    const Landing = {};
+
     $(document).ready(function() {
 
         $('[data-vue-landing]').each(function(index, element) {
 
-            var data = $(element).data();
+            const data = $(element).data();
 
-            var App = Vue.extend({
-                data: function() {
-                    return data;
+            const routes = [
+                {
+                    path: '/',
+                    component: Landing.LandingPage,
                 },
+                {
+                    path: '/gallery',
+                    component: Landing.LandingGalleryPage,
+                },
+                {
+                    path: '/storage',
+                    component: Landing.LandingStoragePage,
+                },
+                {
+                    path: '/signin',
+                    component: Landing.LandingSigninPage,
+                },
+                {
+                    path: '/signup',
+                    component: Landing.LandingSignupPage,
+                },
+                {
+                    path: '/manage',
+                    component: Landing.LandingManagePage,
+                    meta: {
+                        auth: true,
+                    }
+                },
+                {
+                    path: '/manage/create',
+                    component: Landing.LandingManageCreatePage,
+                    meta: {
+                        auth: true,
+                    }
+                },
+                {
+                    path: '/manage/i/:portal/clone',
+                    component: Landing.LandingManageClonePage,
+                    meta: {
+                        auth: true,
+                    }
+                },
+                {
+                    path: '/manage/i/:portal/publish',
+                    component: Landing.LandingManagePublishPage,
+                    meta: {
+                        auth: true,
+                    }
+                },
+            ];
+
+            const router = new VueRouter({
+                mode: 'history',
+                routes
+            })
+
+            router.beforeEach((to, from, next) => {
+
+                if (to.matched.some(record => record.meta.requiresAuth)) {
+
+                    if (!router.app.principal) {
+
+                        next({
+                            path: '/signin',
+                            query: { redirect: to.fullPath },
+                        })
+
+                        return
+                    }
+                }
+
+                next()
+            });
+
+            new Vue({
+                router,
+                data,
                 created: function() {
 
                     Vue.service('security', Core.SecurityFactory(this));
                     Vue.service('portals', Core.PortalsFactory(this));
                 },
-            });
-
-            var router = new VueRouter({
-                history: true,
-            });
-
-            router.beforeEach(function(transition) {
-
-                if (transition.to.auth && !router.app.principal) {
-                    transition.abort();
-                } else if (transition.to.anon && router.app.principal) {
-                    transition.abort();
-                } else {
-                    transition.next();
-                }
-            });
-
-            var routes = {
-                '/': {
-                    component: Landing.LandingPage,
-                },
-                '/gallery': {
-                    component: Landing.LandingGalleryPage,
-                },
-                '/storage': {
-                    component: Landing.LandingStoragePage,
-                },
-                '/signin': {
-                    component: Landing.LandingSigninPage,
-                    anon: true,
-                },
-                '/signup': {
-                    component: Landing.LandingSignupPage,
-                    anon: true,
-                },
-                '/manage': {
-                    component: Landing.LandingManagePage,
-                    auth: true,
-                },
-                '/manage/create': {
-                    component: Landing.LandingManageCreatePage,
-                    auth: true,
-                },
-                '/manage/i/:portal/clone': {
-                    component: Landing.LandingManageClonePage,
-                    auth: true,
-                },
-                '/manage/i/:portal/publish': {
-                    component: Landing.LandingManagePublishPage,
-                    auth: true,
-                },
-            };
-
-            router.map(routes);
-
-            router.start(App, $('[data-vue-body]', element).get(0));
+            }).$mount($('[data-vue-body]', element).get(0));
         });
     });
 
     return Landing;
 
-})(jQuery, Vue, Core, Shell);
+})(jQuery, Vue, Core);

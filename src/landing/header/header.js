@@ -6,8 +6,8 @@
         methods: {
             signout: function() {
                 Vue.service('security').signout().then(
-                    (d) => { this.$router.go('/'); },
-                    (e) => { }
+                    () => { this.$router.push({ path: '/' }); },
+                    () => { }
                 );
             }
         },

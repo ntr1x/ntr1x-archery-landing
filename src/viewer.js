@@ -1,46 +1,46 @@
 window.Viewer =
 (function($, Vue, VueRouter, Core, Shell) {
 
-    var Viewer = {};
+    const Viewer = {};
 
     $(document).ready(function() {
 
         $('[data-vue-viewer]').each(function(index, element) {
 
-            var data = $(element).data();
+            const data = $(element).data();
 
-            var App = Vue.extend({
-                data: function() {
-                    return data;
-                },
+            const routes = [];
+
+            for (let page of data.pages) {
+
+                routes.push({
+                    path: page.name,
+                    component: Vue.component(`shell-loader-public-${page.id}`, {
+                        mixins: [ Shell.LoaderPublic ]
+                    }),
+                    meta: {
+                        auth: false,
+                        private: false,
+                        page: page,
+                    }
+                })
+            }
+
+            const router = new VueRouter({
+                mode: 'history',
+                base: `/view/${data.portal.id}/`,
+                routes
+            });
+
+            new Vue({
+                router,
+                data,
                 created: function() {
 
                     Vue.service('security', Core.SecurityFactory(this));
                     Vue.service('portals', Core.PortalsFactory(this));
                 },
-            });
-
-            var router = new VueRouter({
-                history: true,
-                root: `/view/${data.portal.id}/`
-            });
-
-            var routes = {};
-
-            for (let page of data.pages) {
-                routes[page.name || '/'] = {
-                    component: Vue.component(`shell-loader-public-${page.id}`, {
-                        mixins: [ Shell.LoaderPublic ]
-                    }),
-                    auth: false,
-                    private: false,
-                    page: page,
-                }
-            }
-
-            router.map(routes);
-
-            router.start(App, $('[data-vue-body]', element).get(0));
+            }).$mount($('[data-vue-body]', element).get(0));
         });
     });
 

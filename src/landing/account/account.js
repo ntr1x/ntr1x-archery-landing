@@ -1,7 +1,7 @@
 (function($, Vue, Core, Shell, Landing) {
 
-    var validation = {
-        email: "/^([a-zA-Z0-9_\\.\\-]+)@([a-zA-Z0-9_\\.\\-]+)\\.([a-zA-Z0-9]{2,})$/g",
+    const validation = {
+        email: /^([a-zA-Z0-9_\.\-]+)@([a-zA-Z0-9_\.\-]+)\.([a-zA-Z0-9]{2,})$/,
     };
 
     Landing.Signin =
@@ -10,14 +10,43 @@
         data: function() {
             return {
                 form: this.form,
-                validation: validation,
+                validation: this.validation,
             }
         },
         created: function() {
-            this.$set('form', {
+
+            this.validation = {
+                email: { dirty: false },
+                password: { dirty: false },
+            };
+
+            this.form = {
                 email: null,
                 password: null,
-            });
+            };
+
+            this.$watch('form', () => {
+
+                this.validation.email = {
+                    dirty: true,
+                    required: this.form.email == null || this.form.email == '',
+                    illegal: this.form.email != null && !validation.email.test(this.form.email),
+                }
+
+                this.validation.password = {
+                    dirty: true,
+                    required: this.form.password == null || this.form.password == '',
+                    illegal: this.form.password != null && this.form.password.length < 8,
+                }
+
+                this.validation.valid =
+                       !this.validation.email.required
+                    && !this.validation.email.illegal
+                    && !this.validation.password.required
+                    && !this.validation.password.illegal
+                ;
+
+            }, { deep: true });
         },
         methods: {
             signin: function() {
@@ -26,8 +55,8 @@
                     email: this.form.email,
                     password: this.form.password,
                 }).then(
-                    (d) => { this.$router.go('/'); },
-                    (e) => { }
+                    () => { this.$router.push({ path: '/' }); },
+                    () => { }
                 );
             }
         },
@@ -39,14 +68,43 @@
         data: function() {
             return {
                 form: this.form,
-                validation: validation,
+                validation: this.validation,
             }
         },
         created: function() {
-            this.$set('form', {
+
+            this.validation = {
+                email: { dirty: false },
+                password: { dirty: false },
+            };
+
+            this.form = {
                 email: null,
                 password: null,
-            });
+            };
+
+            this.$watch('form', () => {
+
+                this.validation.email = {
+                    dirty: true,
+                    required: this.form.email == null || this.form.email == '',
+                    illegal: this.form.email != null && !validation.email.test(this.form.email),
+                }
+
+                this.validation.password = {
+                    dirty: true,
+                    required: this.form.password == null || this.form.password == '',
+                    illegal: this.form.password != null && this.form.password.length < 8,
+                }
+
+                this.validation.valid =
+                       !this.validation.email.required
+                    && !this.validation.email.illegal
+                    && !this.validation.password.required
+                    && !this.validation.password.illegal
+                ;
+
+            }, { deep: true });
         },
         methods: {
             signup: function() {
@@ -55,8 +113,8 @@
                     email: this.form.email,
                     password: this.form.password,
                 }).then(
-                    (d) => { this.$router.go('/'); },
-                    (e) => { }
+                    () => { this.$router.push({ path: '/'}); },
+                    () => { }
                 );
             }
         },

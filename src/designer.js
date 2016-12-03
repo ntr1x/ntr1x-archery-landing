@@ -1,53 +1,56 @@
 window.Designer =
 (function($, Vue, Core, Shell) {
 
-    var Designer = {};
+    const Designer = {};
 
     $(document).ready(function() {
 
         $('[data-vue-designer]').each(function(index, element) {
 
-            var data = $(element).data();
+            const data = $(element).data();
 
-            var App = Vue.extend({
-                data: function() {
-                    return data;
-                },
-                created: function() {
+            // router.beforeEach((to, from, next) => {
+            //
+            //     if (to.matched.some(record => record.meta.requiresAuth)) {
+            //
+            //         if (!router.app.principal) {
+            //
+            //             next({
+            //                 path: '/signin',
+            //                 query: { redirect: to.fullPath },
+            //             })
+            //
+            //             return
+            //         }
+            //     }
+            //
+            //     next()
+            // });
 
-                    Vue.service('security', Core.SecurityFactory(this));
-                    Vue.service('portals', Core.PortalsFactory(this));
-                },
-            });
-
-            var router = new VueRouter({
-                history: true,
-                root: `/edit/${data.portal.id}/`
-            });
-
-            router.beforeEach(function(transition) {
-
-                if (transition.to.auth && !router.app.principal) {
-                    transition.abort();
-                } else if (transition.to.anon && router.app.principal) {
-                    transition.abort();
-                } else {
-                    transition.next();
-                }
-            });
-
-            var routes = {
-                '/': {
+            const routes = [
+                {
+                    path: '/',
                     component: Shell.LoaderPrivate,
-                    auth: true,
-                    private: true,
+                    meta: {
+                        auth: true,
+                        private: true,
+                    },
                 },
-                '/:page': {
+                {
+                    path: '/:page',
                     component: Shell.LoaderPrivate,
-                    auth: true,
-                    private: true,
+                    meta: {
+                        auth: true,
+                        private: true,
+                    },
                 },
-            };
+            ];
+
+            const router = new VueRouter({
+                mode: 'history',
+                base: `/edit/${data.portal.id}/`,
+                routes,
+            });
 
             // function createRoute(page) {
             //     return {
@@ -69,9 +72,15 @@ window.Designer =
             //     }
             // }
 
-            router.map(routes);
-
-            router.start(App, $('[data-vue-body]', element).get(0));
+            new Vue({
+                router,
+                data,
+                store: window.Store,
+                created: function() {
+                    Vue.service('security', Core.SecurityFactory(this));
+                    Vue.service('portals', Core.PortalsFactory(this));
+                },
+            }).$mount($('[data-vue-body]', element).get(0));
         });
     });
 

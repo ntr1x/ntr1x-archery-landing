@@ -16,9 +16,10 @@
         methods: {
 
             refresh: function() {
+                this.portals = [];
                 Vue.service('portals').load().then(
-                    (d) => { this.$set('portals', d.data.portals); },
-                    (e) => { this.$set('portals', []); }
+                    (d) => { this.portals = d.data.portals; },
+                    () => { this.portals = []; }
                 );
             },
 
@@ -27,8 +28,8 @@
                     id: id,
                 })
                 .then(
-                    (d) => { this.refresh(); },
-                    (e) => { }
+                    () => { this.refresh(); },
+                    () => { }
                 );
             },
 
@@ -37,8 +38,8 @@
                     id: id,
                 })
                 .then(
-                    (d) => { this.refresh(); },
-                    (e) => { }
+                    () => { this.refresh(); },
+                    () => { }
                 );
             }
         }
@@ -65,8 +66,8 @@
                     title: this.form.title,
                 })
                 .then(
-                    (d) => { this.$router.go('/manage')},
-                    (e) => { }
+                    () => { this.$router.go('/manage')},
+                    () => { }
                 );
             },
         }
@@ -97,7 +98,7 @@
                         image: publication ? `/uploads/${publication.thumbnail.dir}/${publication.thumbnail.path}` : null,
                     });
                 },
-                (e) => {
+                () => {
 
                 }
             );
@@ -110,7 +111,7 @@
                     title: this.form.title,
                 })
                 .then(
-                    (d) => { this.$router.go('/manage')},
+                    () => { this.$router.go('/manage')},
                     (e) => { console.log(e); }
                 );
             },
@@ -147,7 +148,7 @@
                 (e) => { console.log(e); }
             )
         },
-        attached: function() {
+        mounted: function() {
 
             $(this.$el).on('change', 'input[type="file"]', (e) => {
 
@@ -170,7 +171,7 @@
                     thumbnail: this.file,
                 })
                 .then(
-                    (d) => { this.$router.go('/manage'); },
+                    () => { this.$router.go('/manage'); },
                     (e) => { console.log(e); }
                 );
             },
