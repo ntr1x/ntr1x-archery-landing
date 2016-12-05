@@ -11,20 +11,16 @@
         created: function() {
 
             this.portals = [];
-
-            Vue.service('portals').load({
-                params: {
+            this.$store
+                .dispatch('portals/load', {
                     published: 1,
-                    limit: 3,
-                }
-            }).then(
-                (d) => {
-                    this.portals = d.data.portals;
-                },
-                (e) => {
-                    console.log(e);
-                }
-            )
+                    limit: 3
+                })
+                .then(
+                    (d) => { this.portals = d.data.portals; },
+                    (e) => {}
+                )
+            ;
         }
     });
 
@@ -39,19 +35,15 @@
         created: function() {
 
             this.portals = [];
-
-            Vue.service('portals').load({
-                params: {
-                    published: 1,
-                }
-            }).then(
-                (d) => {
-                    this.portals = d.data.portals;
-                },
-                (e) => {
-                    console.log(e);
-                }
-            )
+            this.$store
+                .dispatch('portals/load', {
+                    published: 1
+                })
+                .then(
+                    (d) => { this.portals = d.data.portals; },
+                    (e) => {}
+                )
+            ;
         }
     });
 

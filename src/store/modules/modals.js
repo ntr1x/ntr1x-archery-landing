@@ -1,21 +1,25 @@
-(function($, Vue, Vuex, Store) {
+window.StoreFactoryModals =
+(function() {
 
-    Store.registerModule('modals', {
+    return function() {
 
-        state: {
-            items: [],
-        },
+        return {
 
-        mutations: {
-
-            showModal: (state, modal) => {
-                state.items.push(modal);
+            state: {
+                items: [],
             },
 
-            closeModal: (state) => {
-                state.items.pop()
+            mutations: {
+
+                'modals/show': (state, modal) => {
+                    state.items.push(modal);
+                },
+
+                'modals/close': (state) => {
+                    state.items.pop()
+                }
             }
         }
-    })
+    }
 
-})(jQuery, Vue, Vuex, Store);
+})();

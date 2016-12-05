@@ -49,15 +49,19 @@
             }, { deep: true });
         },
         methods: {
+
             signin: function() {
 
-                Vue.service('security').signin({
-                    email: this.form.email,
-                    password: this.form.password,
-                }).then(
-                    () => { this.$router.push({ path: '/' }); },
-                    () => { }
-                );
+                this.$store
+                    .dispatch('security/signin', {
+                        email: this.form.email,
+                        password: this.form.password,
+                    })
+                    .then(
+                        () => { this.$router.push({ path: this.$route.query.redirect || '/' }) },
+                        () => {}
+                    )
+                ;
             }
         },
     });
@@ -107,15 +111,19 @@
             }, { deep: true });
         },
         methods: {
+
             signup: function() {
 
-                Vue.service('security').signup({
-                    email: this.form.email,
-                    password: this.form.password,
-                }).then(
-                    () => { this.$router.push({ path: '/'}); },
-                    () => { }
-                );
+                this.$store
+                    .dispatch('security/signup', {
+                        email: this.form.email,
+                        password: this.form.password,
+                    })
+                    .then(
+                        () => { this.$router.push({ path: '/' }) },
+                        () => {}
+                    )
+                ;
             }
         },
     });

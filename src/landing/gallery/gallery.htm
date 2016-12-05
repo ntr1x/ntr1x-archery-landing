@@ -10,23 +10,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-6 col-md-4" v-for="portal in portals">
-                        <div class="thumbnail ld ld-thumbnail">
-                            <div class="ld ld-thumbnail-inner" :style="{
-                                'background-image': 'url(/uploads/' + portal.publication.thumbnail.dir + '/' + portal.publication.thumbnail.path + ')'
-                            }"></div>
-                            <div class="ld ld-thumbnail-overlay">
-                                <div class="ld ld-overlay-content">
-                                    <div class="ld ld-thumbnail-buttons">
-                                        <a :href="'/view/' + portal.id + '/'" class="btn btn-default">Preview</a>
-                                        <a href="#" class="btn btn-primary">Start Editing</a>
+                <transition appear name="fade">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-4" v-for="portal in portals">
+                            <div class="thumbnail ld ld-thumbnail">
+                                <div class="ld ld-thumbnail-inner" :style="{
+                                    'background-image': 'url(/uploads/' + portal.publication.thumbnail.dir + '/' + portal.publication.thumbnail.path + ')'
+                                }"></div>
+                                <div class="ld ld-thumbnail-overlay">
+                                    <div class="ld ld-overlay-content">
+                                        <div class="ld ld-thumbnail-buttons">
+                                            <a :href="'/view/' + portal.id + '/'" class="btn btn-default">Preview</a>
+                                            <a href="#" class="btn btn-primary">Start Editing</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </transition>
             </div>
         </div>
     </div>

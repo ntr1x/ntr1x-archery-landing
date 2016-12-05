@@ -3,12 +3,24 @@
     Landing.Header =
     Vue.component('landing-header', {
         template: '#landing-header',
+        computed: {
+            principal: {
+                get: function() {
+                    return this.$store.state.security.principal;
+                }
+            }
+        },
         methods: {
+
             signout: function() {
-                Vue.service('security').signout().then(
-                    () => { this.$router.push({ path: '/' }); },
-                    () => { }
-                );
+
+                this.$store
+                    .dispatch('security/signout')
+                    .then(
+                        () => { this.$router.push({ path: '/' }) },
+                        () => {}
+                    )
+                ;
             }
         },
     });

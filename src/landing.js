@@ -9,6 +9,13 @@ window.Landing =
 
             const data = $(element).data();
 
+            const store = new window.StoreFactory()
+            store.registerModule('security', new window.StoreFactorySecurity())
+            store.registerModule('portals', new window.StoreFactoryPortals())
+            store.registerModule('modals', new window.StoreFactoryModals())
+
+            store.commit('security/principal', data.principal)
+
             const routes = [
                 {
                     path: '/',
@@ -67,9 +74,9 @@ window.Landing =
 
             router.beforeEach((to, from, next) => {
 
-                if (to.matched.some(record => record.meta.requiresAuth)) {
+                if (to.matched.some(record => record.meta.auth)) {
 
-                    if (!router.app.principal) {
+                    if (!store.state.security.principal) {
 
                         next({
                             path: '/signin',
@@ -86,11 +93,7 @@ window.Landing =
             new Vue({
                 router,
                 data,
-                created: function() {
-
-                    Vue.service('security', Core.SecurityFactory(this));
-                    Vue.service('portals', Core.PortalsFactory(this));
-                },
+                store,
             }).$mount($('[data-vue-body]', element).get(0));
         });
     });
