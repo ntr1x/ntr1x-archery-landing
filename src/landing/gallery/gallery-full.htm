@@ -12,7 +12,7 @@
                                 <div class="ld ld-overlay-content">
                                     <div class="ld ld-thumbnail-buttons">
                                         <a :href="'/view/' + portal.id + '/'" class="btn btn-default">Preview</a>
-                                        <a href="#" class="btn btn-primary">Start Editing</a>
+                                        <a href="#" class="btn btn-primary" @click.prevent="$router.push({ path: '/manage/i/' + portal.id + '/clone' })">Clone &amp; Edit</a>
                                     </div>
                                 </div>
                             </div>

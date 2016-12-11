@@ -9,12 +9,22 @@ window.Viewer =
 
             const data = $(element).data();
 
+            const store = new window.StoreFactory()
+            store.registerModule('security', new window.StoreFactorySecurity())
+            store.registerModule('portals', new window.StoreFactoryPortals())
+            store.registerModule('modals', new window.StoreFactoryModals())
+            store.registerModule('viewer', new window.StoreFactoryViewer())
+
+            store.commit('security/principal', data.principal)
+            store.commit('viewer/portal', data.portal)
+            store.commit('viewer/pages', data.pages)
+
             const routes = [];
 
             for (let page of data.pages) {
 
                 routes.push({
-                    path: page.name,
+                    path: '/' + page.name,
                     component: Vue.component(`shell-loader-public-${page.id}`, {
                         mixins: [ Shell.LoaderPublic ]
                     }),
@@ -35,11 +45,7 @@ window.Viewer =
             new Vue({
                 router,
                 data,
-                created: function() {
-
-                    Vue.service('security', Core.SecurityFactory(this));
-                    Vue.service('portals', Core.PortalsFactory(this));
-                },
+                store,
             }).$mount($('[data-vue-body]', element).get(0));
         });
     });

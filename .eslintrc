@@ -14,6 +14,7 @@
         "Shell": true,
         "Store": true,
         "Landing": true,
+        "Widgets": true,
     },
     "extends": "eslint:recommended",
     "rules": {

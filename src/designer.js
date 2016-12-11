@@ -9,23 +9,19 @@ window.Designer =
 
             const data = $(element).data();
 
-            // router.beforeEach((to, from, next) => {
-            //
-            //     if (to.matched.some(record => record.meta.requiresAuth)) {
-            //
-            //         if (!router.app.principal) {
-            //
-            //             next({
-            //                 path: '/signin',
-            //                 query: { redirect: to.fullPath },
-            //             })
-            //
-            //             return
-            //         }
-            //     }
-            //
-            //     next()
-            // });
+            console.log(window.StoreScopedPlugin);
+            Vue.use(window.StoreScopedPlugin('$page'))
+
+            const store = new window.StoreFactory()
+            store.registerModule('security', new window.StoreFactorySecurity())
+            store.registerModule('portals', new window.StoreFactoryPortals())
+            store.registerModule('modals', new window.StoreFactoryModals())
+            store.registerModule('designer', new window.StoreFactoryDesigner())
+            store.registerModule('palette', new window.StoreFactoryPalette(window.Widgets.Palette))
+
+            store.commit('security/principal', data.principal)
+            store.commit('designer/portal', data.portal)
+            store.commit('designer/pages', data.pages)
 
             const routes = [
                 {
@@ -75,11 +71,7 @@ window.Designer =
             new Vue({
                 router,
                 data,
-                store: window.Store,
-                created: function() {
-                    Vue.service('security', Core.SecurityFactory(this));
-                    Vue.service('portals', Core.PortalsFactory(this));
-                },
+                store,
             }).$mount($('[data-vue-body]', element).get(0));
         });
     });

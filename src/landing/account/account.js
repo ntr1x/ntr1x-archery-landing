@@ -26,6 +26,12 @@
             };
 
             this.$watch('form', () => {
+                this.validate()
+            }, { deep: true });
+        },
+        methods: {
+
+            validate: function() {
 
                 this.validation.email = {
                     dirty: true,
@@ -45,10 +51,7 @@
                     && !this.validation.password.required
                     && !this.validation.password.illegal
                 ;
-
-            }, { deep: true });
-        },
-        methods: {
+            },
 
             signin: function() {
 
