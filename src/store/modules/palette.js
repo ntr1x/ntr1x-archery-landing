@@ -16,9 +16,6 @@ window.StoreFactoryPalette =
                 },
             },
 
-            actions: {
-            },
-
             getters: {
                 palette: () => palette,
             }

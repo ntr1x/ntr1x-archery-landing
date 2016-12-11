@@ -9,7 +9,6 @@ window.Designer =
 
             const data = $(element).data();
 
-            console.log(window.StoreScopedPlugin);
             Vue.use(window.StoreScopedPlugin('$page'))
 
             const store = new window.StoreFactory()

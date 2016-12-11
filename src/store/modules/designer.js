@@ -45,6 +45,13 @@ window.StoreFactoryDesigner =
                 'designer/sources/create': (state, source) => { Core.Collection(state.page, 'sources').create(source) },
                 'designer/sources/update': (state, source) => { Core.Collection(state.page, 'sources').update(source) },
                 'designer/sources/remove': (state, source) => { Core.Collection(state.page, 'sources').remove(source) },
+
+                'designer/widgets/create': (state, { parent, widget }) => { Core.Collection(parent, 'widgets').create(widget) },
+                'designer/widgets/update': (state, { parent, widget }) => { Core.Collection(parent, 'widgets').update(widget) },
+                'designer/widgets/insert': (state, { parent, widget, index }) => { Core.Collection(parent, 'widgets').insert(widget, index); },
+                'designer/widgets/remove': (state, { parent, widget }) => { Core.Collection(parent, 'widgets').remove(widget) },
+
+                'designer/params/update': (state, { model, value }) => { Object.assign(model, value) },
             },
 
             actions: {
