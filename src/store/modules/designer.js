@@ -52,6 +52,13 @@ window.StoreFactoryDesigner =
                 'designer/widgets/remove': (state, { parent, widget }) => { Core.Collection(parent, 'widgets').remove(widget) },
 
                 'designer/params/update': (state, { model, value }) => { Object.assign(model, value) },
+                'designer/property/update': (state, { parent, value, property }) => { parent[property] = value },
+
+                'designer/items/create': (state, { parent, item, property }) => { Core.Collection(parent, property || 'items').create(item) },
+                'designer/items/update': (state, { parent, item, property }) => { Core.Collection(parent, property || 'items').update(item) },
+                'designer/items/insert': (state, { parent, item, property, index }) => { Core.Collection(parent, property || 'items').insert(item, index) },
+                'designer/items/remove': (state, { parent, item, property }) => { Core.Collection(parent, property || 'items').remove(item) },
+
             },
 
             actions: {

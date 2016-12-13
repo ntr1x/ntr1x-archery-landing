@@ -17,8 +17,8 @@ window.StoreFactoryModals =
 
                 'modals/close': (state) => {
                     state.items.pop()
-                }
-            }
+                },
+            },
         }
     }
 

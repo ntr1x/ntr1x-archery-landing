@@ -7,9 +7,9 @@ window.Designer =
 
         $('[data-vue-designer]').each(function(index, element) {
 
-            const data = $(element).data();
+            const data = $(element).data()
 
-            Vue.use(window.StoreScopedPlugin('$page'))
+            Vue.use(window.ContextPlugin)
 
             const store = new window.StoreFactory()
             store.registerModule('security', new window.StoreFactorySecurity())
