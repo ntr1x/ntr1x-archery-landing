@@ -16,6 +16,7 @@
         "Landing": true,
         "Widgets": true,
     },
+    "parser": "babel-eslint",
     "extends": "eslint:recommended",
     "rules": {
         "indent": [
