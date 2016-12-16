@@ -59,6 +59,10 @@ window.StoreFactoryDesigner =
                 'designer/items/insert': (state, { parent, item, property, index }) => { Core.Collection(parent, property || 'items').insert(item, index) },
                 'designer/items/remove': (state, { parent, item, property }) => { Core.Collection(parent, property || 'items').remove(item) },
 
+                'designer/array/create': (state, { parent, item, property }) => { Core.Array(parent, property || 'items').create(item) },
+                'designer/array/update': (state, { parent, item, property, index }) => { Core.Array(parent, property || 'items').update(item, index) },
+                'designer/array/insert': (state, { parent, item, property, index }) => { Core.Array(parent, property || 'items').insert(item, index) },
+                'designer/array/remove': (state, { parent, property, index }) => { Core.Array(parent, property || 'items').remove(index) },
             },
 
             actions: {

@@ -1,5 +1,5 @@
 window.StoreFactoryViewer =
-(function($, Vue) {
+(function() {
 
     return function() {
 
@@ -26,4 +26,4 @@ window.StoreFactoryViewer =
         }
     }
 
-})(jQuery, Vue);
+})();

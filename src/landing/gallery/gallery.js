@@ -18,7 +18,7 @@
                 })
                 .then(
                     (d) => { this.portals = d.data.portals; },
-                    (e) => {}
+                    () => {}
                 )
             ;
         }
@@ -41,7 +41,7 @@
                 })
                 .then(
                     (d) => { this.portals = d.data.portals; },
-                    (e) => {}
+                    () => {}
                 )
             ;
         }

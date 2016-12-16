@@ -1,5 +1,5 @@
 window.Landing =
-(function($, Vue, Core) {
+(function($, Vue) {
 
     const Landing = {};
 
@@ -100,4 +100,4 @@ window.Landing =
 
     return Landing;
 
-})(jQuery, Vue, Core);
+})(jQuery, Vue);

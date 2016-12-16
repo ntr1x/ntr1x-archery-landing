@@ -1,8 +1,8 @@
-(function($, Vue, Core, Shell, Landing) {
+(function(Vue, Landing) {
 
     Landing.Footer =
     Vue.component('landing-footer', {
         template: '#landing-footer',
     });
 
-})(jQuery, Vue, Core, Shell, Landing);
+})(Vue, Landing);

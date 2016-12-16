@@ -1,5 +1,5 @@
 window.StoreFactoryPalette =
-(function($, Vue) {
+(function() {
 
     return function(palette) {
 
@@ -22,4 +22,4 @@ window.StoreFactoryPalette =
         }
     }
 
-})(jQuery, Vue);
+})();

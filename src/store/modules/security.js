@@ -24,7 +24,7 @@ window.StoreFactorySecurity =
                         .post('/ws/signin', { email, password })
                         .then(
                             (d) => { commit('security/principal', d.data.principal); },
-                            (e) => { commit('security/principal', null); reject(e); }
+                            () => { commit('security/principal', null); }
                         )
                     ;
                 },
@@ -35,18 +35,18 @@ window.StoreFactorySecurity =
                         .post('/ws/signup', { email, password })
                         .then(
                             (d) => { commit('security/principal', d.data.principal); },
-                            (e) => { commit('security/principal', null); reject(e); }
+                            () => { commit('security/principal', null); }
                         )
                     ;
                 },
 
-                'security/signout': ({ commit, state }) => {
+                'security/signout': ({ commit }) => {
 
                     return Vue.http
                         .post('/ws/signout')
                         .then(
-                            (d) => { commit('security/principal', null); },
-                            (e) => { reject(e); }
+                            () => { commit('security/principal', null); },
+                            () => { commit('security/principal', null); }
                         )
                     ;
                 },
