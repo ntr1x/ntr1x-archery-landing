@@ -1,18 +1,27 @@
 window.StoreFactorySecurity =
 (function($, Vue) {
 
-    return function() {
+    return function({ endpoint }) {
 
         return {
 
             state: {
-                principal: null,
+                principal: {
+                    token: null,
+                    user: null,
+                }
             },
 
             mutations: {
 
                 'security/principal': (state, principal) => {
-                    state.principal = principal;
+                    state.principal.user = principal.user
+                    state.principal.token = principal.token
+                    if (state.principal.token) {
+                        Cookies.set('token', state.principal.token, { expires: 365 })
+                    } else {
+                        Cookies.remove('token')
+                    }
                 },
             },
 
@@ -21,36 +30,60 @@ window.StoreFactorySecurity =
                 'security/signin': ({ commit, state }, { email, password }) => {
 
                     return Vue.http
-                        .post('/ws/signin', { email, password })
+                        .post(`${endpoint}/security/signin`, { email, password })
                         .then(
-                            (d) => { commit('security/principal', d.data.principal); },
-                            () => { commit('security/principal', null); }
+                            (d) => {
+                                commit('security/principal', {
+                                    user: d.data.user,
+                                    token: d.data.token
+                                });
+                            },
+                            () => {
+                                commit('security/principal', {
+                                    user: null,
+                                    token: null
+                                });
+                            }
                         )
                     ;
                 },
 
-                'security/signup': ({ commit, state }, { email, password }) => {
+                'security/signup': ({ commit, state }, { email, password, name }) => {
 
                     return Vue.http
-                        .post('/ws/signup', { email, password })
+                        .post(`${endpoint}/security/signup`, { email, password, name })
                         .then(
-                            (d) => { commit('security/principal', d.data.principal); },
-                            () => { commit('security/principal', null); }
+                            (d) => { alert('Check your email') },
+                            () => { alert('fail') }
                         )
+                        // .then(
+                        //     (d) => { commit('security/user', d.data); },
+                        //     () => { commit('security/user', null); }
+                        // )
                     ;
                 },
 
                 'security/signout': ({ commit }) => {
 
                     return Vue.http
-                        .post('/ws/signout')
+                        .post(`${endpoint}/security/signout`)
                         .then(
-                            () => { commit('security/principal', null); },
-                            () => { commit('security/principal', null); }
+                            () => {
+                                commit('security/principal', {
+                                    user: null,
+                                    token: null
+                                });
+                            },
+                            () => {
+                                commit('security/principal', {
+                                    user: null,
+                                    token: null
+                                });
+                            }
                         )
                     ;
                 },
-            }
+            },
         }
     }
 

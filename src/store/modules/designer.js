@@ -31,6 +31,14 @@ window.StoreFactoryDesigner =
                     state.scale = scale;
                 },
 
+                'designer/leftToggle': (state) => {
+                    state.leftOpen = !state.leftOpen;
+                },
+
+                'designer/rightToggle': (state) => {
+                    state.rightOpen = !state.rightOpen;
+                },
+
                 'designer/pages/select': (state, page) => { state.page = page; },
                 'designer/pages/create': (state, page) => { Core.Collection(state, 'pages').create(page) },
                 'designer/pages/update': (state, page) => { Core.Collection(state, 'pages').update(page) },
@@ -66,14 +74,6 @@ window.StoreFactoryDesigner =
             },
 
             actions: {
-
-                'designer/leftToggle': ({ state }) => {
-                    state.leftOpen = !state.leftOpen;
-                },
-
-                'designer/rightToggle': ({ state }) => {
-                    state.rightOpen = !state.rightOpen;
-                },
 
                 'designer/zoom': ({ commit, state }, scale) => {
                     commit('designer/scale', scale);

@@ -18,7 +18,9 @@
             refresh: function() {
                 this.portals = [];
                 this.$store
-                    .dispatch('portals/load')
+                    .dispatch('portals/my', {
+                        size: 100
+                    })
                     .then(
                         (d) => { this.portals = d.data.portals; },
                         () => { this.portals = []; }

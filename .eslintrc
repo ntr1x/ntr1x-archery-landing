@@ -15,6 +15,7 @@
         "Store": true,
         "Landing": true,
         "Widgets": true,
+        "Cookies": false
     },
     "parser": "babel-eslint",
     "extends": "eslint:recommended",

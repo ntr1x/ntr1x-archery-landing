@@ -1,10 +1,15 @@
 window.StoreFactoryPortals =
-(function($, Vue) {
+(function($, _, Vue) {
 
-    return function() {
+    return function({ endpoint }) {
 
         return {
 
+            mutations: {
+                'portals/model':  (state, user) => {
+
+                }
+            },
             actions: {
 
                 'portals/push': ({ commit, state }) => {
@@ -25,32 +30,45 @@ window.StoreFactoryPortals =
                 'portals/pull': ({ commit, state }) => {
 
                     return $.ajax({
-                        url: `/ws/portals/${state.portal.id}`,
+                        url: `${endpoint}/portals/i/${state.portal.id}/pull`,
                         method: 'GET',
                         dataType: 'json'
                     })
                     .then(
-                        (d) => commit('portals/model', d),
+                        (d) => commit('portals/model', d.content),
                         () => {}
                     )
                 },
 
-                'portals/load': ({ commit, state }, data) => {
-                    return Vue.http.get('/ws/portals', {
-                        params: data
+                'portals/shared': ({ commit, state, rootState }, data) => {
+                    return Vue.http.get(`${endpoint}/portals/shared`, {
+                        params: data,
                     })
                 },
 
-                'portals/create': ({ commit, state }, data) => {
-                    return Vue.http.post('/ws/portals', data)
+                'portals/my': ({ commit, state, rootState }, data) => {
+                    return Vue.http.get(`${endpoint}/me/portals`, {
+                        params: data,
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    })
+                },
+
+                'portals/create': ({ commit, state, rootState }, data) => {
+                    return Vue.http.post(`${endpoint}/me/portals`, data, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    })
                 },
 
                 'portals/get/id': ({ commit, state }, { id }) => {
-                    return Vue.http.get(`/ws/portals/${id}`)
+                    return Vue.http.get(`${endpoint}/portals/i/${id}`)
                 },
 
                 'portals/remove/id': ({ commit, state }, { id }) => {
-                    return Vue.http.delete(`/ws/portals/${id}`);
+                    return Vue.http.delete(`${endpoint}/portals/i/${id}`);
                 },
 
                 'portals/publish/id': ({ commit, state }, { id, title, thumbnail }) => {
@@ -69,4 +87,4 @@ window.StoreFactoryPortals =
         }
     }
 
-})(jQuery, Vue);
+})(jQuery, _, Vue);
