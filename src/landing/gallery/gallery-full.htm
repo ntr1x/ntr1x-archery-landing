@@ -3,10 +3,10 @@
         <div class="ld ld-container">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-xs-6 col-md-4" v-for="portal in portals">
+                    <div class="col-xs-6 col-md-4" v-for="portal in portals.content">
                         <div class="thumbnail ld ld-thumbnail">
                             <div class="ld ld-thumbnail-inner" :style="{
-                                'background-image': 'url(/uploads/' + portal.publication.thumbnail.dir + '/' + portal.publication.thumbnail.path + ')'
+                                'background-image': 'url(' + $store.state.settings.endpoint + '/images/u/' + portal.thumbnail.uuid + '/thumbnail.png)'
                             }"></div>
                             <div class="ld ld-thumbnail-overlay">
                                 <div class="ld ld-overlay-content">

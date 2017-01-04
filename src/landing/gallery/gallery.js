@@ -16,7 +16,7 @@
                     size: 3
                 })
                 .then(
-                    (d) => { this.portals = d.data.portals; },
+                    (d) => { this.portals = d.data; },
                     () => {}
                 )
             ;
@@ -35,9 +35,11 @@
 
             this.portals = [];
             this.$store
-                .dispatch('portals/shared')
+                .dispatch('portals/shared', {
+                    size: 1000
+                })
                 .then(
-                    (d) => { this.portals = d.data.portals; },
+                    (d) => { this.portals = d.data; },
                     () => {}
                 )
             ;

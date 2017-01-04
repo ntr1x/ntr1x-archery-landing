@@ -1,5 +1,5 @@
 window.StoreFactoryPortals =
-(function($, _, Vue) {
+(function($, Vue) {
 
     return function({ endpoint }) {
 
@@ -63,28 +63,53 @@ window.StoreFactoryPortals =
                     })
                 },
 
-                'portals/get/id': ({ commit, state }, { id }) => {
-                    return Vue.http.get(`${endpoint}/portals/i/${id}`)
+                'portals/id/get': ({ commit, state, rootState }, { id }) => {
+                    return Vue.http.get(`${endpoint}/portals/i/${id}`, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    })
                 },
 
-                'portals/remove/id': ({ commit, state }, { id }) => {
-                    return Vue.http.delete(`${endpoint}/portals/i/${id}`);
+                'portals/id/remove': ({ commit, state, rootState }, { id }) => {
+                    return Vue.http.delete(`${endpoint}/portals/i/${id}`, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    });
                 },
 
-                'portals/publish/id': ({ commit, state }, { id, title, thumbnail }) => {
+                'portals/id/update': ({ commit, state, rootState }, data) => {
 
-                    var fd = new FormData();
-                    fd.append('title', title);
-                    fd.append('thumbnail', thumbnail);
-
-                    return Vue.http.post(`/ws/portals/${id}/publication`, fd);
+                    return Vue.http.put(`${endpoint}/portals/i/${data.id}`, {
+                        title: data.title,
+                        thumbnail: data.thumbnail,
+                        shared: data.shared,
+                    }, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    });
                 },
 
-                'portals/unpublish/id': ({ commit, state }, { id }) => {
-                    return Vue.http.delete(`/ws/portals/${id}/publication`);
+                'portals/id/share': ({ commit, state, rootState }, { id }) => {
+
+                    return Vue.http.put(`${endpoint}/portals/i/${id}/share`, null, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    });
+                },
+
+                'portals/id/unshare': ({ commit, state, rootState }, { id }) => {
+                    return Vue.http.put(`${endpoint}/portals/i/${id}/unshare`, null, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    });
                 }
             }
         }
     }
 
-})(jQuery, _, Vue);
+})(jQuery, Vue);

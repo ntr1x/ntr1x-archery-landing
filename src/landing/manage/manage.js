@@ -18,11 +18,9 @@
             refresh: function() {
                 this.portals = [];
                 this.$store
-                    .dispatch('portals/my', {
-                        size: 100
-                    })
+                    .dispatch('portals/my', { size: 100 })
                     .then(
-                        (d) => { this.portals = d.data.portals; },
+                        (d) => { this.portals = d.data; },
                         () => { this.portals = []; }
                     )
                 ;
@@ -30,9 +28,7 @@
 
             remove: function(id) {
                 this.$store
-                    .dispatch('portals/remove/id', {
-                        id: id,
-                    })
+                    .dispatch('portals/id/remove', { id: id })
                     .then(
                         () => { this.refresh(); },
                         () => { }
@@ -40,11 +36,19 @@
                 ;
             },
 
-            unpublish: function(id) {
+            unshare: function(id) {
                 this.$store
-                    .dispatch('portals/unpublish/id', {
-                        id: id,
-                    })
+                    .dispatch('portals/id/unshare', { id: id })
+                    .then(
+                        () => { this.refresh(); },
+                        () => { }
+                    )
+                ;
+            },
+
+            share: function(id) {
+                this.$store
+                    .dispatch('portals/id/share', { id: id })
                     .then(
                         () => { this.refresh(); },
                         () => { }
@@ -113,19 +117,18 @@
         },
         created: function() {
 
-            this.$store.dispatch('portals/get/id', {
+            this.$store.dispatch('portals/id/get', {
                 id: this.$route.params.portal
             })
             .then(
                 (d) => {
 
-                    var portal = d.data.portal;
-                    var publication = portal.publication;
+                    var portal = d.data;
 
                     this.form = {
-                        id: d.data.portal.id,
-                        title: null,
-                        image: publication ? `/uploads/${publication.thumbnail.dir}/${publication.thumbnail.path}` : null,
+                        id: portal.id,
+                        title: portal.title,
+                        thumbnail: portal.thumbnail,
                     };
 
                     this.validation = {
@@ -150,7 +153,7 @@
                             && !this.validation.title.required
                         ;
 
-                    }, { deep: true })
+                    }, { deep: true, immediate: true })
                 },
                 () => {
 
@@ -164,6 +167,7 @@
                 this.$store.dispatch('portals/create', {
                     clone: this.form.id,
                     title: this.form.title,
+                    thumbnail: this.form.thumbnail.id,
                 })
                 .then(
                     () => { this.$router.push({ path: '/manage' }) },
@@ -185,28 +189,27 @@
         created: function() {
 
             this.$store
-                .dispatch('portals/get/id', {
+                .dispatch('portals/id/get', {
                     id: this.$route.params.portal
                 })
                 .then(
                     (d) => {
 
-                        var portal = d.data.portal;
-                        var publication = portal.publication;
+                        var portal = d.data;
 
                         this.form = {
                             id: portal.id,
-                            title: publication ? publication.title : '',
-                            image: publication ? `/uploads/${publication.thumbnail.dir}/${publication.thumbnail.path}` : null,
+                            title: portal.title,
+                            thumbnail: portal.thumbnail,
                         };
 
                         this.validation = {
                             id: { dirty: false },
                             title: { dirty: false },
-                            image: { dirty: false },
+                            thumbnail: { dirty: false },
                         }
 
-                        this.file = null;
+                        // this.file = null;
 
                         this.$watch('form', () => {
 
@@ -215,17 +218,17 @@
                                 required: this.form.title == null || this.form.title == '',
                             }
 
-                            this.validation.image = {
+                            this.validation.thumbnail = {
                                 dirty: true,
-                                required: this.form.image == null || this.form.image == '',
+                                required: this.form.thumbnail == null || this.form.thumbnail == '',
                             }
 
                             this.validation.valid =
                                    !this.validation.title.required
-                                && !this.validation.image.required
+                                && !this.validation.thumbnail.required
                             ;
 
-                        }, { deep: true })
+                        }, { deep: true, immediate: true })
                     },
                     (e) => { console.log(e); }
                 )
@@ -234,13 +237,36 @@
 
             $(this.$el).on('change', 'input[type="file"]', (e) => {
 
-                this.file = e.target.files[0];
+                let file = e.target.files[0];
 
-                var reader = new FileReader();
-                reader.onload = (e) => {
-                    this.form.image = e.target.result;
-                }
-                reader.readAsDataURL(this.file);
+                this.$store
+                    .dispatch('upload/image', {
+                        file,
+                        settings: {
+                            items: [
+                                { name: 'thumbnail', format: 'png', width: 360, height: 195, type: 'COVER' }
+                            ]
+                        }
+                    })
+                    .then(
+                        (d) => { this.form.thumbnail = d.data },
+                        () => {}
+                    )
+
+                // var formData = new FormData();
+                // // formData.append('section', 'general');
+                // // formData.append('action', 'previewImg');
+                // // Main magic with files here
+                // formData.append('settings', JSON.stringify({
+                //
+                // }));
+                // formData.append('file', $('input[type=file]')[0].files[0]);
+                //
+                // var reader = new FileReader();
+                // reader.onload = (e) => {
+                //     this.form.image = e.target.result;
+                // }
+                // reader.readAsDataURL(this.file);
             });
         },
         methods: {
@@ -248,10 +274,11 @@
             publish: function() {
 
                 this.$store
-                    .dispatch('portals/publish/id', {
+                    .dispatch('portals/id/update', {
                         id: this.form.id,
                         title: this.form.title,
-                        thumbnail: this.file,
+                        thumbnail: this.form.thumbnail.id,
+                        shared: true,
                     })
                     .then(
                         () => { this.$router.push({ path: '/manage' }); },

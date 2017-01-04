@@ -2,34 +2,30 @@
     <div class="ld ld-section ld-body ld-manage ld-manage-clone">
         <div class="ld ld-table">
             <div class="ld ld-cell">
-
                 <form v-if="form" novalidate @submit.prevent="validation.valid && clone()">
                     <div class="form-group">
-                        <h3>Create Portal</h3>
+                        <h3>Clone Portal</h3>
                     </dif>
                     <div class="form-group" :class="{
                         'has-error': validation.title.dirty && validation.title.required,
                         'has-feedback': validation.title.dirty && validation.title.required,
                     }">
-                        <input type="text" class="form-control input-lg" placeholder="Title" v-model="form.title">
+                        <input type="text" class="form-control input-lg" placeholder="Title" autofocus v-model="form.title">
                         <span v-if="validation.title.dirty && validation.title.required" class="glyphicon glyphicon-remove form-control-feedback"></span>
                         <div v-if="validation.title.dirty && validation.title.required">Title is a required field</div>
                     </div>
                     <div class="form-group">
-                        <h4>Template</h4>
-                    </dif>
-                    <div class="form-group">
                         <div class="ld ld-upload">
-                            <div class="thumbnail ld ld-thumbnail" v-if="form.image">
+                            <div class="thumbnail ld ld-thumbnail" v-if="form.thumbnail">
                                 <div class="ld ld-thumbnail-inner" :style="{
-                                    'background-image': 'url(' + form.image + ')'
+                                    'background-image': 'url(' + $store.state.settings.endpoint + '/images/u/' + form.thumbnail.uuid + '/thumbnail.png)'
                                 }">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-lg" v-if="validation.valid">Create</button>
+                        <button type="submit" class="btn btn-primary btn-lg" v-if="validation.valid">Clone</button>
                     </div>
                 </form>
             </div>

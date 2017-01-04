@@ -1,5 +1,5 @@
 <template id="landing-manage-publish">
-    <div class="ld ld-section ld-body ld-manage ld-manage-create">
+    <div class="ld ld-section ld-body ld-manage ld-manage-publish">
         <div class="ld ld-table">
             <div class="ld ld-cell">
                 <form v-if="form" novalidate @submit.prevent="validation.valid && publish()">
@@ -7,8 +7,8 @@
                         <h3>Publish Portal</h3>
                     </dif>
                     <div class="form-group" :class="{
-                        'has-error': validation.title.dirty && (validation.title.required || validation.title.pattern),
-                        'has-feedback': validation.title.dirty && (validation.title.required || validation.title.pattern),
+                        'has-error': validation.title.dirty && validation.title.required,
+                        'has-feedback': validation.title.dirty && validation.title.required,
                     }">
                         <input type="text" class="form-control input-lg" placeholder="Title" autofocus v-model="form.title">
                         <span v-if="validation.title.dirty && validation.title.required" class="glyphicon glyphicon-remove form-control-feedback"></span>
@@ -16,18 +16,18 @@
                     </div>
                     <div class="form-group">
                         <div class="ld ld-upload">
-                            <div class="thumbnail ld ld-thumbnail" v-if="form.image">
+                            <div class="thumbnail ld ld-thumbnail" v-if="form.thumbnail">
                                 <div class="ld ld-thumbnail-inner" :style="{
-                                    'background-image': 'url(' + form.image + ')'
+                                    'background-image': 'url(' + $store.state.settings.endpoint + '/images/u/' + form.thumbnail.uuid + '/thumbnail.png)'
                                 }">
                                 </div>
                             </div>
-                            <div class="btn btn-default btn-block" v-if="!form.image">Upload Thumbnail</div>
+                            <div class="btn btn-default btn-block" v-if="!form.thumbnail">Upload Thumbnail</div>
                             <input type="file" name="thumbnail" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-lg" v-if="validation.valid && form.image">Publish</button>
+                        <button type="submit" class="btn btn-primary btn-lg" v-if="validation.valid">Publish</button>
                     </div>
                 </form>
             </div>

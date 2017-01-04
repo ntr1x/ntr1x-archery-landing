@@ -12,9 +12,11 @@ window.Landing =
             const data = $(element).data();
 
             const store = new window.StoreFactory()
+            store.registerModule('settings', new window.StoreFactorySettings({ endpoint }))
             store.registerModule('security', new window.StoreFactorySecurity({ endpoint }))
             store.registerModule('portals', new window.StoreFactoryPortals({ endpoint }))
             store.registerModule('modals', new window.StoreFactoryModals({ endpoint }))
+            store.registerModule('uploads', new window.StoreFactoryUploads({ endpoint }))
 
             store.commit('security/principal', data.principal)
 
