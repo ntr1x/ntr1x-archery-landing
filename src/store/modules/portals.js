@@ -5,9 +5,15 @@ window.StoreFactoryPortals =
 
         return {
 
+            state: {
+                shared: null
+            },
             mutations: {
-                'portals/model':  (state, user) => {
-
+                // 'portals/model':  (state, user) => {
+                //
+                // }
+                'portals/shared': (state, shared) => {
+                    state.shared = shared
                 }
             },
             actions: {
@@ -22,7 +28,7 @@ window.StoreFactoryPortals =
                         contentType: 'application/json',
                     })
                     .then(
-                        (d) => commit('portals/model', d),
+                        (d) => { commit('portals/model', d) },
                         () => {}
                     )
                 },
@@ -35,7 +41,7 @@ window.StoreFactoryPortals =
                         dataType: 'json'
                     })
                     .then(
-                        (d) => commit('portals/model', d.content),
+                        (d) => { commit('portals/model', d.content) },
                         () => {}
                     )
                 },

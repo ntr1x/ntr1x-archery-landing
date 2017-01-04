@@ -12,13 +12,14 @@ window.Landing =
             const data = $(element).data();
 
             const store = new window.StoreFactory()
-            store.registerModule('settings', new window.StoreFactorySettings({ endpoint }))
-            store.registerModule('security', new window.StoreFactorySecurity({ endpoint }))
-            store.registerModule('portals', new window.StoreFactoryPortals({ endpoint }))
-            store.registerModule('modals', new window.StoreFactoryModals({ endpoint }))
-            store.registerModule('uploads', new window.StoreFactoryUploads({ endpoint }))
+            store.registerModule('settings', new window.StoreFactorySettings(data.config))
+            store.registerModule('security', new window.StoreFactorySecurity(data.config))
+            store.registerModule('portals', new window.StoreFactoryPortals(data.config))
+            store.registerModule('modals', new window.StoreFactoryModals(data.config))
+            store.registerModule('uploads', new window.StoreFactoryUploads(data.config))
 
             store.commit('security/principal', data.principal)
+            store.commit('portals/shared', data.shared)
 
             const routes = [
                 {

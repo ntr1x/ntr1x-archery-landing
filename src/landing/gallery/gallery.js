@@ -8,19 +8,11 @@
                 portals: this.portals,
             }
         },
-        created: function() {
-
-            this.portals = [];
-            this.$store
-                .dispatch('portals/shared', {
-                    size: 3
-                })
-                .then(
-                    (d) => { this.portals = d.data; },
-                    () => {}
-                )
-            ;
-        }
+        // created: function() {
+        //
+        //     this.portals = [];
+        //     this.$store.dispatch('portals/shared', { size: 3 });
+        // }
     });
 
     Landing.GalleryFull =
