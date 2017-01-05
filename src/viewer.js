@@ -9,19 +9,24 @@ window.Viewer =
 
             const data = $(element).data();
 
+            Vue.use(window.ContextPlugin)
+
             const store = new window.StoreFactory()
-            store.registerModule('security', new window.StoreFactorySecurity())
-            store.registerModule('portals', new window.StoreFactoryPortals())
-            store.registerModule('modals', new window.StoreFactoryModals())
-            store.registerModule('viewer', new window.StoreFactoryViewer())
+            store.registerModule('settings', new window.StoreFactorySettings(data.config))
+            store.registerModule('security', new window.StoreFactorySecurity(data.config))
+            store.registerModule('portals', new window.StoreFactoryPortals(data.config))
+            store.registerModule('modals', new window.StoreFactoryModals(data.config))
+            store.registerModule('uploads', new window.StoreFactoryUploads(data.config))
+            store.registerModule('viewer', new window.StoreFactoryViewer(data.config))
+            store.registerModule('palette', new window.StoreFactoryPalette(data.config, window.Widgets.Palette))
 
             store.commit('security/principal', data.principal)
-            store.commit('viewer/portal', data.portal)
-            store.commit('viewer/pages', data.pages)
+            store.commit('viewer/portal', data.model.portal)
+            store.commit('viewer/content', data.model.content)
 
             const routes = [];
 
-            for (let page of data.pages) {
+            for (let page of data.model.content.pages) {
 
                 routes.push({
                     path: '/' + page.name,
@@ -38,7 +43,7 @@ window.Viewer =
 
             const router = new VueRouter({
                 mode: 'history',
-                base: `/view/${data.portal.id}/`,
+                base: `/view/${data.model.portal.id}/`,
                 routes
             });
 

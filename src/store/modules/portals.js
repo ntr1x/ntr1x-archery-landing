@@ -9,38 +9,12 @@ window.StoreFactoryPortals =
                 shared: null
             },
             mutations: {
-                // 'portals/model':  (state, user) => {
-                //
-                // }
+                
                 'portals/shared': (state, shared) => {
                     state.shared = shared
                 }
             },
             actions: {
-
-                'portals/id/push': ({ commit, state }) => {
-
-                    return $.ajax({
-                        url: `/ws/portals/${state.portal.id}`,
-                        method: 'PUT',
-                        dataType: 'json',
-                        data: JSON.stringify(state.model),
-                        contentType: 'application/json',
-                    })
-                    .then(
-                        (d) => { commit('portals/model', d) },
-                        () => {}
-                    )
-                },
-
-                'portals/pull': ({ commit, state, rootState }) => {
-
-                    return Vue.http.get(`${endpoint}/portals/i/${state.portal.id}/pull`, {
-                        headers: $.extend({}, {
-                            Authorization: rootState.security.principal.token
-                        })
-                    })
-                },
 
                 'portals/shared': ({ commit, state, rootState }, data) => {
                     return Vue.http.get(`${endpoint}/portals/shared`, {

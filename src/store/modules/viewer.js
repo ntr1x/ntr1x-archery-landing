@@ -7,7 +7,7 @@ window.StoreFactoryViewer =
 
             state: {
                 portal: null,
-                pages: null,
+                content: null,
             },
 
             mutations: {
@@ -16,8 +16,8 @@ window.StoreFactoryViewer =
                     state.portal = portal;
                 },
 
-                'viewer/pages': (state, pages) => {
-                    state.pages = pages;
+                'viewer/content': (state, content) => {
+                    state.content = content;
                 },
             },
 

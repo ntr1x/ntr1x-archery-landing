@@ -1,7 +1,7 @@
 window.StoreFactoryDesigner =
 (function($, Vue, Core) {
 
-    return function() {
+    return function({ endpoint }) {
 
         return {
 
@@ -77,6 +77,70 @@ window.StoreFactoryDesigner =
             },
 
             actions: {
+
+                'designer/setup': ({ state }, content) =>  {
+
+                    let c = JSON.parse(JSON.stringify(content || {}))
+
+                    if (!c.pages || !c.pages.length) {
+                        c.pages = [
+                            {
+                                uuid: Math.random().toString(36).substr(2, 9),
+                                type: 'page',
+                                name: '',
+                                root: {
+                                    uuid: Math.random().toString(36).substr(2, 9),
+                                    name: 'default-container/default-container-stack/default-stack-canvas',
+                                    widgets: [],
+                                    params: {
+                                        width: { value: null },
+                                        height: { value: null }
+                                    }
+                                },
+                                sources: [],
+                                storages: [],
+                            }
+                        ]
+                    }
+
+                    return Promise.resolve(c);
+                },
+
+                'designer/push': ({ commit, dispatch, state, rootState }) => {
+
+                    return Vue.http.put(`${endpoint}/portals/i/${state.portal.id}/push`, { content: state.content }, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token
+                        })
+                    })
+                    .then(
+                        (d) => {
+                            dispatch('designer/setup', d.data).then(
+                                (d) => { commit('designer/content', d.content) },
+                                () => { /* ignore */ }
+                            )
+                        },
+                        () => {/* ignore */ }
+                    )
+                },
+
+                'designer/pull': ({ commit, dispatch, state, rootState }) => {
+
+                    return Vue.http.get(`${endpoint}/portals/i/${state.portal.id}/pull`, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token
+                        })
+                    })
+                    .then(
+                        (d) => {
+                            dispatch('designer/setup', d.data).then(
+                                (d) => { commit('designer/content', d) },
+                                () => { /* ignore */ }
+                            )
+                        },
+                        () => { /* ignore */ }
+                    )
+                },
 
                 'designer/zoom': ({ commit, state }, scale) => {
                     commit('designer/scale', scale);

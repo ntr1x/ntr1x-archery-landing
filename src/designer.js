@@ -20,30 +20,15 @@ window.Designer =
             store.registerModule('designer', new window.StoreFactoryDesigner(data.config))
             store.registerModule('palette', new window.StoreFactoryPalette(data.config, window.Widgets.Palette))
 
-            let content = data.model.content = data.model.content || {}
-
-            if (!content.pages || !content.pages.length) {
-                content.pages = [
-                    {
-                        type: 'page',
-                        name: '',
-                        root: {
-                            name: 'default-container/default-container-stack/default-stack-canvas',
-                            widgets: [],
-                            params: {
-                                width: { value: null },
-                                height: { value: null }
-                            }
-                        },
-                        sources: [],
-                        storages: [],
-                    }
-                ]
-            }
-
             store.commit('security/principal', data.principal)
             store.commit('designer/portal', data.model.portal)
-            store.commit('designer/content', content)
+
+            store
+                .dispatch('designer/setup', data.model.content)
+                .then(
+                    (content) => { store.commit('designer/content', content) },
+                    () => {}
+                )
 
             const routes = [
                 {
@@ -69,26 +54,6 @@ window.Designer =
                 base: `/edit/${data.model.portal.id}/`,
                 routes,
             });
-
-            // function createRoute(page) {
-            //     return {
-            //         component: Shell.ShellPublic.extend({
-            //             data: function() {
-            //                 return {
-            //                     page: page,
-            //                 };
-            //             }
-            //         }),
-            //     };
-            // }
-            //
-            // if (data.model) {
-            //     for (var i = 0; i < data.model.pages.length; i++) {
-            //
-            //         var page = data.model.pages[i];
-            //         routes[page.name] = createRoute(page);
-            //     }
-            // }
 
             new Vue({
                 router,
