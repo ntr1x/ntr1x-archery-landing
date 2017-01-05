@@ -1,7 +1,7 @@
 window.StoreFactoryPalette =
 (function() {
 
-    return function(palette) {
+    return function(config, palette) {
 
         return {
 

@@ -18,7 +18,7 @@ window.StoreFactoryPortals =
             },
             actions: {
 
-                'portals/push': ({ commit, state }) => {
+                'portals/id/push': ({ commit, state }) => {
 
                     return $.ajax({
                         url: `/ws/portals/${state.portal.id}`,
@@ -33,17 +33,13 @@ window.StoreFactoryPortals =
                     )
                 },
 
-                'portals/pull': ({ commit, state }) => {
+                'portals/pull': ({ commit, state, rootState }) => {
 
-                    return $.ajax({
-                        url: `${endpoint}/portals/i/${state.portal.id}/pull`,
-                        method: 'GET',
-                        dataType: 'json'
+                    return Vue.http.get(`${endpoint}/portals/i/${state.portal.id}/pull`, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token
+                        })
                     })
-                    .then(
-                        (d) => { commit('portals/model', d.content) },
-                        () => {}
-                    )
                 },
 
                 'portals/shared': ({ commit, state, rootState }, data) => {

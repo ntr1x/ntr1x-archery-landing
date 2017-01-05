@@ -6,11 +6,14 @@ window.StoreFactoryDesigner =
         return {
 
             state: {
+
                 portal: null,
-                pages: null,
+                content: null,
+
                 scale: 1.0,
                 leftOpen: true,
                 rightOpen: true,
+
                 page: null,
                 storage: null,
                 source: null,
@@ -22,9 +25,9 @@ window.StoreFactoryDesigner =
                     state.portal = portal;
                 },
 
-                'designer/pages': (state, pages) => {
-                    state.pages = pages;
-                    state.page = pages[0];
+                'designer/content': (state, content) => {
+                    state.content = content;
+                    state.page = content.pages[0];
                 },
 
                 'designer/scale': (state, scale) => {
@@ -40,9 +43,9 @@ window.StoreFactoryDesigner =
                 },
 
                 'designer/pages/select': (state, page) => { state.page = page; },
-                'designer/pages/create': (state, page) => { Core.Collection(state, 'pages').create(page) },
-                'designer/pages/update': (state, page) => { Core.Collection(state, 'pages').update(page) },
-                'designer/pages/remove': (state, page) => { Core.Collection(state, 'pages').remove(page) },
+                'designer/pages/create': (state, page) => { Core.Collection(state.content, 'pages').create(page) },
+                'designer/pages/update': (state, page) => { Core.Collection(state.content, 'pages').update(page) },
+                'designer/pages/remove': (state, page) => { Core.Collection(state.content, 'pages').remove(page) },
 
                 'designer/storages/select': (state, storage) => { state.storage = storage; },
                 'designer/storages/create': (state, storage) => { Core.Collection(state.page, 'storages').create(storage) },

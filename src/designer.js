@@ -12,15 +12,38 @@ window.Designer =
             Vue.use(window.ContextPlugin)
 
             const store = new window.StoreFactory()
-            store.registerModule('security', new window.StoreFactorySecurity())
-            store.registerModule('portals', new window.StoreFactoryPortals())
-            store.registerModule('modals', new window.StoreFactoryModals())
-            store.registerModule('designer', new window.StoreFactoryDesigner())
-            store.registerModule('palette', new window.StoreFactoryPalette(window.Widgets.Palette))
+            store.registerModule('settings', new window.StoreFactorySettings(data.config))
+            store.registerModule('security', new window.StoreFactorySecurity(data.config))
+            store.registerModule('portals', new window.StoreFactoryPortals(data.config))
+            store.registerModule('modals', new window.StoreFactoryModals(data.config))
+            store.registerModule('uploads', new window.StoreFactoryUploads(data.config))
+            store.registerModule('designer', new window.StoreFactoryDesigner(data.config))
+            store.registerModule('palette', new window.StoreFactoryPalette(data.config, window.Widgets.Palette))
+
+            let content = data.model.content = data.model.content || {}
+
+            if (!content.pages || !content.pages.length) {
+                content.pages = [
+                    {
+                        type: 'page',
+                        name: '',
+                        root: {
+                            name: 'default-container/default-container-stack/default-stack-canvas',
+                            widgets: [],
+                            params: {
+                                width: { value: null },
+                                height: { value: null }
+                            }
+                        },
+                        sources: [],
+                        storages: [],
+                    }
+                ]
+            }
 
             store.commit('security/principal', data.principal)
-            store.commit('designer/portal', data.portal)
-            store.commit('designer/pages', data.pages)
+            store.commit('designer/portal', data.model.portal)
+            store.commit('designer/content', content)
 
             const routes = [
                 {
@@ -43,7 +66,7 @@ window.Designer =
 
             const router = new VueRouter({
                 mode: 'history',
-                base: `/edit/${data.portal.id}/`,
+                base: `/edit/${data.model.portal.id}/`,
                 routes,
             });
 
