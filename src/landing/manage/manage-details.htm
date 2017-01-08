@@ -1,11 +1,11 @@
-<template id="landing-manage-publish">
-    <div class="ld ld-section ld-body ld-manage ld-manage-publish">
+<template id="landing-manage-details">
+    <div class="ld ld-section ld-body ld-manage ld-manage-details">
         <div class="ld ld-table">
             <div class="ld ld-cell">
-                <form v-if="form" novalidate @submit.prevent="validation.valid && publish()">
+                <form v-if="form" novalidate @submit.prevent="validation.valid && update()">
                     <div class="form-group">
-                        <h3>Publish Portal</h3>
-                    </dif>
+                        <h3>Portal Settings</h3>
+                    </div>
                     <div class="form-group" :class="{
                         'has-error': validation.title.dirty && validation.title.required,
                         'has-feedback': validation.title.dirty && validation.title.required,
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-lg" v-if="validation.valid">Publish</button>
+                        <button type="submit" class="btn btn-primary btn-lg" v-if="validation.valid">Update</button>
                     </div>
                 </form>
             </div>

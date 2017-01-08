@@ -100,3 +100,18 @@
   opacity: 0;
   cursor: pointer;
 }
+.ld.ld-manage .dropdown-toggle.dropdown-select {
+  text-align: left;
+}
+.ld.ld-manage .dropdown-toggle.dropdown-select .select-title {
+  margin-right: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ld.ld-manage .dropdown-toggle.dropdown-select .select-caret {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  height: auto;
+  margin-top: -3px;
+}

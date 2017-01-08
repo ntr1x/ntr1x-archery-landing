@@ -1,0 +1,43 @@
+<template id="landing-manage-domain">
+    <div class="ld ld-section ld-body ld-manage ld-manage-domain">
+        <div class="ld ld-table">
+            <div class="ld ld-cell">
+                <form v-if="form" novalidate @submit.prevent="validation.valid && register()">
+                    <div class="form-group">
+                        <h3>Domain Registration</h3>
+                    </div>
+                    <div class="form-group" :class="{
+                        'has-error': validation.name.dirty && validation.name.required,
+                        'has-feedback': validation.name.dirty && validation.name.required,
+                    }">
+                        <input type="text" class="form-control input-lg" placeholder="yoursitename.up.ntr1x.com" autofocus v-model="form.name">
+                        <span v-if="validation.name.dirty && validation.name.required" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                        <div v-if="validation.name.dirty && validation.name.required">Name is a required field</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group btn-block">
+                            <button type="button" class="btn btn-lg btn-block btn-default dropdown-toggle dropdown-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="select-title">
+                                    <span v-if="form.portal == null"><i>Select Portal</i></span>
+                                    <span v-if="form.portal != null">{{ form.portal.title }}</span>
+                                </span>
+                                <span class="caret select-caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" style="width: 100%">
+                                <li v-for="portal in portals"><a href="#" @click.prevent="form.portal = portal">{{ portal.title }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        Domains in *.up.ntr1x.com and *.ui.ntr1x.com zones are free to use and handled by our servers by design.
+                        If you would like to use your own domain make sure its DNS record points to one of our IP addresses.
+                        For some domains commercial subscription required.
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg" v-if="validation.valid">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>

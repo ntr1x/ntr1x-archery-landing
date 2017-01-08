@@ -45,9 +45,14 @@
         template: '#landing-manage-clone-page',
     });
 
-    Landing.LandingManagePublishPage =
-    Vue.component('landing-manage-publish-page', {
-        template: '#landing-manage-publish-page',
+    Landing.LandingManageDetailsPage =
+    Vue.component('landing-manage-details-page', {
+        template: '#landing-manage-details-page',
+    });
+
+    Landing.LandingManageDomainPage =
+    Vue.component('landing-manage-domain-page', {
+        template: '#landing-manage-domain-page',
     });
 
 })(jQuery, Vue, Core, Shell, Landing);

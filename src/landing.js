@@ -15,6 +15,7 @@ window.Landing =
             store.registerModule('settings', new window.StoreFactorySettings(data.config))
             store.registerModule('security', new window.StoreFactorySecurity(data.config))
             store.registerModule('portals', new window.StoreFactoryPortals(data.config))
+            store.registerModule('domains', new window.StoreFactoryDomains(data.config))
             store.registerModule('modals', new window.StoreFactoryModals(data.config))
             store.registerModule('uploads', new window.StoreFactoryUploads(data.config))
 
@@ -57,6 +58,13 @@ window.Landing =
                     }
                 },
                 {
+                    path: '/manage/domain',
+                    component: Landing.LandingManageDomainPage,
+                    meta: {
+                        auth: true,
+                    }
+                },
+                {
                     path: '/manage/i/:portal/clone',
                     component: Landing.LandingManageClonePage,
                     meta: {
@@ -64,8 +72,8 @@ window.Landing =
                     }
                 },
                 {
-                    path: '/manage/i/:portal/publish',
-                    component: Landing.LandingManagePublishPage,
+                    path: '/manage/i/:portal/details',
+                    component: Landing.LandingManageDetailsPage,
                     meta: {
                         auth: true,
                     }

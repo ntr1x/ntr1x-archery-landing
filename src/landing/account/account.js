@@ -42,7 +42,7 @@
                 this.validation.password = {
                     dirty: true,
                     required: this.form.password == null || this.form.password == '',
-                    illegal: this.form.password != null && this.form.password.length < 8,
+                    illegal: this.form.password != null && this.form.password.length < 7,
                 }
 
                 this.validation.valid =

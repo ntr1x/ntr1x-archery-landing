@@ -5,7 +5,7 @@
                 <form v-if="form" novalidate @submit.prevent="validation.valid && clone()">
                     <div class="form-group">
                         <h3>Clone Portal</h3>
-                    </dif>
+                    </div>
                     <div class="form-group" :class="{
                         'has-error': validation.title.dirty && validation.title.required,
                         'has-feedback': validation.title.dirty && validation.title.required,

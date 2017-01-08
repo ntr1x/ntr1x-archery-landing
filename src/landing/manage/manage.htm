@@ -2,7 +2,7 @@
     <div class="ld ld-section ld-manage">
         <div class="ld ld-container">
             <div class="container-fluid">
-                <div class="row" v-if="portals">
+                <div class="row" v-if="portals && domains">
                     <div class="col-xs-6">
                         <div class="ld ld-offset-header">
                             <h3 class="ld ld-decorate ld-decorate-left"><span class="glyphicon glyphicon-globe"></span> Portals</h3>
@@ -14,12 +14,12 @@
                                     <div class="ld ld-data-ref"><a :href="'/view/' + portal.id + '/'">/view/{{ portal.id }}/</a></div>
                                 </div>
                                 <div class="ld ld-portal-buttons">
-                                    <a class="btn btn-primary" v-if="!portal.shared" :href="'/edit/' + portal.id + '/'">Edit</a>
-                                    <a class="btn btn-default" v-if="portal.shared" :href="'/view/' + portal.id + '/'">View</a>
+                                    <a class="btn btn-sm btn-primary" v-if="!portal.shared" :href="'/edit/' + portal.id + '/'">Edit</a>
+                                    <a class="btn btn-sm btn-default" v-if="portal.shared" :href="'/view/' + portal.id + '/'">View</a>
                                     <div class="btn-group pull-right">
-                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Advanced <span class="caret"></span></button>
+                                        <button class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">Advanced <span class="caret"></span></button>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#" @click.prevent="$router.push({ path: '/manage/i/' + portal.id + '/publish' })">Publish</a></li>
+                                            <li><a href="#" @click.prevent="$router.push({ path: '/manage/i/' + portal.id + '/details' })">Settings</a></li>
                                             <li><a href="#" v-if="portal.shared" @click.prevent="unshare(portal.id)">Unpublish</a></li>
                                             <li><a href="#" v-if="portal.shared" @click.prevent="$router.push({ path: '/manage/i/' + portal.id + '/clone' })">Clone</a></li>
                                             <li role="separator" class="divider"></li>
@@ -30,8 +30,38 @@
                             </div>
                             <div class="ld ld-portal">
                                 <div class="ld ld-portal-buttons">
-                                    <a href="#" @click="$router.push({ path: '/gallery' })" class="btn btn-primary">Browse Gallery</a>
-                                    <a href="#" @click="$router.push({ path: '/manage/create' })" class="btn btn-default">Create Blank</a>
+                                    <a href="#" @click.prevent="$router.push({ path: '/gallery' })" class="btn btn-primary">Browse Gallery</a>
+                                    <a href="#" @click.prevent="$router.push({ path: '/manage/create' })" class="btn btn-default">Create Blank</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="ld ld-offset-header">
+                            <h3 class="ld ld-decorate ld-decorate-right"><span class="glyphicon glyphicon-globe"></span> Domains</h3>
+                        </div>
+                        <div class="ld ld-portals">
+                            <div class="ld ld-portal" v-for="domain in domains.content">
+                                <div class="ld ld-portal-data">
+                                    <div class="ld ld-data-title"><a :href="'http://' + domain.name">{{ domain.name }}</a></div>
+                                    <div class="ld ld-portal-data">
+                                        <div class="ld ld-data-ref">{{ domain.portal.title }}</div>
+                                    </div>
+                                </div>
+                                <div class="ld ld-portal-buttons">
+                                    <a class="btn btn-sm btn-primary" :href="'http://' + domain.name">View</a>
+                                    <div class="btn-group pull-right">
+                                        <button class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">Advanced <span class="caret"></span></button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" @click.prevent="removeDomain(domain.id)">Remove</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ld ld-portal">
+                                <div class="ld ld-portal-buttons">
+                                    <div class="pull-left"></div>
+                                    <a href="#" @click.prevent="$router.push({ path: '/manage/domain' })" class="btn btn-primary">Register</a>
                                 </div>
                             </div>
                         </div>

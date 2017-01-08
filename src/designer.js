@@ -14,17 +14,16 @@ window.Designer =
             const store = new window.StoreFactory()
             store.registerModule('settings', new window.StoreFactorySettings(data.config))
             store.registerModule('security', new window.StoreFactorySecurity(data.config))
-            store.registerModule('portals', new window.StoreFactoryPortals(data.config))
             store.registerModule('modals', new window.StoreFactoryModals(data.config))
             store.registerModule('uploads', new window.StoreFactoryUploads(data.config))
             store.registerModule('designer', new window.StoreFactoryDesigner(data.config))
             store.registerModule('palette', new window.StoreFactoryPalette(data.config, window.Widgets.Palette))
 
-            store.commit('security/principal', data.principal)
-            store.commit('designer/portal', data.model.portal)
+            store.commit('security/principal', data.context.principal)
+            store.commit('designer/portal', data.context.portal)
 
             store
-                .dispatch('designer/setup', data.model.content)
+                .dispatch('designer/setup', data.context.content)
                 .then(
                     (content) => { store.commit('designer/content', content) },
                     () => {}
@@ -51,7 +50,7 @@ window.Designer =
 
             const router = new VueRouter({
                 mode: 'history',
-                base: `/edit/${data.model.portal.id}/`,
+                base: `/edit/${data.context.portal.id}/`,
                 routes,
             });
 

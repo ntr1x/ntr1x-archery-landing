@@ -6,13 +6,13 @@ window.StoreFactoryPortals =
         return {
 
             state: {
-                shared: null
+                shared: null,
             },
             mutations: {
-                
+
                 'portals/shared': (state, shared) => {
                     state.shared = shared
-                }
+                },
             },
             actions: {
 

@@ -8,6 +8,7 @@
             return {
                 url: window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port: ''),
                 portals: this.portals,
+                domains: this.domains,
             };
         },
         created: function() {
@@ -17,11 +18,21 @@
 
             refresh: function() {
                 this.portals = [];
+                this.domains = [];
+
                 this.$store
                     .dispatch('portals/my', { size: 100 })
                     .then(
                         (d) => { this.portals = d.data; },
                         () => { this.portals = []; }
+                    )
+                ;
+
+                this.$store
+                    .dispatch('domains/my', { size: 100 })
+                    .then(
+                        (d) => { this.domains = d.data; },
+                        () => { this.domains = []; }
                     )
                 ;
             },
@@ -54,7 +65,17 @@
                         () => { }
                     )
                 ;
-            }
+            },
+
+            removeDomain: function(id) {
+                this.$store
+                    .dispatch('domains/id/remove', { id: id })
+                    .then(
+                        () => { this.refresh(); },
+                        () => { }
+                    )
+                ;
+            },
         }
     });
 
@@ -177,9 +198,9 @@
         }
     });
 
-    Landing.ManagePublish =
-    Vue.component('landing-manage-publish', {
-        template: '#landing-manage-publish',
+    Landing.ManageUpdate =
+    Vue.component('landing-manage-details', {
+        template: '#landing-manage-details',
         data: function() {
             return {
                 form: this.form,
@@ -271,7 +292,7 @@
         },
         methods: {
 
-            publish: function() {
+            update: function() {
 
                 this.$store
                     .dispatch('portals/id/update', {
@@ -285,6 +306,84 @@
                         (e) => { console.log(e); }
                     )
                 ;
+            },
+        }
+    });
+
+    Landing.ManageDomain =
+    Vue.component('landing-manage-domain', {
+        template: '#landing-manage-domain',
+        data: function() {
+            return {
+                form: this.form,
+                validation: this.validation,
+                portals: this.portals,
+            }
+        },
+        created: function() {
+
+            this.portals = [];
+
+            this.$store
+                .dispatch('portals/my', { size: 100 })
+                .then(
+                    (d) => {
+                        this.portals = d.data.content
+                        this.form.portal = this.portals.length ? this.portals[0] : null
+                    },
+                    () => {
+                        this.portals = []
+                        this.form.portal = null
+                    }
+                )
+
+            this.validation = {
+                valid: false,
+                name: { dirty: false, required: true },
+                portal: { dirty: false, required: true }
+            }
+
+            this.form = {
+                name: null,
+                portal: null,
+            }
+
+            this.$watch('form.name', () => {
+
+                this.validation.name = {
+                    dirty: true,
+                    required: this.form.name == null || this.form.name == '',
+                }
+
+                this.validation.valid =
+                       !this.validation.name.required
+                    && !this.validation.portal.required
+            })
+
+            this.$watch('form.portal', () => {
+
+                this.validation.portal = {
+                    dirty: true,
+                    required: this.form.portal == null,
+                }
+
+                this.validation.valid =
+                       !this.validation.name.required
+                    && !this.validation.portal.required
+            })
+        },
+        methods: {
+
+            register: function() {
+
+                this.$store.dispatch('domains/create', {
+                    name: this.form.name,
+                    portal: this.form.portal.id
+                })
+                .then(
+                    () => { this.$router.push({ path: '/manage' })},
+                    () => { }
+                );
             },
         }
     });
