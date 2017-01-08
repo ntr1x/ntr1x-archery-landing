@@ -42,7 +42,7 @@ window.Viewer =
 
             const router = new VueRouter({
                 mode: 'history',
-                base: `/view/${data.context.portal.id}/`,
+                base: data.root,
                 routes
             });
 

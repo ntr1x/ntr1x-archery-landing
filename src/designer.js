@@ -50,7 +50,7 @@ window.Designer =
 
             const router = new VueRouter({
                 mode: 'history',
-                base: `/edit/${data.context.portal.id}/`,
+                base: data.root,
                 routes,
             });
 
