@@ -19,6 +19,11 @@ window.StoreFactoryDesigner =
                 source: null,
             },
 
+            getters: {
+                content: (state) => state.content,
+                portal: (state) => state.portal,
+            },
+
             mutations: {
 
                 'designer/portal': (state, portal) => {

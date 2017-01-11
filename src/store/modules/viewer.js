@@ -10,6 +10,11 @@ window.StoreFactoryViewer =
                 content: null,
             },
 
+            getters: {
+                content: (state) => state.content,
+                portal: (state) => state.portal,
+            },
+
             mutations: {
 
                 'viewer/portal': (state, portal) => {

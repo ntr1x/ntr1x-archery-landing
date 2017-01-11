@@ -18,6 +18,7 @@ window.Designer =
             store.registerModule('uploads', new window.StoreFactoryUploads(data.config))
             store.registerModule('designer', new window.StoreFactoryDesigner(data.config))
             store.registerModule('palette', new window.StoreFactoryPalette(data.config, window.Widgets.Palette))
+            store.registerModule('actions', new window.StoreFactoryActions(data.config))
 
             store.commit('security/principal', data.context.principal)
             store.commit('designer/portal', data.context.portal)

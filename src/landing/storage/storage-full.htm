@@ -1,12 +1,111 @@
 <template id="landing-storage-full">
     <div class="ld ld-section ld-storage ld-storage-full">
         <div class="ld ld-container">
-            <div class="container-fluid">
-                <div class="row">
-                    <div style="height: 1200px">
+            <transition appear name="fade">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="ld ld-offset-header">
+                                <h3 class="ld ld-decorate ld-decorate-left"><span class="glyphicon glyphicon-eye-open"></span> Security</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ld ld-api" style="margin-bottom: 20px">
+                        <div class="col-sm-12 col-md-6">
+                            <img style="width: 100%" src="/assets/vendor/ntr1x-archery-landing/src/landing/storage/apis/security.png" />
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="ld ld-api-promo">
+                                <h4>Security</h4>
+                                <p>
+                                    Built-in support of the authorizatin flow. Social login, token-based access, email confirmation.
+                                    Powerfull access control and declarative security for developers.
+                                    Phone number validation and two-factory authentication for advanced integrations.
+                                </p>
+                                <a href="http://archery.swagger.ntr1x.com" class="btn btn-primary">Explore</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </transition>
+            <transition appear name="fade">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="ld ld-offset-header">
+                                <h3 class="ld ld-decorate ld-decorate-right"><span class="glyphicon glyphicon-eye-open"></span> Users</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ld ld-api" style="margin-bottom: 20px">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="ld ld-api-promo">
+                                <h4>Users</h4>
+                                <p>
+                                    User management including listing, querying, locking and all relevant CRUD operations.
+                                </p>
+                                <a href="http://archery.swagger.ntr1x.com" class="btn btn-primary">Explore</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <img style="width: 100%" src="/assets/vendor/ntr1x-archery-landing/src/landing/storage/apis/users.png" />
+                        </div>
+                    </div>
+                </div>
+            </transition>
+            <transition appear name="fade">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="ld ld-offset-header">
+                                <h3 class="ld ld-decorate ld-decorate-left"><span class="glyphicon glyphicon-eye-open"></span> Me</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ld ld-api" style="margin-bottom: 20px">
+                        <div class="col-sm-12 col-md-6">
+                            <img style="width: 100%" src="/assets/vendor/ntr1x-archery-landing/src/landing/storage/apis/me.png" />
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="ld ld-api-promo">
+                                <h4>Me</h4>
+                                <p>
+                                    User profile and user scope data accessors. The entry point for all queries for user own data.
+                                </p>
+                                <a href="http://archery.swagger.ntr1x.com" class="btn btn-primary">Explore</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </transition>
+            <transition appear name="fade">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="ld ld-offset-header">
+                                <h3 class="ld ld-decorate ld-decorate-right"><span class="glyphicon glyphicon-eye-open"></span> Media</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ld ld-api" style="margin-bottom: 20px">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="ld ld-api-promo">
+                                <h4>Media</h4>
+                                <p>
+                                    Blogs, news and events. Built-in support of tagging.
+                                    Support of thumbnails and media attachments.
+                                    Moderation and pre-moderation.
+                                    Full-text morphological search.
+                                </p>
+                                <a href="http://archery.swagger.ntr1x.com" class="btn btn-primary">Explore</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <img style="width: 100%" src="/assets/vendor/ntr1x-archery-landing/src/landing/storage/apis/media.png" />
+                        </div>
+                    </div>
+                </div>
+            </transition>
         </div>
     </div>
 </template>
