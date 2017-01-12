@@ -87,7 +87,7 @@
   margin: 10px 0px 0px 0px;
 }
 .ld.ld-page .ld.ld-section .ld.ld-offset-header h3.ld.ld-decorate {
-  display: block;
+  display: inline-block;
   position: relative;
   overflow: visible;
   color: #FFFFFF;
@@ -125,6 +125,9 @@
   left: 100%;
   right: auto;
   background-color: #15A0BF;
+}
+.ld.ld-page .ld.ld-section .ld.ld-offset-header h3.ld.ld-decorate.ld-decorate-center {
+  float: none;
 }
 .ld.ld-page .ld.ld-section .ld.ld-message {
   color: #D0D0D2;

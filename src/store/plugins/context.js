@@ -8,12 +8,12 @@ window.ContextPlugin =
             Vue.mixin({
 
                 created: function() {
-                    this._page = this.page || (this.$parent && this.$parent.$page);
+                    this._page = this.$parent && this.$parent.$page
+                    this._context = this.$parent && this.$parent.$context
                 },
                 computed: {
-                    $page: function() {
-                        return this._page;
-                    }
+                    $page: function() { return this._page },
+                    $context: function() { return this._context },
                 }
             })
         }
