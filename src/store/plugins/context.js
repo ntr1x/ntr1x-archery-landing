@@ -6,15 +6,16 @@ window.ContextPlugin =
         install: function (Vue) {
 
             Vue.mixin({
-
-                created: function() {
-                    this._page = this.$parent && this.$parent.$page
-                    this._context = this.$parent && this.$parent.$context
+                data: function() {
+                    return {
+                        $page: this.$page,
+                        $context: this.$context,
+                    }
                 },
-                computed: {
-                    $page: function() { return this._page },
-                    $context: function() { return this._context },
-                }
+                beforeCreate: function() {
+                    this.$page = this.$page || this.$parent && this.$parent.$page
+                    this.$context = this.$context || this.$parent && this.$parent.$context
+                },
             })
         }
     }
