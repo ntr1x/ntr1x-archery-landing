@@ -55,4 +55,14 @@
         template: '#landing-manage-domain-page',
     });
 
+    Landing.LandingManageMailPage =
+    Vue.component('landing-manage-mail-page', {
+        template: '#landing-manage-mail-page',
+    });
+
+    Landing.LandingManageTemplatePage =
+    Vue.component('landing-manage-templates-page', {
+        template: '#landing-manage-templates-page',
+    });
+
 })(jQuery, Vue, Core, Shell, Landing);

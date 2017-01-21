@@ -47,6 +47,14 @@ window.StoreFactoryPortals =
                     })
                 },
 
+                'portals/id/details/get': ({ commit, state, rootState }, { id }) => {
+                    return Vue.http.get(`${endpoint}/portals/i/${id}/details`, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    })
+                },
+
                 'portals/id/remove': ({ commit, state, rootState }, { id }) => {
                     return Vue.http.delete(`${endpoint}/portals/i/${id}`, {
                         headers: $.extend({}, {
@@ -61,6 +69,7 @@ window.StoreFactoryPortals =
                         title: data.title,
                         thumbnail: data.thumbnail,
                         shared: data.shared,
+                        params: data.params
                     }, {
                         headers: $.extend({}, {
                             Authorization: rootState.security.principal.token || undefined

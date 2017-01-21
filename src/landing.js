@@ -78,6 +78,13 @@ window.Landing =
                         auth: true,
                     }
                 },
+                {
+                    path: '/manage/i/:portal/mail',
+                    component: Landing.LandingManageMailPage,
+                    meta: {
+                        auth: true,
+                    }
+                },
             ];
 
             const router = new VueRouter({

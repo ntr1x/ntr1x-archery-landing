@@ -80,38 +80,59 @@
         },
         created: function() {
 
-            this.validation = {
+            let v = this.validation = {
+                name: { dirty: false },
                 email: { dirty: false },
                 password: { dirty: false },
             };
 
-            this.form = {
+            let f = this.form = {
+                name: null,
                 email: null,
                 password: null,
             };
 
-            this.$watch('form', () => {
+            let validate = () => {
 
-                this.validation.email = {
+                v.valid =
+                       v.name.dirty && !v.name.required
+                    && v.email.dirty && !v.email.required && !v.email.illegal
+                    && v.password.dirty && !v.password.required && !v.password.illegal
+            }
+
+            this.$watch('form.name', () => {
+
+                v.name = {
                     dirty: true,
-                    required: this.form.email == null || this.form.email == '',
-                    illegal: this.form.email != null && !validation.email.test(this.form.email),
+                    required: f.name == null || f.name == '',
                 }
 
-                this.validation.password = {
+                validate()
+            })
+
+            this.$watch('form.email', () => {
+
+                v.email = {
                     dirty: true,
-                    required: this.form.password == null || this.form.password == '',
-                    illegal: this.form.password != null && this.form.password.length < 8,
+                    required: f.email == null || f.email == '',
+                    illegal: f.email != null && !validation.email.test(f.email),
                 }
 
-                this.validation.valid =
-                       !this.validation.email.required
-                    && !this.validation.email.illegal
-                    && !this.validation.password.required
-                    && !this.validation.password.illegal
-                ;
+                validate()
+            })
 
-            }, { deep: true });
+            this.$watch('form.password', () => {
+
+                v.password = {
+                    dirty: true,
+                    required: f.password == null || f.password == '',
+                    illegal: f.password != null && f.password.length < 8,
+                }
+
+                validate()
+            })
+
+            validate()
         },
         methods: {
 
@@ -119,6 +140,7 @@
 
                 this.$store
                     .dispatch('security/signup', {
+                        name: this.form.name,
                         email: this.form.email,
                         password: this.form.password,
                     })

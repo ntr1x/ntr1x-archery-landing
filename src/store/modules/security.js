@@ -18,9 +18,9 @@ window.StoreFactorySecurity =
                     state.principal.user = principal.user
                     state.principal.token = principal.token
                     if (state.principal.token) {
-                        Cookies.set('token', state.principal.token, { expires: 365 })
+                        Cookies.set('authorization', state.principal.token, { expires: 365 })
                     } else {
-                        Cookies.remove('token')
+                        Cookies.remove('authorization')
                     }
                 },
             },
