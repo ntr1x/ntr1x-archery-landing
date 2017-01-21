@@ -85,6 +85,20 @@ window.Landing =
                         auth: true,
                     }
                 },
+                {
+                    path: '/manage/i/:portal/router',
+                    component: Landing.LandingManageRouterPage,
+                    meta: {
+                        auth: true,
+                    }
+                },
+                {
+                    path: '/manage/i/:portal/meta',
+                    component: Landing.LandingManageMetaPage,
+                    meta: {
+                        auth: true,
+                    }
+                },
             ];
 
             const router = new VueRouter({

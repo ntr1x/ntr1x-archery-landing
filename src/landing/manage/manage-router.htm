@@ -1,28 +1,21 @@
-<template id="landing-manage-mail">
-    <div class="ld ld-section ld-body ld-manage ld-manage-mail">
+<template id="landing-manage-router">
+    <div class="ld ld-section ld-body ld-manage ld-manage-router">
         <div class="ld ld-table">
             <div class="ld ld-cell">
                 <div class="ld ld-center">
                     <form v-if="details" class="form-horizontal" novalidate @submit.prevent="validation.valid && add()">
                         <div class="form-group">
-                            <h3>Mail Settings</h3>
+                            <h3>Router Settings</h3>
                         </div>
                         <div class="form-group">
-                            <label>New Property</label>
+                            <label>New Route</label>
                             <div class="input-group input-group-sm">
                                 <span class="input-group-addon">Key</span>
-                                <input type="text" class="form-control input-sm" placeholder="mail.*" v-model="form.name" list="mail-properties-list" />
-                                <datalist id="mail-properties-list">
-                                    <option value="mail.host" />
-                                    <option value="mail.port" />
-                                    <option value="mail.username" />
-                                    <option value="mail.password" />
-                                    <option value="mail.protocol" />
-                                    <option value="mail.properties.mail.transport.protocol" />
-                                    <option value="mail.properties.mail.smtp.auth" />
-                                    <option value="mail.properties.mail.smtp.starttls.enable" />
-                                    <option value="mail.properties.mail.smtp.socketFactory.class" />
-                                    <option value="mail.properties.mail.smtp.socketFactory.port" />
+                                <input type="text" class="form-control input-sm" placeholder="route.*" v-model="form.name" list="route-properties-list" />
+                                <datalist id="route-properties-list">
+                                    <option value="route.email.confirmed" />
+                                    <option value="route.passwd.confirmed" />
+                                    <option value="route.recover.confirmed" />
                                 </datalist>
                                 <span class="input-group-addon">Value</span>
                                 <input type="text" class="form-control input-sm" placeholder="" v-model="form.value" />
@@ -34,7 +27,7 @@
                     </form>
                     <form v-if="details" class="form-horizontal" novalidate @submit.prevent="update()">
                         <div class="form-group">
-                            <label>Properties</label>
+                            <label>Routes</label>
                             <div v-for="item in sorted()" :key="item.uuid" style="margin-bottom: 4px">
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon" style="min-width: 280px; text-align: left">{{ item.name }}</span>

@@ -23,6 +23,8 @@
                                             <li><a href="#" v-if="portal.shared" @click.prevent="unshare(portal.id)">Unshare</a></li>
                                             <li><a href="#" v-if="portal.shared" @click.prevent="$router.push({ path: '/manage/i/' + portal.id + '/clone' })">Clone</a></li>
                                             <li role="separator" class="divider"></li>
+                                            <li><a href="#" @click.prevent="$router.push({ path: '/manage/i/' + portal.id + '/router' })">Router Settings</a></li>
+                                            <li><a href="#" @click.prevent="$router.push({ path: '/manage/i/' + portal.id + '/meta' })">Meta Settings</a></li>
                                             <li><a href="#" @click.prevent="$router.push({ path: '/manage/i/' + portal.id + '/mail' })">Mail Settings</a></li>
                                             <li><a href="#" @click.prevent="$router.push({ path: '/manage/i/' + portal.id + '/templates' })">Mail Templates</a></li>
                                             <li role="separator" class="divider"></li>

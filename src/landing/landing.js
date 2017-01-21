@@ -60,6 +60,16 @@
         template: '#landing-manage-mail-page',
     });
 
+    Landing.LandingManageRouterPage =
+    Vue.component('landing-manage-router-page', {
+        template: '#landing-manage-router-page',
+    });
+
+    Landing.LandingManageMetaPage =
+    Vue.component('landing-manage-meta-page', {
+        template: '#landing-manage-meta-page',
+    });
+
     Landing.LandingManageTemplatePage =
     Vue.component('landing-manage-templates-page', {
         template: '#landing-manage-templates-page',

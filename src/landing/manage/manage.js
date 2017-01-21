@@ -386,11 +386,12 @@
                 );
             },
         }
+
     });
 
-    Landing.ManageMail =
-    Vue.component('landing-manage-mail', {
-        template: '#landing-manage-mail',
+    Landing.ManageParams =
+    (collection, type) => ({
+
         data: function() {
             return {
                 form: this.form,
@@ -421,7 +422,7 @@
                 .then(
                     (d) => {
                         this.details = d.data
-                        this.items = d.data.mail.map(p => ({
+                        this.items = !(collection in d.data) ? [] : d.data[collection].map(p => ({
                             uuid: Core.UUID.random(),
                             id: p.id,
                             type: p.type,
@@ -456,7 +457,7 @@
 
                 this.items.push({
                     uuid: Core.UUID.random(),
-                    type: 'MAIL',
+                    type: type,
                     name: this.form.name,
                     value: this.form.value,
                     action: 'CREATE'
@@ -500,6 +501,21 @@
                 );
             },
         }
+    });
+
+    Vue.component('landing-manage-mail', {
+        mixins: [ Landing.ManageParams('mail', 'MAIL') ],
+        template: '#landing-manage-mail'
+    });
+
+    Vue.component('landing-manage-router', {
+        mixins: [ Landing.ManageParams('routes', 'ROUTE') ],
+        template: '#landing-manage-router'
+    });
+
+    Vue.component('landing-manage-meta', {
+        mixins: [ Landing.ManageParams('meta', 'META') ],
+        template: '#landing-manage-meta'
     });
 
 })(jQuery, Vue, Core, Shell, Landing);

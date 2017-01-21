@@ -115,6 +115,8 @@
   height: auto;
   margin-top: -3px;
 }
-.ld.ld-manage.ld-manage-mail .ld.ld-center {
+.ld.ld-manage.ld-manage-mail .ld.ld-center,
+.ld.ld-manage.ld-manage-router .ld.ld-center,
+.ld.ld-manage.ld-manage-meta .ld.ld-center {
   width: 600px;
 }
