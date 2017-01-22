@@ -50,9 +50,19 @@
         template: '#landing-manage-details-page',
     });
 
-    Landing.LandingManageDomainPage =
-    Vue.component('landing-manage-domain-page', {
-        template: '#landing-manage-domain-page',
+    Landing.LandingManageDomainsPage =
+    Vue.component('landing-manage-domains-page', {
+        template: '#landing-manage-domains-page',
+    });
+
+    Landing.LandingManageDomainsCreatePage =
+    Vue.component('landing-manage-domains-create-page', {
+        template: '#landing-manage-domains-create-page',
+    });
+
+    Landing.LandingManageDomainsUpdatePage =
+    Vue.component('landing-manage-domains-update-page', {
+        template: '#landing-manage-domains-update-page',
     });
 
     Landing.LandingManageMailPage =
@@ -70,9 +80,19 @@
         template: '#landing-manage-meta-page',
     });
 
-    Landing.LandingManageTemplatePage =
+    Landing.LandingManageTemplatesPage =
     Vue.component('landing-manage-templates-page', {
         template: '#landing-manage-templates-page',
+    });
+
+    Landing.LandingManageTemplatesCreatePage =
+    Vue.component('landing-manage-templates-create-page', {
+        template: '#landing-manage-templates-create-page',
+    });
+
+    Landing.LandingManageTemplatesUpdatePage =
+    Vue.component('landing-manage-templates-update-page', {
+        template: '#landing-manage-templates-update-page',
     });
 
 })(jQuery, Vue, Core, Shell, Landing);

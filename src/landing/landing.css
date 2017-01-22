@@ -3,6 +3,16 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
+.ld.ld-page input {
+  background-color: #434857;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #FFFFFF;
+}
+.ld.ld-page input:focus {
+  background-color: #FFFFFF;
+  border-color: #FFFFFF;
+  color: #555555;
+}
 .ld.ld-page.ld-secondary-page .ld.ld-header {
   height: 70px;
   overflow: hidden;
@@ -25,8 +35,11 @@
   background: none;
   box-shadow: none;
 }
-.ld.ld-page.ld-fullscreen-page .ld.ld-body {
+.ld.ld-page.ld-fullscreen-page .ld.ld-body,
+.ld.ld-page.ld-fullscreen-page .ld.ld-manage {
   position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
   top: 95px;
   bottom: 40px;
   left: 0px;

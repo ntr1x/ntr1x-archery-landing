@@ -19,6 +19,9 @@
   color: #FFFFFF;
   margin-bottom: 200px;
 }
+.ld.ld-manage .ld.ld-container {
+  color: #FFFFFF;
+}
 .ld.ld-manage .ld.ld-portals .ld.ld-portal {
   display: table;
   width: 100%;
@@ -115,8 +118,14 @@
   height: auto;
   margin-top: -3px;
 }
+.ld.ld-manage.ld-manage-portals .ld.ld-center,
 .ld.ld-manage.ld-manage-mail .ld.ld-center,
 .ld.ld-manage.ld-manage-router .ld.ld-center,
-.ld.ld-manage.ld-manage-meta .ld.ld-center {
+.ld.ld-manage.ld-manage-meta .ld.ld-center,
+.ld.ld-manage.ld-manage-domains .ld.ld-center,
+.ld.ld-manage.ld-manage-templates .ld.ld-center {
   width: 600px;
+}
+.ld.ld-manage.ld-manage-templates .container-fluid {
+  margin: 0px -15px;
 }

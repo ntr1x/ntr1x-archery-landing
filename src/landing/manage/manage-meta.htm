@@ -3,7 +3,7 @@
         <div class="ld ld-table">
             <div class="ld ld-cell">
                 <div class="ld ld-center">
-                    <form v-if="details" class="form-horizontal" novalidate @submit.prevent="validation.valid && add()">
+                    <form v-if="details" novalidate @submit.prevent="validation.valid && add()">
                         <div class="form-group">
                             <h3>Meta Settings</h3>
                         </div>
@@ -26,7 +26,7 @@
                             </div>
                         </div>
                     </form>
-                    <form v-if="details" class="form-horizontal" novalidate @submit.prevent="update()">
+                    <form v-if="details" novalidate @submit.prevent="update()">
                         <div class="form-group">
                             <label>Meta Strings</label>
                             <div v-for="item in sorted()" :key="item.uuid" style="margin-bottom: 4px">

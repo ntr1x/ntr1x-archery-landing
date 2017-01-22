@@ -26,6 +26,10 @@
         margin-bottom: 200px;
     }
 
+    .ld.ld-container {
+        color: #FFFFFF;
+    }
+
     .ld.ld-portals {
 
         .ld.ld-portal {
@@ -143,11 +147,20 @@
         }
     }
 
+    &.ld-manage-portals,
     &.ld-manage-mail,
     &.ld-manage-router,
-    &.ld-manage-meta, {
+    &.ld-manage-meta,
+    &.ld-manage-domains,
+    &.ld-manage-templates {
         .ld.ld-center {
             width: 600px;
+        }
+    }
+
+    &.ld-manage-templates {
+        .container-fluid {
+            margin: 0px -15px;
         }
     }
 }

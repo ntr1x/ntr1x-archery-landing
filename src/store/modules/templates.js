@@ -1,4 +1,4 @@
-window.StoreFactoryDomains =
+window.StoreFactoryTemplates =
 (function($, Vue) {
 
     return function({ endpoint }) {
@@ -10,8 +10,8 @@ window.StoreFactoryDomains =
 
             actions: {
 
-                'domains/my': ({ commit, state, rootState }, data) => {
-                    return Vue.http.get(`${endpoint}/me/domains`, {
+                'templates/my': ({ commit, state, rootState }, data) => {
+                    return Vue.http.get(`${endpoint}/me/templates`, {
                         params: data,
                         headers: $.extend({}, {
                             Authorization: rootState.security.principal.token || undefined
@@ -19,8 +19,8 @@ window.StoreFactoryDomains =
                     })
                 },
 
-                'domains/create': ({ commit, state, rootState }, data) => {
-                    return Vue.http.post(`${endpoint}/me/domains`, data, {
+                'templates/create': ({ commit, state, rootState }, data) => {
+                    return Vue.http.post(`${endpoint}/me/templates`, data, {
                         params: data,
                         headers: $.extend({}, {
                             Authorization: rootState.security.principal.token || undefined
@@ -28,26 +28,29 @@ window.StoreFactoryDomains =
                     })
                 },
 
-                'domains/id/get': ({ commit, state, rootState }, { id }) => {
-                    return Vue.http.get(`${endpoint}/domains/i/${id}`, {
+                'templates/id/get': ({ commit, state, rootState }, { id }) => {
+                    return Vue.http.get(`${endpoint}/templates/i/${id}`, {
                         headers: $.extend({}, {
                             Authorization: rootState.security.principal.token || undefined
                         })
                     });
                 },
 
-                'domains/id/remove': ({ commit, state, rootState }, { id }) => {
-                    return Vue.http.delete(`${endpoint}/domains/i/${id}`, {
+                'templates/id/remove': ({ commit, state, rootState }, { id }) => {
+                    return Vue.http.delete(`${endpoint}/templates/i/${id}`, {
                         headers: $.extend({}, {
                             Authorization: rootState.security.principal.token || undefined
                         })
                     });
                 },
 
-                'domains/id/update': ({ commit, state, rootState }, data) => {
+                'templates/id/update': ({ commit, state, rootState }, data) => {
 
-                    return Vue.http.put(`${endpoint}/domains/i/${data.id}`, {
+                    return Vue.http.put(`${endpoint}/templates/i/${data.id}`, {
                         name: data.name,
+                        subject: data.subject,
+                        sender: data.sender,
+                        content: data.content,
                     }, {
                         headers: $.extend({}, {
                             Authorization: rootState.security.principal.token || undefined

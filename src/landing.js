@@ -16,6 +16,7 @@ window.Landing =
             store.registerModule('security', new window.StoreFactorySecurity(data.config))
             store.registerModule('portals', new window.StoreFactoryPortals(data.config))
             store.registerModule('domains', new window.StoreFactoryDomains(data.config))
+            store.registerModule('templates', new window.StoreFactoryTemplates(data.config))
             store.registerModule('modals', new window.StoreFactoryModals(data.config))
             store.registerModule('uploads', new window.StoreFactoryUploads(data.config))
 
@@ -46,58 +47,67 @@ window.Landing =
                 {
                     path: '/manage',
                     component: Landing.LandingManagePage,
-                    meta: {
-                        auth: true,
-                    }
+                    meta: { auth: true }
                 },
                 {
                     path: '/manage/create',
                     component: Landing.LandingManageCreatePage,
-                    meta: {
-                        auth: true,
-                    }
+                    meta: { auth: true }
                 },
                 {
-                    path: '/manage/domain',
-                    component: Landing.LandingManageDomainPage,
-                    meta: {
-                        auth: true,
-                    }
+                    path: '/manage/i/:portal/domains',
+                    component: Landing.LandingManageDomainsPage,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/manage/i/:portal/domains/create',
+                    component: Landing.LandingManageDomainsCreatePage,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/manage/i/:portal/domains/i/:domain',
+                    component: Landing.LandingManageDomainsUpdatePage,
+                    meta: { auth: true }
                 },
                 {
                     path: '/manage/i/:portal/clone',
                     component: Landing.LandingManageClonePage,
-                    meta: {
-                        auth: true,
-                    }
+                    meta: { auth: true }
                 },
                 {
-                    path: '/manage/i/:portal/details',
+                    path: '/manage/i/:portal',
                     component: Landing.LandingManageDetailsPage,
-                    meta: {
-                        auth: true,
-                    }
+                    meta: { auth: true }
                 },
                 {
                     path: '/manage/i/:portal/mail',
                     component: Landing.LandingManageMailPage,
-                    meta: {
-                        auth: true,
-                    }
+                    meta: { auth: true }
                 },
                 {
                     path: '/manage/i/:portal/router',
                     component: Landing.LandingManageRouterPage,
-                    meta: {
-                        auth: true,
-                    }
+                    meta: { auth: true }
                 },
                 {
                     path: '/manage/i/:portal/meta',
                     component: Landing.LandingManageMetaPage,
-                    meta: {
-                        auth: true,
-                    }
+                    meta: { auth: true }
+                },
+                {
+                    path: '/manage/i/:portal/templates',
+                    component: Landing.LandingManageTemplatesPage,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/manage/i/:portal/templates/create',
+                    component: Landing.LandingManageTemplatesCreatePage,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/manage/i/:portal/templates/i/:template',
+                    component: Landing.LandingManageTemplatesUpdatePage,
+                    meta: { auth: true }
                 },
             ];
 
