@@ -4,6 +4,12 @@
             <div class="ld ld-cell">
                 <div class="ld ld-center">
                     <form novalidate @submit.prevent="validation.valid && create()">
+                        <div>
+                            <ol class="breadcrumb">
+                                <li><router-link :to="{ path: '/manage' }">Manage</router-link></li>
+                                <li class="active">Create Portal</li>
+                            </ol>
+                        </div>
                         <div class="form-group">
                             <h3>Create Portal</h3>
                         </div>

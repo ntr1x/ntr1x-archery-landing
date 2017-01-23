@@ -2,6 +2,27 @@
 
 .ld.ld-manage {
 
+    h3 {
+        margin-bottom: 30px;
+    }
+
+    .breadcrumb {
+        background: none;
+        border: none;
+        box-shadow: none;
+        padding: 0px;
+        color: #555555;
+
+        li {
+            &:before {
+                color: #334466;
+            }
+            &.active {
+                color: #9999AA;
+            }
+        }
+    }
+
     background: transparent;
 
     .ld.ld-table {
@@ -158,7 +179,7 @@
         }
     }
 
-    &.ld-manage-templates {
+    &.ld-manage {
         .container-fluid {
             margin: 0px -15px;
         }

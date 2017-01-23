@@ -1,8 +1,15 @@
 <template id="landing-manage-templates">
-    <div class="ld ld-section ld-manage">
+    <div class="ld ld-section ld-manage ld-manage-templates">
         <div class="ld ld-table" v-if="details">
             <div class="ld ld-cell">
                 <div class="ld ld-center">
+                    <div>
+                        <ol class="breadcrumb">
+                            <li><router-link :to="{ path: '/manage' }">Manage</router-link></li>
+                            <li><router-link :to="{ path: '/manage/i/' + $route.params.portal }">Portal</router-link></li>
+                            <li class="active">Mail Templates</li>
+                        </ol>
+                    </div>
                     <div>
                         <h3>Mail Templates</h3>
                     </div>

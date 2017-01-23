@@ -4,6 +4,12 @@
             <div class="ld ld-cell">
                 <div class="ld ld-center">
                     <form v-if="form" novalidate @submit.prevent="validation.valid && clone()">
+                        <div>
+                            <ol class="breadcrumb">
+                                <li><router-link :to="{ path: '/manage' }">Manage</router-link></li>
+                                <li class="active">Clone Portal</li>
+                            </ol>
+                        </div>
                         <div class="form-group">
                             <h3>Clone Portal</h3>
                         </div>

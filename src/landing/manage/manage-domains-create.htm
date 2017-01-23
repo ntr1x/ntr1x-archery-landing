@@ -4,6 +4,14 @@
             <div class="ld ld-cell">
                 <div class="ld ld-center">
                     <form v-if="form" novalidate @submit.prevent="validation.valid && create()">
+                        <div>
+                            <ol class="breadcrumb">
+                                <li><router-link :to="{ path: '/manage' }">Manage</router-link></li>
+                                <li><router-link :to="{ path: '/manage/i/' + $route.params.portal }">Portal</router-link></li>
+                                <li><router-link :to="{ path: '/manage/i/' + $route.params.portal + '/domains' }">Portal Domains</router-link></li>
+                                <li class="active">{{ form.name || '&lt;Create Domain&gt;' }}</li>
+                            </ol>
+                        </div>
                         <div class="form-group">
                             <h3>Create Domain</h3>
                         </div>

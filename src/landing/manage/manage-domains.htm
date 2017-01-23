@@ -4,6 +4,13 @@
             <div class="ld ld-cell">
                 <div class="ld ld-center">
                     <div>
+                        <ol class="breadcrumb">
+                            <li><router-link :to="{ path: '/manage' }">Manage</router-link></li>
+                            <li><router-link :to="{ path: '/manage/i/' + $route.params.portal }">Portal</router-link></li>
+                            <li class="active">Portal Domains</li>
+                        </ol>
+                    </div>
+                    <div>
                         <h3>Portal Domains</h3>
                     </div>
                     <div class="ld ld-portals">
