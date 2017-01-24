@@ -96,7 +96,7 @@
 
                 this.$store.dispatch('portals/id/update', {
                     id: this.details.portal.id,
-                    thumbnail: this.details.portal.thumbnail.id,
+                    thumbnail: this.details.portal.thumbnail && this.details.portal.thumbnail.id,
                     title: this.details.portal.title,
                     params: this.items.map(p => ({
                         id: p.id,
@@ -189,39 +189,11 @@
                 })
             },
 
-            // add: function() {
-            //
-            //     this.items.push({
-            //         uuid: Core.UUID.random(),
-            //         type: type,
-            //         name: this.form.name,
-            //         value: this.form.value,
-            //         action: 'CREATE'
-            //     })
-            //
-            //     this.form.name = ''
-            //     this.form.value = ''
-            //
-            //     this.$forceUpdate()
-            // },
-            //
-            // remove: function(item) {
-            //
-            //     if (item.action == 'CREATE') {
-            //         let index = this.items.indexOf(item)
-            //         this.items.splice(index, 1)
-            //     } else {
-            //         item.action = 'REMOVE'
-            //         this.items = this.items.slice();
-            //     }
-            //     this.$forceUpdate()
-            // },
-
             update: function() {
 
                 this.$store.dispatch('portals/id/update', {
                     id: this.details.portal.id,
-                    thumbnail: this.details.portal.thumbnail.id,
+                    thumbnail: this.details.portal.thumbnail && this.details.portal.thumbnail.id,
                     title: this.details.portal.title,
                     params: this.items.map(p => ({
                         id: p.id,

@@ -222,8 +222,6 @@
                             thumbnail: { dirty: false },
                         }
 
-                        // this.file = null;
-
                         this.$watch('form', () => {
 
                             this.validation.title = {
@@ -265,21 +263,6 @@
                         (d) => { this.form.thumbnail = d.data },
                         () => {}
                     )
-
-                // var formData = new FormData();
-                // // formData.append('section', 'general');
-                // // formData.append('action', 'previewImg');
-                // // Main magic with files here
-                // formData.append('settings', JSON.stringify({
-                //
-                // }));
-                // formData.append('file', $('input[type=file]')[0].files[0]);
-                //
-                // var reader = new FileReader();
-                // reader.onload = (e) => {
-                //     this.form.image = e.target.result;
-                // }
-                // reader.readAsDataURL(this.file);
             });
         },
         methods: {
@@ -291,7 +274,6 @@
                         id: this.form.id,
                         title: this.form.title,
                         thumbnail: this.form.thumbnail.id,
-                        shared: true,
                     })
                     .then(
                         () => { this.$router.push({ path: '/manage' }); },
