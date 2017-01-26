@@ -145,4 +145,9 @@
         template: '#landing-manage-templates-update-page',
     });
 
+    Landing.LandingDonatePage =
+    Vue.component('landing-donate-page', {
+        template: '#landing-donate-page',
+    });
+
 })(jQuery, Vue, Core, Shell, Landing);

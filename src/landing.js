@@ -35,6 +35,10 @@ window.Landing =
                     component: Landing.LandingStoragePage,
                 },
                 {
+                    path: '/donate',
+                    component: Landing.LandingDonatePage,
+                },
+                {
                     path: '/signin',
                     component: Landing.LandingSigninPage,
                 },
