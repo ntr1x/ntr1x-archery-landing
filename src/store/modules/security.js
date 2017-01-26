@@ -23,6 +23,10 @@ window.StoreFactorySecurity =
                         Cookies.remove('authorization')
                     }
                 },
+
+                'security/principal/user': (state, user) => {
+                    state.principal.user = user
+                },
             },
 
             actions: {
@@ -38,12 +42,7 @@ window.StoreFactorySecurity =
                                     token: d.data.token
                                 });
                             },
-                            () => {
-                                commit('security/principal', {
-                                    user: null,
-                                    token: null
-                                });
-                            }
+                            (e) => { throw e }
                         )
                     ;
                 },
@@ -52,14 +51,6 @@ window.StoreFactorySecurity =
 
                     return Vue.http
                         .post(`${endpoint}/security/signup`, { email, password, name })
-                        .then(
-                            (d) => { alert('Check your email') },
-                            () => { alert('fail') }
-                        )
-                        // .then(
-                        //     (d) => { commit('security/user', d.data); },
-                        //     () => { commit('security/user', null); }
-                        // )
                     ;
                 },
 
@@ -82,6 +73,67 @@ window.StoreFactorySecurity =
                             }
                         )
                     ;
+                },
+
+                'security/recover': ({ commit, state }, { email }) => {
+
+                    return Vue.http
+                        .post(`${endpoint}/security/recover`, { email })
+                    ;
+                },
+
+                'security/recover/password/update': ({ commit, state }, { newPassword, token }) => {
+
+                    return Vue.http
+                        .put(`${endpoint}/security/passwd`, {
+                            token,
+                            newPassword,
+                        })
+                        .then(
+                            (d) => {
+                                commit('security/principal', {
+                                    user: d.data.user,
+                                    token: d.data.token
+                                });
+                            },
+                            (e) => { throw e }
+                        )
+                    ;
+                },
+
+                'security/profile/update': ({ commit, state, rootState }, data) => {
+
+                    return Vue.http.put(`${endpoint}/me/profile`, {
+                        name: data.name,
+                    }, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    });
+                },
+
+                'security/profile/email/update': ({ commit, state, rootState }, data) => {
+
+                    return Vue.http.put(`${endpoint}/me/profile/email`, {
+                        email: data.email,
+                        password: data.password,
+                    }, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    });
+                },
+
+                'security/profile/password/update': ({ commit, state, rootState }, data) => {
+
+                    return Vue.http.put(`${endpoint}/me/profile/passwd`, {
+                        password: data.password,
+                        newPassword: data.newPassword,
+                    }, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    });
                 },
             },
         }

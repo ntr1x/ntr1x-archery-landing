@@ -6,7 +6,7 @@
                     <form novalidate @submit.prevent="validation.valid && signin()">
                         <div class="form-group">
                             <h3>Sign In</h3>
-                        </dif>
+                        </div>
                         <div class="form-group" :class="{
                             'has-error': validation.email.dirty && (validation.email.required || validation.email.illegal),
                             'has-feedback': validation.email.dirty && (validation.email.required || validation.email.pattern),
@@ -26,7 +26,8 @@
                             <div v-if="validation.password.dirty && !validation.password.required && validation.password.illegal">Your password is too short</div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg" v-if="validation.valid">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-lg" :disabled="!validation.valid">Sign In</button>
+                            <button type="button" class="btn btn-link btn-lg" @click.prevent="$router.push({ path: '/recover' })">Recover</button>
                         </div>
                     </form>
                 </div>

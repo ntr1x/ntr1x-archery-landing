@@ -29,6 +29,16 @@ window.StoreFactoryStorage =
                     }
                 },
 
+                'storage/value': (state, { parent, property, value }) => {
+                    if (parent != null) {
+                        if (typeof value !== 'undefined') {
+                            parent[property] = value;
+                        } else {
+                            delete parent[property];
+                        }
+                    }
+                },
+
                 'sources/init': (state, sources) => {
                     Object.assign(state.sources, sources)
                 },

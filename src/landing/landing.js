@@ -25,9 +25,59 @@
         template: '#landing-signup-page',
     });
 
+    Landing.LandingSignupAlert =
+    Vue.component('landing-signup-alert', {
+        template: '#landing-signup-alert',
+    });
+
+    Landing.LandingSignupSuccess =
+    Vue.component('landing-signup-success', {
+        template: '#landing-signup-success',
+    });
+
+    Landing.LandingRecoverPage =
+    Vue.component('landing-recover-page', {
+        template: '#landing-recover-page',
+    });
+
+    Landing.LandingRecoverAlert =
+    Vue.component('landing-recover-alert', {
+        template: '#landing-recover-alert',
+    });
+
+    Landing.LandingRecoverPasswdPage =
+    Vue.component('landing-recover-passwd-page', {
+        template: '#landing-recover-passwd-page',
+    });
+
+    Landing.LandingRecoverSuccess =
+    Vue.component('landing-recover-success', {
+        template: '#landing-recover-success',
+    });
+
     Landing.LandingProfilePage =
     Vue.component('landing-profile-page', {
         template: '#landing-profile-page',
+    });
+
+    Landing.LandingProfileSuccess =
+    Vue.component('landing-profile-success', {
+        template: '#landing-profile-success',
+    });
+
+    Landing.LandingProfileEmailAlert =
+    Vue.component('landing-profile-email-alert', {
+        template: '#landing-profile-email-alert',
+    });
+
+    Landing.LandingProfileEmailSuccess =
+    Vue.component('landing-profile-email-success', {
+        template: '#landing-profile-email-success',
+    });
+
+    Landing.LandingProfilePasswdSuccess =
+    Vue.component('landing-profile-passwd-success', {
+        template: '#landing-profile-passwd-success',
     });
 
     Landing.LandingManagePage =

@@ -3,8 +3,6 @@ window.Landing =
 
     const Landing = {};
 
-    const endpoint = 'http://api.storage.tp.ntr1x.com';
-
     $(document).ready(function() {
 
         $('[data-vue-landing]').each(function(index, element) {
@@ -43,6 +41,55 @@ window.Landing =
                 {
                     path: '/signup',
                     component: Landing.LandingSignupPage,
+                },
+                {
+                    path: '/signup/alert',
+                    component: Landing.LandingSignupAlert,
+                },
+                {
+                    path: '/signup/success',
+                    component: Landing.LandingSignupSuccess,
+                },
+                {
+                    path: '/recover',
+                    component: Landing.LandingRecoverPage,
+                },
+                {
+                    path: '/recover/alert',
+                    component: Landing.LandingRecoverAlert,
+                },
+                {
+                    path: '/recover/passwd/:token',
+                    component: Landing.LandingRecoverPasswdPage,
+                },
+                {
+                    path: '/recover/success',
+                    component: Landing.LandingRecoverSuccess,
+                },
+                {
+                    path: '/profile',
+                    component: Landing.LandingProfilePage,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/profile/success',
+                    component: Landing.LandingProfileSuccess,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/profile/email/alert',
+                    component: Landing.LandingProfileEmailAlert,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/profile/email/success',
+                    component: Landing.LandingProfileEmailSuccess,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/profile/passwd/success',
+                    component: Landing.LandingProfilePasswdSuccess,
+                    meta: { auth: true }
                 },
                 {
                     path: '/manage',

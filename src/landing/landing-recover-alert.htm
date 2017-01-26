@@ -1,0 +1,18 @@
+<template id="landing-recover-alert">
+    <div class="ld ld-page ld-fullscreen-page">
+        <landing-super></landing-super>
+        <landing-header></landing-header>
+        <transition appear name="fade">
+            <landing-layout-center>
+                <div class="text-center">
+                    <h3>Recover password with email</h3>
+                    <p>We have sent a message to specified email address.
+                        Please open the email message and click on the confirmation
+                        link to proceed with password recovery.</p>
+                    <a href="#" class="btn btn-primary" @click.prevent="$router.push({ path: '/' })">Go to Main Page</a>
+                </div>
+            </landing-layout-center>
+        </transition>
+        <landing-footer></landing-footer>
+    </div>
+</template>
