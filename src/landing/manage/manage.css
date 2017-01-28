@@ -1,23 +1,21 @@
 .ld.ld-manage {
   background: transparent;
 }
-.ld.ld-manage .ld.ld-table {
-  display: table;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  text-align: center;
+.ld.ld-manage h3 {
+  margin-bottom: 30px;
 }
-.ld.ld-manage .ld.ld-table .ld.ld-cell {
-  display: table-cell;
-  vertical-align: middle;
+.ld.ld-manage .breadcrumb {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0px;
+  color: #555555;
 }
-.ld.ld-manage form {
-  display: inline-block;
-  text-align: left;
-  width: 400px;
-  color: #FFFFFF;
-  margin-bottom: 200px;
+.ld.ld-manage .breadcrumb li:before {
+  color: #334466;
+}
+.ld.ld-manage .breadcrumb li.active {
+  color: #9999AA;
 }
 .ld.ld-manage .ld.ld-portals .ld.ld-portal {
   display: table;
@@ -78,10 +76,6 @@
   background-position: top center;
   background-size: cover;
 }
-.ld.ld-manage .ld.ld-relative {
-  position: relative;
-  overflow: hidden;
-}
 .ld.ld-manage .ld.ld-upload {
   position: relative;
   display: table;
@@ -99,4 +93,30 @@
   font-size: 500px;
   opacity: 0;
   cursor: pointer;
+}
+.ld.ld-manage .dropdown-toggle.dropdown-select {
+  text-align: left;
+}
+.ld.ld-manage .dropdown-toggle.dropdown-select .select-title {
+  margin-right: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ld.ld-manage .dropdown-toggle.dropdown-select .select-caret {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  height: auto;
+  margin-top: -3px;
+}
+.ld.ld-manage.ld-manage-portals .ld.ld-center,
+.ld.ld-manage.ld-manage-mail .ld.ld-center,
+.ld.ld-manage.ld-manage-router .ld.ld-center,
+.ld.ld-manage.ld-manage-meta .ld.ld-center,
+.ld.ld-manage.ld-manage-domains .ld.ld-center,
+.ld.ld-manage.ld-manage-templates .ld.ld-center {
+  width: 600px;
+}
+.ld.ld-manage.ld-manage .container-fluid {
+  margin: 0px -15px;
 }

@@ -1,0 +1,46 @@
+<template id="landing-manage-domains">
+    <div class="ld ld-section ld-manage ld-manage-domains">
+        <div class="ld ld-table" v-if="details">
+            <div class="ld ld-cell">
+                <div class="ld ld-center">
+                    <div>
+                        <ol class="breadcrumb">
+                            <li><router-link :to="{ path: '/manage' }">Manage</router-link></li>
+                            <li><router-link :to="{ path: '/manage/i/' + $route.params.portal }">Portal</router-link></li>
+                            <li class="active">Portal Domains</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h3>Portal Domains</h3>
+                    </div>
+                    <div class="ld ld-portals">
+                        <div class="ld ld-portal" v-for="item in sorted()">
+                            <div class="ld ld-portal-data">
+                                <div class="ld ld-data-title"><a :href="'http://' + item.name">{{ item.name }}</a></div>
+                                <div class="ld ld-portal-data">
+                                    <div class="ld ld-data-ref">{{ item.portal.title }}</div>
+                                </div>
+                            </div>
+                            <div class="ld ld-portal-buttons">
+                                <a class="btn btn-sm btn-primary" :href="'http://' + item.name">View</a>
+                                <div class="btn-group pull-right">
+                                    <button class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">Advanced <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#" @click.prevent="$router.push({ path: '/manage/i/' + item.portal.id + '/domains/i/' + item.id })" >Edit</a></li>
+                                        <li><a href="#" @click.prevent="remove(item.id)">Remove</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ld ld-portal">
+                            <div class="ld ld-portal-buttons">
+                                <div class="pull-left"></div>
+                                <a href="#" @click.prevent="$router.push({ path: '/manage/i/' + details.portal.id + '/domains/create' })" class="btn btn-primary">Register</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,77 +1,66 @@
 window.Designer =
 (function($, Vue, Core, Shell) {
 
-    var Designer = {};
+    const Designer = {};
 
     $(document).ready(function() {
 
         $('[data-vue-designer]').each(function(index, element) {
 
-            var data = $(element).data();
+            const data = $(element).data()
 
-            var App = Vue.extend({
-                data: function() {
-                    return data;
-                },
-                created: function() {
+            Vue.use(window.ContextPlugin)
 
-                    Vue.service('security', Core.SecurityFactory(this));
-                    Vue.service('portals', Core.PortalsFactory(this));
-                },
-            });
+            const store = new window.StoreFactory()
+            store.registerModule('settings', new window.StoreFactorySettings(data.config))
+            store.registerModule('security', new window.StoreFactorySecurity(data.config))
+            store.registerModule('modals', new window.StoreFactoryModals(data.config))
+            store.registerModule('uploads', new window.StoreFactoryUploads(data.config))
+            store.registerModule('designer', new window.StoreFactoryDesigner(data.config))
+            store.registerModule('palette', new window.StoreFactoryPalette(data.config, window.Widgets.Palette))
+            store.registerModule('actions', new window.StoreFactoryActions(data.config))
+            store.registerModule('storage', new window.StoreFactoryStorage(data.config))
 
-            var router = new VueRouter({
-                history: true,
-                root: `/edit/${data.portal.id}/`
-            });
+            store.commit('security/principal', data.context.principal)
+            store.commit('designer/portal', data.context.portal)
 
-            router.beforeEach(function(transition) {
+            store
+                .dispatch('designer/setup', data.context.content)
+                .then(
+                    (content) => { store.commit('designer/content', content) },
+                    () => {}
+                )
 
-                if (transition.to.auth && !router.app.principal) {
-                    transition.abort();
-                } else if (transition.to.anon && router.app.principal) {
-                    transition.abort();
-                } else {
-                    transition.next();
-                }
-            });
-
-            var routes = {
-                '/': {
+            const routes = [
+                {
+                    path: '/',
                     component: Shell.LoaderPrivate,
-                    auth: true,
-                    private: true,
+                    meta: {
+                        auth: true,
+                        private: true,
+                    },
                 },
-                '/:page': {
+                {
+                    path: '/:page',
                     component: Shell.LoaderPrivate,
-                    auth: true,
-                    private: true,
+                    meta: {
+                        auth: true,
+                        private: true,
+                    },
                 },
-            };
+            ];
 
-            // function createRoute(page) {
-            //     return {
-            //         component: Shell.ShellPublic.extend({
-            //             data: function() {
-            //                 return {
-            //                     page: page,
-            //                 };
-            //             }
-            //         }),
-            //     };
-            // }
-            //
-            // if (data.model) {
-            //     for (var i = 0; i < data.model.pages.length; i++) {
-            //
-            //         var page = data.model.pages[i];
-            //         routes[page.name] = createRoute(page);
-            //     }
-            // }
+            const router = new VueRouter({
+                mode: 'history',
+                base: data.root,
+                routes,
+            });
 
-            router.map(routes);
-
-            router.start(App, $('[data-vue-body]', element).get(0));
+            new Vue({
+                router,
+                data,
+                store,
+            }).$mount($('[data-vue-body]', element).get(0));
         });
     });
 

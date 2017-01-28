@@ -6,27 +6,29 @@
                     <div class="col-xs-12">
                         <div class="ld ld-offset-header">
                             <h3 class="ld ld-decorate ld-decorate-left"><span class="glyphicon glyphicon-eye-open"></span> Featured Templates</h3>
-                            <a href="/gallery" class="btn btn-primary pull-right">Browse Gallery</a>
+                            <a href="/gallery" @click.prevent="$router.push({ path: '/gallery' })" class="btn btn-primary pull-right">Browse Gallery</a>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-6 col-md-4" v-for="portal in portals">
-                        <div class="thumbnail ld ld-thumbnail">
-                            <div class="ld ld-thumbnail-inner" :style="{
-                                'background-image': 'url(/uploads/' + portal.publication.thumbnail.dir + '/' + portal.publication.thumbnail.path + ')'
-                            }"></div>
-                            <div class="ld ld-thumbnail-overlay">
-                                <div class="ld ld-overlay-content">
-                                    <div class="ld ld-thumbnail-buttons">
-                                        <a :href="'/view/' + portal.id + '/'" class="btn btn-default">Preview</a>
-                                        <a href="#" class="btn btn-primary">Start Editing</a>
+                <transition appear name="fade" v-if="$store.state.portals.shared">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-4" v-for="portal in $store.state.portals.shared.content">
+                            <div class="thumbnail ld ld-thumbnail">
+                                <div class="ld ld-thumbnail-inner" :style="{
+                                    'background-image': 'url(' + $store.state.settings.endpoint + '/images/u/' + portal.thumbnail.uuid + '/thumbnail.png)'
+                                }"></div>
+                                <div class="ld ld-thumbnail-overlay">
+                                    <div class="ld ld-overlay-content">
+                                        <div class="ld ld-thumbnail-buttons">
+                                            <a :href="'/view/' + portal.id + '/'" class="btn btn-default">Preview</a>
+                                            <a href="#" class="btn btn-primary" @click.prevent="$router.push({ path: '/manage/i/' + portal.id + '/clone' })">Clone &amp; Edit</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </transition>
             </div>
         </div>
     </div>

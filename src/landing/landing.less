@@ -2,6 +2,26 @@
 
 .ld.ld-page {
 
+    .form-control {
+
+        &:not(.ace_editor) {
+
+            background-color: #434857;
+            color: #FFFFFF;
+
+            &:focus {
+                background-color: #FFFFFF;
+                color: #555555;
+            }
+        }
+
+        border: 1px solid rgba(0, 0, 0, 0.15);
+
+        &:focus {
+            border-color: #FFFFFF;
+        }
+    }
+
     background-color: #262633;
     overflow-y: auto;
     overflow-x: hidden;
@@ -21,6 +41,7 @@
     &.ld-fullscreen-page {
 
         position: absolute;
+        // overflow: visible;
         top: 0px;
         bottom: 0px;
         left: 0px;
@@ -33,8 +54,11 @@
             box-shadow: none;
         }
 
-        .ld.ld-body {
+        .ld.ld-body,
+        .ld.ld-manage {
             position: absolute;
+            overflow-y: auto;
+            overflow-x: hidden;
             top: 95px;
             bottom: 40px;
             left: 0px;
@@ -47,6 +71,37 @@
             left: 0px;
             right: 0px;
         }
+    }
+
+    .ld.ld-table {
+
+        display: table;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+
+        .ld.ld-cell {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
+
+    .ld.ld-center {
+        display: inline-block;
+        text-align: left;
+        width: 400px;
+        color: #FFFFFF;
+        margin-bottom: 200px;
+    }
+
+    .ld.ld-container {
+        color: #FFFFFF;
+    }
+
+    .ld.ld-relative {
+        position: relative;
+        overflow: hidden;
     }
 
     .btn.btn-lg {
@@ -62,6 +117,16 @@
         &:hover {
             background: #E2D16B;
             border-color: #E2D16B;
+        }
+    }
+
+    .btn.btn-link {
+
+        color: #D8C13A;
+        text-decoration: none;
+
+        &:hover {
+            background-color: rgba(255,255,255,0.1);
         }
     }
 
@@ -113,7 +178,7 @@
 
             h3.ld.ld-decorate {
 
-                display: block;
+                display: inline-block;
                 position: relative;
                 overflow: visible;
                 color: #FFFFFF;
@@ -158,6 +223,10 @@
                     right: auto;
                     background-color: #15A0BF;
                 }
+            }
+
+            h3.ld.ld-decorate.ld-decorate-center {
+                float: none;
             }
         }
 

@@ -6,7 +6,7 @@
                     <div class="col-xs-12">
                         <div class="ld ld-offset-header">
                             <h3 class="ld ld-decorate ld-decorate-left"><span class="glyphicon glyphicon-hdd"></span> Data Storage</h3>
-                            <a href="/storage" class="btn btn-primary pull-right">Explore Catalog</a>
+                            <a href="/storage" @click.prevent="$router.push({ path: '/storage' })" class="btn btn-primary pull-right">Explore Catalog</a>
                         </div>
                     </div>
                 </div>

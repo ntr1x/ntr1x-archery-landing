@@ -1,0 +1,56 @@
+<template id="landing-manage-router">
+    <div class="ld ld-section ld-body ld-manage ld-manage-router">
+        <div class="ld ld-table">
+            <div class="ld ld-cell">
+                <div class="ld ld-center">
+                    <form v-if="details" novalidate @submit.prevent="validation.valid && add()">
+                        <div>
+                            <ol class="breadcrumb">
+                                <li><router-link :to="{ path: '/manage' }">Manage</router-link></li>
+                                <li><router-link :to="{ path: '/manage/i/' + $route.params.portal }">Portal</router-link></li>
+                                <li class="active">Router Settings</li>
+                            </ol>
+                        </div>
+                        <div class="form-group">
+                            <h3>Router Settings</h3>
+                        </div>
+                        <div class="form-group">
+                            <label>New Route</label>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon">Key</span>
+                                <input type="text" class="form-control input-sm" placeholder="route.*" v-model="form.name" list="route-properties-list" />
+                                <datalist id="route-properties-list">
+                                    <option value="route.email.confirmed" />
+                                    <option value="route.passwd.confirmed" />
+                                    <option value="route.recover.confirmed" />
+                                </datalist>
+                                <span class="input-group-addon">Value</span>
+                                <input type="text" class="form-control input-sm" placeholder="" v-model="form.value" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit" :disabled="!validation.valid">Add</button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                    <form v-if="details" novalidate @submit.prevent="update()">
+                        <div class="form-group">
+                            <label>Routes</label>
+                            <div v-for="item in sorted()" :key="item.uuid" style="margin-bottom: 4px">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" style="min-width: 280px; text-align: left">{{ item.name }}</span>
+                                    <input type="text" class="form-control input-sm" v-model="item.value" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" @click="remove(item)">Remove</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

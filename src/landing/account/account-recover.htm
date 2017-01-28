@@ -1,0 +1,27 @@
+<template id="landing-account-recover">
+    <div class="ld ld-section ld-body ld-account ld-account-recover">
+        <div class="ld ld-table">
+            <div class="ld ld-cell">
+                <div class="ld ld-center">
+                    <form novalidate @submit.prevent="validation.valid && recover()">
+                        <div class="form-group">
+                            <h3>Recover Password</h3>
+                        </div>
+                        <div class="form-group" :class="{
+                            'has-error': validation.email.dirty && (validation.email.required || validation.email.illegal),
+                            'has-feedback': validation.email.dirty && (validation.email.required || validation.email.pattern),
+                        }">
+                            <input type="text" class="form-control input-lg" placeholder="Email" autofocus v-model="form.email">
+                            <span v-if="validation.email.dirty && (validation.email.required || validation.email.illegal)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <div v-if="validation.email.dirty && validation.email.required">Email is a required field</div>
+                            <div v-if="validation.email.dirty && !validation.email.required && validation.email.illegal">Invalid email address</div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg" :disabled="!validation.valid">Recover</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

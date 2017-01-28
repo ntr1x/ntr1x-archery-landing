@@ -1,0 +1,16 @@
+<template id="landing-profile-success">
+    <div class="ld ld-page ld-fullscreen-page">
+        <landing-super></landing-super>
+        <landing-header></landing-header>
+        <transition appear name="fade">
+            <landing-layout-center>
+                <div class="text-center">
+                    <h3>Profile updated</h3>
+                    <p>Your profile data has been successfully updated.</p>
+                    <a href="#" class="btn btn-primary" @click.prevent="$router.push({ path: '/' })">Go to Main Page</a>
+                </div>
+            </landing-layout-center>
+        </transition>
+        <landing-footer></landing-footer>
+    </div>
+</template>

@@ -8,24 +8,11 @@
                 portals: this.portals,
             }
         },
-        created: function() {
-
-            this.portals = [];
-
-            Vue.service('portals').load({
-                params: {
-                    published: 1,
-                    limit: 3,
-                }
-            }).then(
-                (d) => {
-                    this.portals = d.data.portals;
-                },
-                (e) => {
-                    console.log(e);
-                }
-            )
-        }
+        // created: function() {
+        //
+        //     this.portals = [];
+        //     this.$store.dispatch('portals/shared', { size: 3 });
+        // }
     });
 
     Landing.GalleryFull =
@@ -39,19 +26,15 @@
         created: function() {
 
             this.portals = [];
-
-            Vue.service('portals').load({
-                params: {
-                    published: 1,
-                }
-            }).then(
-                (d) => {
-                    this.portals = d.data.portals;
-                },
-                (e) => {
-                    console.log(e);
-                }
-            )
+            this.$store
+                .dispatch('portals/shared', {
+                    size: 1000
+                })
+                .then(
+                    (d) => { this.portals = d.data; },
+                    () => {}
+                )
+            ;
         }
     });
 

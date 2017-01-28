@@ -1,46 +1,57 @@
 window.Viewer =
 (function($, Vue, VueRouter, Core, Shell) {
 
-    var Viewer = {};
+    const Viewer = {};
 
     $(document).ready(function() {
 
         $('[data-vue-viewer]').each(function(index, element) {
 
-            var data = $(element).data();
+            const data = $(element).data();
 
-            var App = Vue.extend({
-                data: function() {
-                    return data;
-                },
-                created: function() {
+            Vue.use(window.ContextPlugin)
 
-                    Vue.service('security', Core.SecurityFactory(this));
-                    Vue.service('portals', Core.PortalsFactory(this));
-                },
-            });
+            const store = new window.StoreFactory()
+            store.registerModule('settings', new window.StoreFactorySettings(data.config))
+            store.registerModule('security', new window.StoreFactorySecurity(data.config))
+            store.registerModule('modals', new window.StoreFactoryModals(data.config))
+            store.registerModule('uploads', new window.StoreFactoryUploads(data.config))
+            store.registerModule('viewer', new window.StoreFactoryViewer(data.config))
+            store.registerModule('palette', new window.StoreFactoryPalette(data.config, window.Widgets.Palette))
+            store.registerModule('storage', new window.StoreFactoryStorage(data.config))
 
-            var router = new VueRouter({
-                history: true,
-                root: `/view/${data.portal.id}/`
-            });
+            store.commit('security/principal', data.context.principal)
+            store.commit('viewer/portal', data.context.portal)
+            store.commit('viewer/content', data.context.content)
 
-            var routes = {};
+            const routes = [];
 
-            for (let page of data.pages) {
-                routes[page.name || '/'] = {
+            for (let page of data.context.content.pages) {
+
+                routes.push({
+                    path: '/' + page.name,
                     component: Vue.component(`shell-loader-public-${page.id}`, {
                         mixins: [ Shell.LoaderPublic ]
                     }),
-                    auth: false,
-                    private: false,
-                    page: page,
-                }
+                    meta: {
+                        auth: false,
+                        private: false,
+                        page: page,
+                    }
+                })
             }
 
-            router.map(routes);
+            const router = new VueRouter({
+                mode: 'history',
+                base: data.root,
+                routes
+            });
 
-            router.start(App, $('[data-vue-body]', element).get(0));
+            new Vue({
+                router,
+                data,
+                store,
+            }).$mount($('[data-vue-body]', element).get(0));
         });
     });
 

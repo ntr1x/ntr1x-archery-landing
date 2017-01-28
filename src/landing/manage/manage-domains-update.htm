@@ -1,0 +1,39 @@
+<template id="landing-manage-domains-update">
+    <div class="ld ld-section ld-body ld-manage ld-manage-domains-update">
+        <div class="ld ld-table">
+            <div class="ld ld-cell">
+                <div class="ld ld-center">
+                    <form v-if="form" novalidate @submit.prevent="validation.valid && update()">
+                        <div>
+                            <ol class="breadcrumb">
+                                <li><router-link :to="{ path: '/manage' }">Manage</router-link></li>
+                                <li><router-link :to="{ path: '/manage/i/' + $route.params.portal }">Portal</router-link></li>
+                                <li><router-link :to="{ path: '/manage/i/' + $route.params.portal + '/domains' }">Portal Domains</router-link></li>
+                                <li class="active">{{ form.name || '&lt;Edit Domain&gt;' }}</li>
+                            </ol>
+                        </div>
+                        <div class="form-group">
+                            <h3>Update Domain</h3>
+                        </div>
+                        <div class="form-group" :class="{
+                            'has-error': validation.name.dirty && validation.name.required,
+                            'has-feedback': validation.name.dirty && validation.name.required,
+                        }">
+                            <input type="text" class="form-control input-lg" placeholder="yoursitename.up.ntr1x.com" autofocus v-model="form.name">
+                            <span v-if="validation.name.dirty && validation.name.required" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <div v-if="validation.name.dirty && validation.name.required">Name is a required field</div>
+                        </div>
+                        <div class="form-group">
+                            Domains in *.up.ntr1x.com and *.ui.ntr1x.com zones are free to use and handled by our servers by design.
+                            If you would like to use your own domain make sure its DNS record points to one of our IP addresses.
+                            For some domains commercial subscription required.
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg" v-if="validation.valid">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

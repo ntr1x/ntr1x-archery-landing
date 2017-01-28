@@ -1,0 +1,59 @@
+<template id="landing-donate-page">
+    <div class="ld ld-page ld-fullscreen-page">
+        <landing-super></landing-super>
+        <landing-header></landing-header>
+        <transition appear name="fade">
+            <landing-layout-center>
+                <div class="text-center">
+                    <h3>Support Project</h3>
+                    <br />
+                    <div>
+                        <p>You like Archery, it makes us happy!</p>
+                        <p>Sometimes we work round the clock to make Archery better.
+                        We have great support from our friends and families these days.
+                        You can also participate by making a little donation.</p>
+                        <p>Thank you very much, Friend!</p>
+                    </div>
+                    <br />
+                    <div>
+                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                            <input type="hidden" name="cmd" value="_s-xclick">
+                            <input type="hidden" name="hosted_button_id" value="2QZX7QCQMGE6J">
+                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                            <img alt="" border="0" src="https://www.paypalobjects.com/ru_RU/i/scr/pixel.gif" width="1" height="1">
+                        </form>
+                    </div>
+                    <br />
+                    <div>
+                        <a class="btn btn-xs btn-link" href="https://github.com/ipavlenko/">https://github.com/ipavlenko/</a>
+                    </div>
+                    <br />
+                    <div>
+                        <h5>Special Thanks</h5>
+                        <a href="#">
+                            <img class="img-circle" style="width: 50px; height: 50px; margin: 3px;"
+                                src="/assets/vendor/ntr1x-archery-landing/src/landing/feedback/avatars/1.jpg" />
+                        </a>
+                        <a href="#">
+                            <img class="img-circle" style="width: 50px; height: 50px; margin: 3px;"
+                                src="/assets/vendor/ntr1x-archery-landing/src/landing/feedback/avatars/2.jpg" />
+                        </a>
+                        <a href="#">
+                            <img class="img-circle" style="width: 50px; height: 50px; margin: 3px;"
+                                src="/assets/vendor/ntr1x-archery-landing/src/landing/feedback/avatars/3.jpg" />
+                        </a>
+                        <a href="#">
+                            <img class="img-circle" style="width: 50px; height: 50px; margin: 3px;"
+                                src="/assets/vendor/ntr1x-archery-landing/src/landing/feedback/avatars/4.jpg" />
+                        </a>
+                        <a href="#">
+                            <img class="img-circle" style="width: 50px; height: 50px; margin: 3px;"
+                                src="/assets/vendor/ntr1x-archery-landing/src/landing/feedback/avatars/5.jpg" />
+                        </a>
+                    </div>
+                </div>
+            </landing-layout-center>
+        </transition>
+        <landing-footer></landing-footer>
+    </div>
+</template>

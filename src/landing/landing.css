@@ -3,6 +3,20 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
+.ld.ld-page .form-control {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+.ld.ld-page .form-control:not(.ace_editor) {
+  background-color: #434857;
+  color: #FFFFFF;
+}
+.ld.ld-page .form-control:not(.ace_editor):focus {
+  background-color: #FFFFFF;
+  color: #555555;
+}
+.ld.ld-page .form-control:focus {
+  border-color: #FFFFFF;
+}
 .ld.ld-page.ld-secondary-page .ld.ld-header {
   height: 70px;
   overflow: hidden;
@@ -25,8 +39,11 @@
   background: none;
   box-shadow: none;
 }
-.ld.ld-page.ld-fullscreen-page .ld.ld-body {
+.ld.ld-page.ld-fullscreen-page .ld.ld-body,
+.ld.ld-page.ld-fullscreen-page .ld.ld-manage {
   position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
   top: 95px;
   bottom: 40px;
   left: 0px;
@@ -37,6 +54,31 @@
   bottom: 0px;
   left: 0px;
   right: 0px;
+}
+.ld.ld-page .ld.ld-table {
+  display: table;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.ld.ld-page .ld.ld-table .ld.ld-cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+.ld.ld-page .ld.ld-center {
+  display: inline-block;
+  text-align: left;
+  width: 400px;
+  color: #FFFFFF;
+  margin-bottom: 200px;
+}
+.ld.ld-page .ld.ld-container {
+  color: #FFFFFF;
+}
+.ld.ld-page .ld.ld-relative {
+  position: relative;
+  overflow: hidden;
 }
 .ld.ld-page .btn.btn-lg {
   border-radius: 4px;
@@ -49,6 +91,13 @@
 .ld.ld-page .btn.btn-primary:hover {
   background: #E2D16B;
   border-color: #E2D16B;
+}
+.ld.ld-page .btn.btn-link {
+  color: #D8C13A;
+  text-decoration: none;
+}
+.ld.ld-page .btn.btn-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 .ld.ld-page .ld.ld-container {
   width: 100%;
@@ -87,7 +136,7 @@
   margin: 10px 0px 0px 0px;
 }
 .ld.ld-page .ld.ld-section .ld.ld-offset-header h3.ld.ld-decorate {
-  display: block;
+  display: inline-block;
   position: relative;
   overflow: visible;
   color: #FFFFFF;
@@ -125,6 +174,9 @@
   left: 100%;
   right: auto;
   background-color: #15A0BF;
+}
+.ld.ld-page .ld.ld-section .ld.ld-offset-header h3.ld.ld-decorate.ld-decorate-center {
+  float: none;
 }
 .ld.ld-page .ld.ld-section .ld.ld-message {
   color: #D0D0D2;

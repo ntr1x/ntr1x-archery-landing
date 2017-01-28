@@ -1,82 +1,198 @@
 window.Landing =
-(function($, Vue, Core, Shell) {
+(function($, Vue) {
 
-    var Landing = {};
-    
+    const Landing = {};
+
     $(document).ready(function() {
 
         $('[data-vue-landing]').each(function(index, element) {
 
-            var data = $(element).data();
+            const data = $(element).data();
 
-            var App = Vue.extend({
-                data: function() {
-                    return data;
-                },
-                created: function() {
+            const store = new window.StoreFactory()
+            store.registerModule('settings', new window.StoreFactorySettings(data.config))
+            store.registerModule('security', new window.StoreFactorySecurity(data.config))
+            store.registerModule('portals', new window.StoreFactoryPortals(data.config))
+            store.registerModule('domains', new window.StoreFactoryDomains(data.config))
+            store.registerModule('templates', new window.StoreFactoryTemplates(data.config))
+            store.registerModule('modals', new window.StoreFactoryModals(data.config))
+            store.registerModule('uploads', new window.StoreFactoryUploads(data.config))
 
-                    Vue.service('security', Core.SecurityFactory(this));
-                    Vue.service('portals', Core.PortalsFactory(this));
-                },
-            });
+            store.commit('security/principal', data.principal)
+            store.commit('portals/shared', data.shared)
 
-            var router = new VueRouter({
-                history: true,
-            });
-
-            router.beforeEach(function(transition) {
-
-                if (transition.to.auth && !router.app.principal) {
-                    transition.abort();
-                } else if (transition.to.anon && router.app.principal) {
-                    transition.abort();
-                } else {
-                    transition.next();
-                }
-            });
-
-            var routes = {
-                '/': {
+            const routes = [
+                {
+                    path: '/',
                     component: Landing.LandingPage,
                 },
-                '/gallery': {
+                {
+                    path: '/gallery',
                     component: Landing.LandingGalleryPage,
                 },
-                '/storage': {
+                {
+                    path: '/storage',
                     component: Landing.LandingStoragePage,
                 },
-                '/signin': {
+                {
+                    path: '/donate',
+                    component: Landing.LandingDonatePage,
+                },
+                {
+                    path: '/signin',
                     component: Landing.LandingSigninPage,
-                    anon: true,
                 },
-                '/signup': {
+                {
+                    path: '/signup',
                     component: Landing.LandingSignupPage,
-                    anon: true,
                 },
-                '/manage': {
+                {
+                    path: '/signup/alert',
+                    component: Landing.LandingSignupAlert,
+                },
+                {
+                    path: '/signup/success',
+                    component: Landing.LandingSignupSuccess,
+                },
+                {
+                    path: '/recover',
+                    component: Landing.LandingRecoverPage,
+                },
+                {
+                    path: '/recover/alert',
+                    component: Landing.LandingRecoverAlert,
+                },
+                {
+                    path: '/recover/passwd/:token',
+                    component: Landing.LandingRecoverPasswdPage,
+                },
+                {
+                    path: '/recover/success',
+                    component: Landing.LandingRecoverSuccess,
+                },
+                {
+                    path: '/profile',
+                    component: Landing.LandingProfilePage,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/profile/success',
+                    component: Landing.LandingProfileSuccess,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/profile/email/alert',
+                    component: Landing.LandingProfileEmailAlert,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/profile/email/success',
+                    component: Landing.LandingProfileEmailSuccess,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/profile/passwd/success',
+                    component: Landing.LandingProfilePasswdSuccess,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/manage',
                     component: Landing.LandingManagePage,
-                    auth: true,
+                    meta: { auth: true }
                 },
-                '/manage/create': {
+                {
+                    path: '/manage/create',
                     component: Landing.LandingManageCreatePage,
-                    auth: true,
+                    meta: { auth: true }
                 },
-                '/manage/i/:portal/clone': {
+                {
+                    path: '/manage/i/:portal/domains',
+                    component: Landing.LandingManageDomainsPage,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/manage/i/:portal/domains/create',
+                    component: Landing.LandingManageDomainsCreatePage,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/manage/i/:portal/domains/i/:domain',
+                    component: Landing.LandingManageDomainsUpdatePage,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/manage/i/:portal/clone',
                     component: Landing.LandingManageClonePage,
-                    auth: true,
+                    meta: { auth: true }
                 },
-                '/manage/i/:portal/publish': {
-                    component: Landing.LandingManagePublishPage,
-                    auth: true,
+                {
+                    path: '/manage/i/:portal',
+                    component: Landing.LandingManageDetailsPage,
+                    meta: { auth: true }
                 },
-            };
+                {
+                    path: '/manage/i/:portal/mail',
+                    component: Landing.LandingManageMailPage,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/manage/i/:portal/router',
+                    component: Landing.LandingManageRouterPage,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/manage/i/:portal/meta',
+                    component: Landing.LandingManageMetaPage,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/manage/i/:portal/templates',
+                    component: Landing.LandingManageTemplatesPage,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/manage/i/:portal/templates/create',
+                    component: Landing.LandingManageTemplatesCreatePage,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/manage/i/:portal/templates/i/:template',
+                    component: Landing.LandingManageTemplatesUpdatePage,
+                    meta: { auth: true }
+                },
+            ];
 
-            router.map(routes);
+            const router = new VueRouter({
+                mode: 'history',
+                routes
+            })
 
-            router.start(App, $('[data-vue-body]', element).get(0));
+            router.beforeEach((to, from, next) => {
+
+                if (to.matched.some(record => record.meta.auth)) {
+
+                    if (!store.state.security.principal.user) {
+
+                        next({
+                            path: '/signin',
+                            query: { redirect: to.fullPath },
+                        })
+
+                        return
+                    }
+                }
+
+                next()
+            });
+
+            new Vue({
+                router,
+                data,
+                store,
+            }).$mount($('[data-vue-body]', element).get(0));
         });
     });
 
     return Landing;
 
-})(jQuery, Vue, Core, Shell);
+})(jQuery, Vue);

@@ -1,0 +1,46 @@
+<template id="landing-account-profile-passwd">
+    <form novalidate @submit.prevent="validation.valid && update()">
+        <div class="form-group">
+            <h3>Update Password</h3>
+        </div>
+        <div class="form-group" :class="{
+            'has-error': validation.password.dirty && (validation.password.required || validation.password.illegal),
+            'has-feedback': validation.password.dirty && (validation.password.required || validation.password.illegal),
+        }">
+            <input type="password" class="form-control input-lg" placeholder="Old password" v-model="form.password">
+            <span v-if="validation.password.dirty && (validation.password.required || validation.password.illegal)"
+                class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <div v-if="validation.password.dirty && validation.password.required"
+            >Old Password is a required field</div>
+            <div v-if="validation.password.dirty && !validation.password.required && validation.password.illegal"
+            >Old password is too short</div>
+        </div>
+        <div class="form-group" :class="{
+            'has-error': validation.newPassword.dirty && (validation.newPassword.required || validation.newPassword.illegal),
+            'has-feedback': validation.newPassword.dirty && (validation.newPassword.required || validation.newPassword.illegal),
+        }">
+            <input type="password" class="form-control input-lg" placeholder="New password" v-model="form.newPassword">
+            <span v-if="validation.newPassword.dirty && (validation.newPassword.required || validation.newPassword.illegal)"
+                class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <div v-if="validation.newPassword.dirty && validation.newPassword.required"
+            >Password is a required field</div>
+            <div v-if="validation.newPassword.dirty && !validation.newPassword.required && validation.newPassword.illegal"
+            >Your password is too short</div>
+        </div>
+        <div class="form-group" :class="{
+            'has-error': validation.confirmPassword.dirty && (validation.confirmPassword.required || validation.confirmPassword.illegal),
+            'has-feedback': validation.confirmPassword.dirty && (validation.confirmPassword.required || validation.confirmPassword.illegal),
+        }">
+            <input type="password" class="form-control input-lg" placeholder="New password confirmation" v-model="form.confirmPassword">
+            <span v-if="validation.confirmPassword.dirty && (validation.confirmPassword.required || validation.confirmPassword.illegal)"
+                class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <div v-if="validation.confirmPassword.dirty && validation.confirmPassword.required"
+            >Password confirmation is a required field</div>
+            <div v-if="validation.confirmPassword.dirty && !validation.confirmPassword.required && validation.confirmPassword.illegal"
+            >Password confirmation should be equal to the Password field</div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg" v-if="validation.valid">Update</button>
+        </div>
+    </form>
+</template>

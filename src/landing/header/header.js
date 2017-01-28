@@ -4,11 +4,16 @@
     Vue.component('landing-header', {
         template: '#landing-header',
         methods: {
+
             signout: function() {
-                Vue.service('security').signout().then(
-                    (d) => { this.$router.go('/'); },
-                    (e) => { }
-                );
+
+                this.$store
+                    .dispatch('security/signout')
+                    .then(
+                        () => { this.$router.push({ path: '/' }) },
+                        () => {}
+                    )
+                ;
             }
         },
     });
