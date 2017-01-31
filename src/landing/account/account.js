@@ -145,7 +145,7 @@
                         password: this.form.password,
                     })
                     .then(
-                        () => { this.$router.push({ path: '/' }) },
+                        () => { this.$router.push({ path: '/signup/alert' }) },
                         () => {}
                     )
                 ;

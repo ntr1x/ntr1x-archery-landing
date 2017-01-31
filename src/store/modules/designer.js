@@ -139,7 +139,7 @@ window.StoreFactoryDesigner =
                     .then(
                         (d) => {
                             dispatch('designer/setup', d.data).then(
-                                (d) => { commit('designer/content', d) },
+                                (d) => { commit('designer/content', d.content) },
                                 () => { /* ignore */ }
                             )
                         },
