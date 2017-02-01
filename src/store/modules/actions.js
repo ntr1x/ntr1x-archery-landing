@@ -11,24 +11,15 @@ window.StoreFactoryActions =
 
             actions: {
 
-                'actions/eval': (context, script) => {
-                    eval(script)
-                },
+                'actions/execute': ({ dispatch }, { $store, $page, $data, $eval }) => {
 
-                'actions/execute': ({ dispatch }, data) => {
+                    if ($data != null) {
 
-                    console.log(data);
-
-                    // return Vue.http.get(`${endpoint}/me/portals`, {
-                    //     params: data,
-                    //     headers: $.extend({}, {
-                    //         Authorization: rootState.security.principal.token || undefined
-                    //     })
-                    // })
-
-                    // dispatch()
-                    // console.log(data);
-                    // eval(script)
+                        $eval($data, {
+                            $store,
+                            $page
+                        })
+                    }
                 },
             },
         }
