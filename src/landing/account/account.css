@@ -1,3 +1,6 @@
 .ld.ld-account {
   background: transparent;
 }
+.ld.ld-account.ld-account-apply .ld.ld-center {
+  width: 800px;
+}

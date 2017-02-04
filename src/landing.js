@@ -98,6 +98,11 @@ window.Landing =
                     meta: { auth: true }
                 },
                 {
+                    path: '/account/apply/:offer',
+                    component: Landing.LandingAccountApplyPage,
+                    meta: { auth: true }
+                },
+                {
                     path: '/manage',
                     component: Landing.LandingManagePage,
                     meta: { auth: true }

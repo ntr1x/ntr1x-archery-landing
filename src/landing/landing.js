@@ -150,4 +150,9 @@
         template: '#landing-donate-page',
     });
 
+    Landing.LandingAccountApplyPage =
+    Vue.component('landing-account-apply-page', {
+        template: '#landing-account-apply-page',
+    });
+
 })(jQuery, Vue, Core, Shell, Landing);

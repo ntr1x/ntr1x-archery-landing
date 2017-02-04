@@ -52,18 +52,44 @@ window.StoreFactoryActions =
                                         param.value
                                     )
 
-                                    if (param.in != 'body') {
-                                        d[param.in] = Object.assign(d[param.in] || {}, { [param.name]: v })
-                                    } else {
-                                        d[param.in] = v
+                                    if (v != null) {
+
+                                        if (param.in != 'body') {
+                                            d[param.in] = Object.assign(d[param.in] || {}, { [param.name]: v })
+                                        } else {
+                                            d[param.in] = v
+                                        }
                                     }
                                 }
                             }
 
-                            console.log($method)
-                            console.log(d)
+                            let handlers = {
+                                POST: Vue.http.post,
+                                PUT: Vue.http.put,
+                                PATCH: Vue.http.patch,
+                                GET: Vue.http.get,
+                                HEAD: Vue.http.head,
+                                DELETE: Vue.http.delete,
+                            }
 
-                            // switch ($method.)
+                            let handler = handlers[$method.method]
+
+                            switch ($method.method) {
+                            case 'POST':
+                            case 'PUT':
+                            case 'PATCH':
+                                return handler.call(Vue.http, $method.url, d.body, {
+                                    params: d.query,
+                                    headers: d.header
+                                })
+                            case 'GET':
+                            case 'HEAD':
+                            case 'DELETE':
+                                return handler($method.url, {
+                                    params: d.query,
+                                    // headers: d.header
+                                })
+                            }
 
                             return Promise.resolve(null)
                         }
