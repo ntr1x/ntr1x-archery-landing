@@ -17,9 +17,11 @@ window.Landing =
             store.registerModule('templates', new window.StoreFactoryTemplates(data.config))
             store.registerModule('modals', new window.StoreFactoryModals(data.config))
             store.registerModule('uploads', new window.StoreFactoryUploads(data.config))
+            store.registerModule('landing', new window.StoreFactoryLanding(data.config))
 
             store.commit('security/principal', data.principal)
             store.commit('portals/shared', data.shared)
+            store.commit('landing/offers', data.offers)
 
             const routes = [
                 {

@@ -14,67 +14,18 @@
                         <div class="ld ld-pricing-offers">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-lg-3 col-sm-6 col-xs-12">
+                                    <div class="col-lg-3 col-sm-6 col-xs-12" v-for="offer in $store.state.landing.offers.content">
                                         <div class="ld ld-pricing-offer">
-                                            <h4>Starter</h4>
-                                            <div class="ld ld-offer-price">$10 / month</div>
-                                            <div class="ld ld-offer-discount">30% discount for 1 year subscription</div>
+                                            <h4>{{ offer.title }}</h4>
+                                            <div class="ld ld-offer-price">{{ offer.extra.price }}</div>
+                                            <div class="ld ld-offer-discount">{{ offer.promo }}</div>
                                             <ul class="ld ld-offer-options">
-                                                <li>One portal</li>
-                                                <li>Unlimited number of pages</li>
-                                                <li>500 Mb Storage</li>
+                                                <li v-for="benefit in offer.extra.benefits">{{ benefit }}</li>
                                             </ul>
                                             <div class="ld ld-offer-promo">
-                                                <p>Better suited for personal, event and product pages.</p>
-                                                <a href="#" class="btn btn-primary">Create Portal</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-sm-6 col-xs-12">
-                                        <div class="ld ld-pricing-offer">
-                                            <h4>Business</h4>
-                                            <div class="ld ld-offer-price">$100 / month</div>
-                                            <div class="ld ld-offer-discount">30% discount for 1 year subscription</div>
-                                            <ul class="ld ld-offer-options">
-                                                <li>Up to 10 portals</li>
-                                                <li>Unlimited number of pages</li>
-                                                <li>2 Gb Storage per each portal</li>
-                                            </ul>
-                                            <div class="ld ld-offer-promo">
-                                                <p>Better suited for small campanies and startups.</p>
-                                                <a href="#" class="btn btn-primary">Create Portal</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-sm-6 col-xs-12">
-                                        <div class="ld ld-pricing-offer">
-                                            <h4>Server</h4>
-                                            <div class="ld ld-offer-price">$5000</div>
-                                            <div class="ld ld-offer-discount">30% discount for each additional server licence</div>
-                                            <ul class="ld ld-offer-options">
-                                                <li>Up to 100 portals</li>
-                                                <li>1 year subscription for updates</li>
-                                                <li>Deploy to your own hardrare</li>
-                                            </ul>
-                                            <div class="ld ld-offer-promo">
-                                                <p>Better suited for web-developers and service providers.</p>
-                                                <a href="#" class="btn btn-primary">Apply</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-sm-6 col-xs-12">
-                                        <div class="ld ld-pricing-offer">
-                                            <h4>Advanced</h4>
-                                            <div class="ld ld-offer-price">Price on request</div>
-                                            <div class="ld ld-offer-discount">Do not see a suitable plan? Need a special offer?</div>
-                                            <ul class="ld ld-offer-options">
-                                                <li>Branding</li>
-                                                <li>Integrations</li>
-                                                <li>Custom setup</li>
-                                            </ul>
-                                            <div class="ld ld-offer-promo">
-                                                <p>We are welcome you as a partner. Please mail us.</p>
-                                                <a href="#" class="btn btn-primary">Apply</a>
+                                                <p>{{ offer.extra.purpose }}</p>
+                                                <a :href="offer.extra.url + '/' + offer.id" @click.prevent="$router.push({ path: offer.extra.url + '/' + offer.id })"
+                                                    class="btn btn-primary">{{ offer.extra.action }}</a>
                                             </div>
                                         </div>
                                     </div>

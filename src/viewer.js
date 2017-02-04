@@ -18,6 +18,7 @@ window.Viewer =
             store.registerModule('uploads', new window.StoreFactoryUploads(data.config))
             store.registerModule('viewer', new window.StoreFactoryViewer(data.config))
             store.registerModule('palette', new window.StoreFactoryPalette(data.config, window.Widgets.Palette))
+            store.registerModule('actions', new window.StoreFactoryActions(data.config))
             store.registerModule('storage', new window.StoreFactoryStorage(data.config))
 
             store.commit('security/principal', data.context.principal)
