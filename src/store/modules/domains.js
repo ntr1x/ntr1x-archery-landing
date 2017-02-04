@@ -11,7 +11,7 @@ window.StoreFactoryDomains =
             actions: {
 
                 'domains/my': ({ commit, state, rootState }, data) => {
-                    return Vue.http.get(`${endpoint}/me/domains`, {
+                    return Vue.http.get(`${endpoint}/me/archery/domains`, {
                         params: data,
                         headers: $.extend({}, {
                             Authorization: rootState.security.principal.token || undefined
@@ -20,7 +20,7 @@ window.StoreFactoryDomains =
                 },
 
                 'domains/create': ({ commit, state, rootState }, data) => {
-                    return Vue.http.post(`${endpoint}/me/domains`, data, {
+                    return Vue.http.post(`${endpoint}/me/archery/domains`, data, {
                         params: data,
                         headers: $.extend({}, {
                             Authorization: rootState.security.principal.token || undefined
@@ -29,7 +29,7 @@ window.StoreFactoryDomains =
                 },
 
                 'domains/id/get': ({ commit, state, rootState }, { id }) => {
-                    return Vue.http.get(`${endpoint}/domains/i/${id}`, {
+                    return Vue.http.get(`${endpoint}/archery/domains/i/${id}`, {
                         headers: $.extend({}, {
                             Authorization: rootState.security.principal.token || undefined
                         })
@@ -37,7 +37,7 @@ window.StoreFactoryDomains =
                 },
 
                 'domains/id/remove': ({ commit, state, rootState }, { id }) => {
-                    return Vue.http.delete(`${endpoint}/domains/i/${id}`, {
+                    return Vue.http.delete(`${endpoint}/archery/domains/i/${id}`, {
                         headers: $.extend({}, {
                             Authorization: rootState.security.principal.token || undefined
                         })
@@ -46,7 +46,7 @@ window.StoreFactoryDomains =
 
                 'domains/id/update': ({ commit, state, rootState }, data) => {
 
-                    return Vue.http.put(`${endpoint}/domains/i/${data.id}`, {
+                    return Vue.http.put(`${endpoint}/archery/domains/i/${data.id}`, {
                         name: data.name,
                     }, {
                         headers: $.extend({}, {

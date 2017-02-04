@@ -17,7 +17,7 @@ window.StoreFactoryUploads =
                     fd.append('settings', JSON.stringify(settings))
 
                     return Vue.http
-                        .post(`${endpoint}/me/images`, fd, {
+                        .post(`${endpoint}/me/uploads/images`, fd, {
                             headers: {
                                 Authorization: rootState.security.principal.token || undefined
                             }

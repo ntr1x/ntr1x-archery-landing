@@ -15,11 +15,13 @@ window.StoreFactoryActions =
 
                     if ($data != null) {
 
-                        $eval($data, {
+                        return $eval($data, {
                             $store,
                             $page
                         })
                     }
+
+                    return null
                 },
             },
         }

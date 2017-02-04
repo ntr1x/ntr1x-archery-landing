@@ -113,7 +113,7 @@ window.StoreFactoryDesigner =
 
                 'designer/push': ({ commit, dispatch, state, rootState }) => {
 
-                    return Vue.http.put(`${endpoint}/portals/i/${state.portal.id}/push`, { content: state.content }, {
+                    return Vue.http.put(`${endpoint}/archery/portals/i/${state.portal.id}/push`, { content: state.content }, {
                         headers: $.extend({}, {
                             Authorization: rootState.security.principal.token
                         })
@@ -131,7 +131,7 @@ window.StoreFactoryDesigner =
 
                 'designer/pull': ({ commit, dispatch, state, rootState }) => {
 
-                    return Vue.http.get(`${endpoint}/portals/i/${state.portal.id}/pull`, {
+                    return Vue.http.get(`${endpoint}/archery/portals/i/${state.portal.id}/pull`, {
                         headers: $.extend({}, {
                             Authorization: rootState.security.principal.token
                         })
