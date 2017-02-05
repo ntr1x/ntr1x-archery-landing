@@ -22,6 +22,17 @@ window.StoreFactoryModals =
                     state.items.pop()
                 },
 
+                'modals/dialog/show': (state, modal) => {
+                    state.items.push({
+                        type: 'dialog',
+                        modal
+                    });
+                },
+
+                'modals/dialog/close': (state) => {
+                    state.items.pop()
+                },
+
                 'modals/page/show': (state, modal) => {
                     state.items.push({
                         type: 'page',

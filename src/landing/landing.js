@@ -155,4 +155,9 @@
         template: '#landing-account-apply-page',
     });
 
+    Landing.LandingAccountApplyAlert =
+    Vue.component('landing-account-apply-alert', {
+        template: '#landing-account-apply-alert',
+    });
+
 })(jQuery, Vue, Core, Shell, Landing);

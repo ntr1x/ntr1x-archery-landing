@@ -24,7 +24,7 @@
                                             </ul>
                                             <div class="ld ld-offer-promo">
                                                 <p>{{ offer.extra.purpose }}</p>
-                                                <a :href="offer.extra.url + '/' + offer.id" @click.prevent="$router.push({ path: offer.extra.url + '/' + offer.id })"
+                                                <a :href="offer.extra.url + '/offers/i/' + offer.id" @click.prevent="$router.push({ path: offer.extra.url + '/offers/i/' + offer.id })"
                                                     class="btn btn-primary">{{ offer.extra.action }}</a>
                                             </div>
                                         </div>

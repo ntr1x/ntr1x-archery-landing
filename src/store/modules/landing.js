@@ -1,7 +1,7 @@
 window.StoreFactoryLanding =
-(function() {
+(function($, Vue) {
 
-    return function() {
+    return function({ endpoint }) {
 
         return {
 
@@ -17,8 +17,16 @@ window.StoreFactoryLanding =
             },
 
             actions: {
+
+                'landing/orders/create': ({ commit, state, rootState }, data) => {
+                    return Vue.http.post(`${endpoint}/me/store/orders`, data, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    })
+                },
             }
         }
     }
 
-})();
+})(jQuery, Vue);

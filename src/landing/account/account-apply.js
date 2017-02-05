@@ -20,6 +20,17 @@
             let f = this.form = {
                 subject: null,
                 message: null,
+
+                name: this.$store.state.security.principal.user.name,
+                organization: null,
+                phone: null,
+                email: this.$store.state.security.principal.user.email,
+                country: null,
+                city: null,
+                state: null,
+                zip: null,
+                address1: null,
+                address2: null,
             };
 
             let validate = () => {
@@ -53,13 +64,26 @@
             send: function() {
 
                 this.$store
-                    .dispatch('landing/offers/apply', {
-                        subject: this.form.subject,
-                        message: this.form.message,
+                    .dispatch('landing/orders/create', {
+                        relate: this.$route.params.offer,
+                        extra: {
+                            subject: this.form.subject,
+                            message: this.form.message,
+                            name: this.form.name,
+                            organization: this.form.organization,
+                            phone: this.form.phone,
+                            email: this.form.email,
+                            country: this.form.country,
+                            city: this.form.city,
+                            state: this.form.state,
+                            zip: this.form.zip,
+                            address1: this.form.address1,
+                            address2: this.form.address2,
+                        },
                     })
                     .then(
                         () => {
-                            this.$router.push({ path: '/apply/alert' })
+                            this.$router.push({ path: '/account/apply/alert' })
                         },
                         () => {}
                     )
