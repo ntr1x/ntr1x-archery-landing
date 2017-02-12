@@ -24,6 +24,18 @@ window.StoreFactoryUploads =
                         })
                     ;
                 },
+
+                'upload/image/list': ({ commit, state, rootState }, { aspect }) => {
+
+                    return Vue.http
+                        .get(`${endpoint}/uploads/images`, {
+                            params: { aspect },
+                            headers: {
+                                Authorization: rootState.security.principal.token || undefined
+                            }
+                        })
+                    ;
+                },
             },
         }
     }
