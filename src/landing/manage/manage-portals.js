@@ -178,7 +178,7 @@
             clone: function() {
 
                 this.$store.dispatch('portals/create', {
-                    clone: this.form.id,
+                    proto: this.form.id,
                     title: this.form.title,
                     thumbnail: this.form.thumbnail.id,
                 })
