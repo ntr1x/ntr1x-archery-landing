@@ -36,6 +36,14 @@ window.StoreFactoryUploads =
                         })
                     ;
                 },
+
+                'upload/id/remove': ({ commit, state, rootState }, { id }) => {
+                    return Vue.http.delete(`${endpoint}/uploads/images/i/${id}`, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    });
+                },
             },
         }
     }
