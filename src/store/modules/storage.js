@@ -39,6 +39,20 @@ window.StoreFactoryStorage =
                     }
                 },
 
+                'storage/values': (state, values) => {
+
+                    for (let { parent, property, value } of values) {
+
+                        if (parent != null) {
+                            if (typeof value !== 'undefined') {
+                                parent[property != null ? property : 'value'] = value;
+                            } else {
+                                delete parent[property != null ? property : 'value'];
+                            }
+                        }
+                    }
+                },
+
                 'sources/init': (state, sources) => {
                     Object.assign(state.sources, sources)
                 },
@@ -60,6 +74,10 @@ window.StoreFactoryStorage =
 
                 'storage/value': ({ state, commit }, data) => {
                     commit('storage/value', data)
+                },
+
+                'storage/values': ({ state, commit }, data) => {
+                    commit('storage/values', data)
                 },
 
                 'sources/store': ({ state, commit }, data) => {
