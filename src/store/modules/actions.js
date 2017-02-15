@@ -1,5 +1,5 @@
 window.StoreFactoryActions =
-(function() {
+(function($) {
 
     return function() {
 
@@ -23,6 +23,20 @@ window.StoreFactoryActions =
                     }
 
                     return null
+                },
+
+                'actions/upload': ({ dispatch }, handle) => {
+
+                    $(window.document.createElement('input'))
+                        .attr('type', 'file')
+                        .on('change', (e) => {
+                            if (e.target.files && e.target.files.length) {
+                                handle(e.target.files)
+                            } else {
+                                handle(null)
+                            }
+                        })
+                        .trigger('click')
                 },
 
                 'actions/ajax': ({ dispatch }, { $page, $store, $context, $method }) => {
@@ -81,11 +95,19 @@ window.StoreFactoryActions =
                                 : $method.url
 
 
+                            let fd = null
+                            if (d.formData != null) {
+                                fd = new FormData();
+                                for (let n in d.formData) {
+                                    fd.append(n, d.formData[n]);
+                                }
+                            }
+
                             switch ($method.method) {
                             case 'POST':
                             case 'PUT':
                             case 'PATCH':
-                                return handler.call(Vue.http, url, d.body, {
+                                return handler.call(Vue.http, url, fd || d.body, {
                                     params: d.query,
                                     headers: d.header
                                 })
@@ -113,4 +135,4 @@ window.StoreFactoryActions =
         }
     }
 
-})();
+})(jQuery);

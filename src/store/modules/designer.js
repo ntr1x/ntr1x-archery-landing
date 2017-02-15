@@ -166,7 +166,8 @@ window.StoreFactoryDesigner =
 
                     return Vue.http.put(`${endpoint}/archery/portals/i/${state.portal.id}/push`, { content: state.content }, {
                         headers: $.extend({}, {
-                            Authorization: rootState.security.principal.token
+                            Authorization: rootState.security.principal.token,
+                            'X-Client-Host': 'archery.ntr1x.com'
                         })
                     })
                     .then(
@@ -184,7 +185,8 @@ window.StoreFactoryDesigner =
 
                     return Vue.http.get(`${endpoint}/archery/portals/i/${state.portal.id}/pull`, {
                         headers: $.extend({}, {
-                            Authorization: rootState.security.principal.token
+                            Authorization: rootState.security.principal.token,
+                            'X-Client-Host': 'archery.ntr1x.com'
                         })
                     })
                     .then(
