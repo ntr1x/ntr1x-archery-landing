@@ -32,9 +32,9 @@ window.StoreFactoryStorage =
                 'storage/value': (state, { parent, property, value }) => {
                     if (parent != null) {
                         if (typeof value !== 'undefined') {
-                            parent[property] = value;
+                            parent[property != null ? property : 'value'] = value;
                         } else {
-                            delete parent[property];
+                            delete parent[property != null ? property : 'value'];
                         }
                     }
                 },
@@ -56,6 +56,10 @@ window.StoreFactoryStorage =
 
                 'storage/store': ({ state, commit }, data) => {
                     commit('storage/store', data)
+                },
+
+                'storage/value': ({ state, commit }, data) => {
+                    commit('storage/value', data)
                 },
 
                 'sources/store': ({ state, commit }, data) => {

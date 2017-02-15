@@ -11,20 +11,21 @@ window.StoreFactoryActions =
 
             actions: {
 
-                'actions/execute': ({ dispatch }, { $store, $page, $data, $eval }) => {
+                'actions/execute': ({ dispatch }, { $store, $page, $script, $context, $eval }) => {
 
-                    if ($data != null) {
+                    if ($script != null) {
 
-                        return $eval($data, {
+                        return $eval($script, {
                             $store,
-                            $page
+                            $page,
+                            $context,
                         })
                     }
 
                     return null
                 },
 
-                'actions/ajax': ({ dispatch }, { $page, $context, $method }) => {
+                'actions/ajax': ({ dispatch }, { $page, $store, $context, $method }) => {
 
                     try {
 
@@ -32,6 +33,7 @@ window.StoreFactoryActions =
 
                             let vm = new Vue();
                             vm.$page = $page;
+                            vm.$store = $store;
                             vm.$context = $context;
 
                             let d = {
@@ -74,20 +76,25 @@ window.StoreFactoryActions =
 
                             let handler = handlers[$method.method]
 
+                            let url = d.path
+                                ? _.template($method.url, { interpolate: /{([\s\S]+?)}/g })(d.path)
+                                : $method.url
+
+
                             switch ($method.method) {
                             case 'POST':
                             case 'PUT':
                             case 'PATCH':
-                                return handler.call(Vue.http, $method.url, d.body, {
+                                return handler.call(Vue.http, url, d.body, {
                                     params: d.query,
                                     headers: d.header
                                 })
                             case 'GET':
                             case 'HEAD':
                             case 'DELETE':
-                                return handler($method.url, {
+                                return handler.call(Vue.http, url, {
                                     params: d.query,
-                                    // headers: d.header
+                                    headers: d.header
                                 })
                             }
 

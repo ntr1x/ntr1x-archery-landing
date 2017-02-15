@@ -42,8 +42,6 @@ window.Viewer =
                 })
             }
 
-            console.log(routes)
-
             const router = new VueRouter({
                 mode: 'history',
                 base: data.root,

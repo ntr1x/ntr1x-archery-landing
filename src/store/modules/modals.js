@@ -60,8 +60,18 @@ window.StoreFactoryModals =
                     if (page != null) {
                         commit('modals/page/show', {
                             page: page,
+                            events: modal.events,
                             context: modal.context
                         })
+                    }
+                },
+
+                'modals/trigger': ({ commit, state }, { name, data }) => {
+
+                    let modal = state.items[state.items.length - 1]
+                    let events = modal && modal.modal && modal.modal.events
+                    if (events && events[name]) {
+                        events[name](data)
                     }
                 },
 
