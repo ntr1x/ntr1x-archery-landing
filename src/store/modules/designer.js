@@ -100,7 +100,8 @@ window.StoreFactoryDesigner =
                                     widgets: [],
                                     params: {
                                         width: { value: null },
-                                        height: { value: null }
+                                        height: { value: null },
+                                        load: { value: null }
                                     }
                                 },
                                 sources: [],
