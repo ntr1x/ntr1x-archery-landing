@@ -173,8 +173,21 @@ window.StoreFactoryDesigner =
                     })
                     .then(
                         (d) => {
+
+                            let uuid = state.page.uuid
+
                             dispatch('designer/setup', d.data).then(
-                                (d) => { commit('designer/content', d.content) },
+                                (d) => {
+
+                                    commit('designer/content', d.content)
+
+                                    for (let p of d.content.pages) {
+                                        if (p.uuid == uuid) {
+                                            commit('designer/pages/select', p)
+                                            break
+                                        }
+                                    }
+                                },
                                 () => { /* ignore */ }
                             )
                         },
@@ -192,8 +205,21 @@ window.StoreFactoryDesigner =
                     })
                     .then(
                         (d) => {
+
+                            let uuid = state.page.uuid
+
                             dispatch('designer/setup', d.data).then(
-                                (d) => { commit('designer/content', d.content) },
+                                (d) => {
+
+                                    commit('designer/content', d.content)
+
+                                    for (let p of d.content.pages) {
+                                        if (p.uuid == uuid) {
+                                            commit('designer/pages/select', p)
+                                            break
+                                        }
+                                    }
+                                },
                                 () => { /* ignore */ }
                             )
                         },
