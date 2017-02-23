@@ -84,29 +84,24 @@ window.StoreFactoryDesigner =
 
             actions: {
 
-                'designer/setup': ({ state }, content) =>  {
+                'designer/setup': ({ state, getters }, content) =>  {
 
                     let c = JSON.parse(JSON.stringify(content || {}))
 
                     if (!c.pages || !c.pages.length) {
+
+                        let root = getters.palette.item('default-container/default-container-stack/stack-canvas');
+
+                        let page = {
+                            root: root,
+                            type: 'page',
+                            name: '',
+                            sources: [],
+                            storages: [],
+                        };
+
                         c.pages = [
-                            {
-                                uuid: Math.random().toString(36).substr(2, 9),
-                                type: 'page',
-                                name: '',
-                                root: {
-                                    uuid: Math.random().toString(36).substr(2, 9),
-                                    name: 'default-container/default-container-stack/default-stack-canvas',
-                                    widgets: [],
-                                    params: {
-                                        width: { value: null },
-                                        height: { value: null },
-                                        load: { value: null }
-                                    }
-                                },
-                                sources: [],
-                                storages: [],
-                            }
+                            page
                         ]
                     }
 
