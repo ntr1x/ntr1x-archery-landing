@@ -12,7 +12,10 @@ window.StoreFactoryDesigner =
 
                 scale: 1.0,
                 leftOpen: true,
-                rightOpen: true,
+                right: {
+                    open: true,
+                    panel: 'structure'
+                },
 
                 page: null,
                 storage: null,
@@ -43,8 +46,17 @@ window.StoreFactoryDesigner =
                     state.leftOpen = !state.leftOpen;
                 },
 
-                'designer/rightToggle': (state) => {
-                    state.rightOpen = !state.rightOpen;
+                'designer/rightToggle': (state, panel) => {
+                    if (!state.right.open) {
+                        state.right.panel = panel
+                        state.right.open = true
+                    } else  {
+                        if (state.right.panel == panel) {
+                            state.right.open = false
+                        } else {
+                            state.right.panel = panel
+                        }
+                    }
                 },
 
                 'designer/pages/select': (state, page) => { state.page = page; },
