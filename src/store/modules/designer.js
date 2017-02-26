@@ -128,24 +128,7 @@ window.StoreFactoryDesigner =
                                     { name: 'image', format: 'jpg', type: 'COVER', width: 1920, height: null },
                                 ]
                             },
-                            {
-                                uuid: Core.UUID.random(),
-                                name: '1280xAuto',
-                                title: '1280 x auto',
-                                items: [
-                                    { name: 'thumbnail', format: 'png', type: 'COVER', width: 120, height: 60 },
-                                    { name: 'image', format: 'jpg', type: 'COVER', width: 1280, height: null },
-                                ]
-                            },
-                            {
-                                uuid: Core.UUID.random(),
-                                name: '640xAuto',
-                                title: '640 x auto',
-                                items: [
-                                    { name: 'thumbnail', format: 'png', type: 'COVER', width: 120, height: 60 },
-                                    { name: 'image', format: 'jpg', type: 'COVER', width: 640, height: null },
-                                ]
-                            },
+
                             {
                                 uuid: Core.UUID.random(),
                                 name: '256x256',
@@ -163,6 +146,21 @@ window.StoreFactoryDesigner =
                                     { name: 'thumbnail', format: 'png', type: 'COVER', width: 120, height: 60 },
                                     { name: 'image', format: 'png', type: 'COVER', width: 64, height: 64 },
                                 ]
+                            },
+                        ]
+                    }
+
+                    if (!c.files || !c.files.length) {
+                        c.files = [
+                            {
+                                uuid: Core.UUID.random(),
+                                name: 'documents',
+                                title: 'Documents',
+                            },
+                            {
+                                uuid: Core.UUID.random(),
+                                name: 'archives',
+                                title: 'Archives',
                             },
                         ]
                     }
