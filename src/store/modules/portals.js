@@ -22,6 +22,14 @@ window.StoreFactoryPortals =
                     })
                 },
 
+                'portals/shared/id/pull': ({ commit, state, rootState }, { id }) => {
+                    return Vue.http.get(`${endpoint}/archery/portals/shared/i/${id}/pull`, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    })
+                },
+
                 'portals/my': ({ commit, state, rootState }, data) => {
                     return Vue.http.get(`${endpoint}/me/archery/portals`, {
                         params: data,
@@ -41,6 +49,14 @@ window.StoreFactoryPortals =
 
                 'portals/id/get': ({ commit, state, rootState }, { id }) => {
                     return Vue.http.get(`${endpoint}/archery/portals/i/${id}`, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    })
+                },
+
+                'portals/id/pull': ({ commit, state, rootState }, { id }) => {
+                    return Vue.http.get(`${endpoint}/archery/portals/i/${id}/pull`, {
                         headers: $.extend({}, {
                             Authorization: rootState.security.principal.token || undefined
                         })

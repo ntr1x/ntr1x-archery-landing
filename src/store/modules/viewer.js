@@ -17,6 +17,9 @@ window.StoreFactoryViewer =
 
             mutations: {
 
+                'console/log': () => { /* ignore */ },
+                'console/clear': () => { /* ignore */ },
+
                 'viewer/portal': (state, portal) => {
                     state.portal = portal;
                 },

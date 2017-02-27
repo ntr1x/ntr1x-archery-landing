@@ -14,6 +14,7 @@ window.Designer =
             const store = new window.StoreFactory()
             store.registerModule('settings', new window.StoreFactorySettings(data.config))
             store.registerModule('security', new window.StoreFactorySecurity(data.config))
+            store.registerModule('portals', new window.StoreFactoryPortals(data.config))
             store.registerModule('modals', new window.StoreFactoryModals(data.config))
             store.registerModule('uploads', new window.StoreFactoryUploads(data.config))
             store.registerModule('designer', new window.StoreFactoryDesigner(data.config))

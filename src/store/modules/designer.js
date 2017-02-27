@@ -11,15 +11,36 @@ window.StoreFactoryDesigner =
                 content: null,
 
                 scale: 1.0,
-                leftOpen: true,
+                left: {
+                    open: true,
+                    panel: 'palette'
+                },
                 right: {
                     open: true,
                     panel: 'structure'
+                },
+                bottom: {
+                    open: false,
+                    panel: 'console'
                 },
 
                 page: null,
                 storage: null,
                 source: null,
+
+                log: {
+                    messages: [
+                        { group: 'runtime', type: 'error', message: 'Cannot evaluate expression', time: '14:30:12.123' },
+                        { group: 'runtime', type: 'error', message: 'Cannot evaluate expression', time: '14:30:12.123' },
+                        { group: 'runtime', type: 'error', message: 'Cannot evaluate expression', time: '14:30:12.123' },
+                        { group: 'runtime', type: 'error', message: 'Cannot evaluate expression', time: '14:30:12.123' },
+                        { group: 'runtime', type: 'error', message: 'Cannot evaluate expression', time: '14:30:12.123' },
+                        { group: 'runtime', type: 'error', message: 'Cannot evaluate expression', time: '14:30:12.123' },
+                        { group: 'runtime', type: 'error', message: 'Cannot evaluate expression', time: '14:30:12.123' },
+                        { group: 'runtime', type: 'error', message: 'Cannot evaluate expression', time: '14:30:12.123' },
+                    ],
+                    limit: 100,
+                },
             },
 
             getters: {
@@ -28,6 +49,28 @@ window.StoreFactoryDesigner =
             },
 
             mutations: {
+
+                'console/log': (state, message) => {
+
+                    if (message.trace) {
+                        message.trace(console);
+                    }
+
+                    state.log.messages.push({
+                        group: message.group == null ? 'general' : message.group,
+                        type: message.type == null ? 'error' : message.type,
+                        message: message.message == null ? 'Undefined error' : message.message,
+                        time: new Date().toLocaleTimeString(),
+                    })
+
+                    if(state.log.messages.length >= state.log.limit) {
+                        state.log.messages.splice(0, state.log.messages.length - state.log.limit + 1)
+                    }
+                },
+
+                'console/clear': (state) => {
+                    state.log.messages = []
+                },
 
                 'designer/portal': (state, portal) => {
                     state.portal = portal;
@@ -42,8 +85,17 @@ window.StoreFactoryDesigner =
                     state.scale = scale;
                 },
 
-                'designer/leftToggle': (state) => {
-                    state.leftOpen = !state.leftOpen;
+                'designer/leftToggle': (state, panel) => {
+                    if (!state.left.open) {
+                        state.left.panel = panel
+                        state.left.open = true
+                    } else  {
+                        if (state.left.panel == panel) {
+                            state.left.open = false
+                        } else {
+                            state.left.panel = panel
+                        }
+                    }
                 },
 
                 'designer/rightToggle': (state, panel) => {
@@ -55,6 +107,19 @@ window.StoreFactoryDesigner =
                             state.right.open = false
                         } else {
                             state.right.panel = panel
+                        }
+                    }
+                },
+
+                'designer/bottomToggle': (state, panel) => {
+                    if (!state.bottom.open) {
+                        state.bottom.panel = panel
+                        state.bottom.open = true
+                    } else  {
+                        if (state.bottom.panel == panel) {
+                            state.bottom.open = false
+                        } else {
+                            state.bottom.panel = panel
                         }
                     }
                 },

@@ -125,7 +125,18 @@ window.StoreFactoryActions =
 
                     } catch (e) {
 
-                        console.log(e);
+                        this.$store.commit('console/log', {
+                            group: 'sources',
+                            type: 'warning',
+                            message: `Cannot execute ajax action ${$method.name == null ? 'undefined' : $method.name}`,
+                            trace: (console) => {
+                                console.groupCollapsed(e.message);
+                                console.warn('Method:', $method);
+                                console.warn(e.stack);
+                                console.groupEnd();
+                            }
+                        })
+
                         return Promise.reject(null)
                     }
 
