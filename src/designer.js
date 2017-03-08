@@ -18,7 +18,7 @@ window.Designer =
             store.registerModule('modals', new window.StoreFactoryModals(data.config))
             store.registerModule('uploads', new window.StoreFactoryUploads(data.config))
             store.registerModule('designer', new window.StoreFactoryDesigner(data.config))
-            store.registerModule('palette', new window.StoreFactoryPalette(data.config, window.Widgets.Palette))
+            store.registerModule('palette', new window.StoreFactoryPalette(data.config, store, window.Widgets.Palette))
             store.registerModule('actions', new window.StoreFactoryActions(data.config))
             store.registerModule('storage', new window.StoreFactoryStorage(data.config))
 

@@ -167,19 +167,20 @@ window.StoreFactoryDesigner =
 
                     if (!c.pages || !c.pages.length) {
 
-                        let root = getters.palette.item('default-container/default-container-stack/stack-canvas');
-
-                        let page = {
-                            root: root,
-                            type: 'page',
-                            name: '',
-                            sources: [],
-                            storages: [],
-                        };
-
-                        c.pages = [
-                            page
-                        ]
+                        getters
+                            .produce('default-container/default-container-stack/stack-canvas')
+                            .then(root => {
+                                c.pages = [
+                                    {
+                                        root: root,
+                                        type: 'page',
+                                        name: '',
+                                        sources: [],
+                                        storages: [],
+                                    }
+                                ]
+                            })
+                            .catch(() => {})
                     }
 
                     if (!c.images || !c.images.length) {

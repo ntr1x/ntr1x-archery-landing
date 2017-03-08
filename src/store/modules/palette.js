@@ -1,7 +1,7 @@
 window.StoreFactoryPalette =
 (function() {
 
-    return function(config, palette) {
+    return function(config, store, palette) {
 
         return {
 
@@ -18,6 +18,14 @@ window.StoreFactoryPalette =
 
             getters: {
                 palette: () => palette,
+                produce: () => (path) => {
+                    return palette.item(path, {
+                        state: store.state,
+                        commit: store.commit,
+                        dispatch: store.dispatch,
+                        getters: store.getters,
+                    })
+                }
             }
         }
     }
