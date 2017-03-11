@@ -110,6 +110,9 @@
 
                 this.$store.dispatch('portals/create', {
                     title: this.form.title,
+                    domains: [
+                        { name:'#.si.ntr1x.com', action: 'CREATE' }
+                    ]
                 })
                 .then(
                     () => { this.$router.push({ path: '/manage' })},
@@ -181,6 +184,9 @@
                     proto: this.form.id,
                     title: this.form.title,
                     thumbnail: this.form.thumbnail.id,
+                    domains: [
+                        { name:'#.si.ntr1x.com', action: 'CREATE' }
+                    ]
                 })
                 .then(
                     () => { this.$router.push({ path: '/manage' }) },
