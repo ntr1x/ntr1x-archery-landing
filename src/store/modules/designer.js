@@ -9,6 +9,7 @@ window.StoreFactoryDesigner =
 
                 portal: null,
                 content: null,
+                viewport: null,
 
                 scale: 1.0,
                 left: {
@@ -74,6 +75,16 @@ window.StoreFactoryDesigner =
 
                 'designer/portal': (state, portal) => {
                     state.portal = portal;
+                },
+
+                'designer/viewport': (state, viewport) => {
+                    state.viewport = viewport;
+                },
+
+                'designer/viewport/rotate': (state) => {
+                    if (state.viewport) {
+                        state.viewport.landscape = !state.viewport.landscape
+                    }
                 },
 
                 'designer/content': (state, content) => {
