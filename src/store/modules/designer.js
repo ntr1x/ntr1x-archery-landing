@@ -89,7 +89,7 @@ window.StoreFactoryDesigner =
 
                 'designer/content': (state, content) => {
                     state.content = content;
-                    state.page = content.pages[0];
+                    state.page = (content.pages != null && content.pages.length) ? content.pages[0] : null;
                 },
 
                 'designer/scale': (state, scale) => {
@@ -176,73 +176,96 @@ window.StoreFactoryDesigner =
 
                     let c = JSON.parse(JSON.stringify(content || {}))
 
-                    if (!c.pages || !c.pages.length) {
+                    return Promise.all([
 
-                        getters
-                            .produce('default-container/default-container-stack/stack-canvas')
-                            .then(root => {
-                                c.pages = [
+                        (() => {
+
+                            if (!c.pages || !c.pages.length) {
+
+                                return getters
+                                    .produce('default-container/default-container-stack/stack-canvas')
+                                    .then(root => {
+                                        c.pages = [
+                                            {
+                                                root: root,
+                                                type: 'page',
+                                                name: '',
+                                                sources: [],
+                                                storages: [],
+                                            }
+                                        ]
+                                    })
+                                    .catch(() => {})
+                            }
+
+                            return Promise.resolve()
+
+                        })(),
+
+                        (() => {
+
+                            if (!c.images || !c.images.length) {
+
+                                c.images = [
                                     {
-                                        root: root,
-                                        type: 'page',
-                                        name: '',
-                                        sources: [],
-                                        storages: [],
-                                    }
-                                ]
-                            })
-                            .catch(() => {})
-                    }
+                                        uuid: Core.UUID.random(),
+                                        name: '1920xAuto',
+                                        title: '1920 x auto',
+                                        items: [
+                                            { name: 'thumbnail', format: 'png', type: 'COVER', width: 120, height: 60 },
+                                            { name: 'image', format: 'jpg', type: 'COVER', width: 1920, height: null },
+                                        ]
+                                    },
 
-                    if (!c.images || !c.images.length) {
-                        c.images = [
-                            {
-                                uuid: Core.UUID.random(),
-                                name: '1920xAuto',
-                                title: '1920 x auto',
-                                items: [
-                                    { name: 'thumbnail', format: 'png', type: 'COVER', width: 120, height: 60 },
-                                    { name: 'image', format: 'jpg', type: 'COVER', width: 1920, height: null },
+                                    {
+                                        uuid: Core.UUID.random(),
+                                        name: '256x256',
+                                        title: '256 x 256',
+                                        items: [
+                                            { name: 'thumbnail', format: 'png', type: 'COVER', width: 120, height: 60 },
+                                            { name: 'image', format: 'png', type: 'COVER', width: 256, height: 256 },
+                                        ]
+                                    },
+                                    {
+                                        uuid: Core.UUID.random(),
+                                        name: '64x64',
+                                        title: '64 x 64',
+                                        items: [
+                                            { name: 'thumbnail', format: 'png', type: 'COVER', width: 120, height: 60 },
+                                            { name: 'image', format: 'png', type: 'COVER', width: 64, height: 64 },
+                                        ]
+                                    },
                                 ]
-                            },
+                            }
 
-                            {
-                                uuid: Core.UUID.random(),
-                                name: '256x256',
-                                title: '256 x 256',
-                                items: [
-                                    { name: 'thumbnail', format: 'png', type: 'COVER', width: 120, height: 60 },
-                                    { name: 'image', format: 'png', type: 'COVER', width: 256, height: 256 },
+                            return Promise.resolve()
+                        })(),
+
+                        (() => {
+
+                            if (!c.files || !c.files.length) {
+
+                                c.files = [
+                                    {
+                                        uuid: Core.UUID.random(),
+                                        name: 'documents',
+                                        title: 'Documents',
+                                    },
+                                    {
+                                        uuid: Core.UUID.random(),
+                                        name: 'archives',
+                                        title: 'Archives',
+                                    },
                                 ]
-                            },
-                            {
-                                uuid: Core.UUID.random(),
-                                name: '64x64',
-                                title: '64 x 64',
-                                items: [
-                                    { name: 'thumbnail', format: 'png', type: 'COVER', width: 120, height: 60 },
-                                    { name: 'image', format: 'png', type: 'COVER', width: 64, height: 64 },
-                                ]
-                            },
-                        ]
-                    }
+                            }
 
-                    if (!c.files || !c.files.length) {
-                        c.files = [
-                            {
-                                uuid: Core.UUID.random(),
-                                name: 'documents',
-                                title: 'Documents',
-                            },
-                            {
-                                uuid: Core.UUID.random(),
-                                name: 'archives',
-                                title: 'Archives',
-                            },
-                        ]
-                    }
+                            return Promise.resolve()
+                        })()
 
-                    return Promise.resolve(c);
+                    ])
+                    .then(() => {
+                        return c
+                    })
                 },
 
                 'designer/push': ({ commit, dispatch, state, rootState }) => {
