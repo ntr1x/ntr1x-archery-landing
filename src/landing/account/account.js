@@ -55,6 +55,8 @@
 
             signin: function() {
 
+                console.log('Signin');
+
                 this.$store
                     .dispatch('security/signin', {
                         email: this.form.email,
