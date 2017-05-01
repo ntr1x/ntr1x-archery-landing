@@ -160,4 +160,14 @@
         template: '#landing-account-apply-alert',
     });
 
+    Landing.LandingAccountPurchasePage =
+    Vue.component('landing-account-purchase-page', {
+        template: '#landing-account-purchase-page',
+    });
+
+    Landing.LandingAccountPurchaseAlert =
+    Vue.component('landing-account-purchase-alert', {
+        template: '#landing-account-purchase-alert',
+    });
+
 })(jQuery, Vue, Core, Shell, Landing);

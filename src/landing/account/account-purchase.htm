@@ -1,0 +1,53 @@
+<template id="landing-account-purchase">
+    <div class="ld ld-section ld-body ld-account ld-account-purchase">
+        <div class="ld ld-table">
+            <div class="ld ld-cell">
+                <div class="ld ld-center">
+                    <div class="ld ld-offer" v-if="context != null">
+                        <div class="form-group">
+                            <h3>{{ context.offer.title }}</h3>
+                        </div>
+                        <div class="form-group">
+                            <p class="ld ld-offer-price">{{ context.offer.extra.price }}</p>
+                            <p>{{ context.offer.promo }}</p>
+                            <ul>
+                                <li v-for="b in context.offer.extra.benefits">{{ b }}</li>
+                            </ul>
+                            <p>{{ context.offer.extra.purpose }}</p>
+                        </div>
+                        <template v-for="s in context.stores">
+                            <shop-yandex
+                                v-if="s.store.name == 'yandex' && order != null"
+                                ref="shop"
+                                :order="order"
+                                :store="s"
+                                :user="$store.state.security.principal.user"
+                            ></shop-yandex>
+                            <hr>
+                            <div class="form-group">
+                                <div class="container-fluid ld ld-offer-prices">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <i>{{ s.store.title }}</i>
+                                        </div>
+                                    </div>
+                                    <div class="row" v-for="p in context.prices">
+                                        <div class="col-xs-6">
+                                            <div style="line-height: 1.0">{{ p.title }}</div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <button type="button" class="btn btn-primary" @click="send(s.store, p)">
+                                                <span>{{ p.currency }} {{ p.price }}</span> |
+                                                <span>Buy</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

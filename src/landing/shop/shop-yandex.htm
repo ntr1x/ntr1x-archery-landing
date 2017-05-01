@@ -1,0 +1,10 @@
+<template id="shop-yandex">
+    <form action="https://money.yandex.ru/eshop.xml" method="post">
+        <input type="hidden" name="shopId" :value="store.params['YANDEX.SHOPID']" />
+        <input type="hidden" name="scid" :value="store.params['YANDEX.SCID']" />
+        <input type="hidden" name="customerNumber" :value="order.id" />
+        <input type="hidden" name="sum" :value="order.price * order.quantity" />
+        <input type="hidden" name="custName" :value="user.name" />
+        <input type="hidden" name="orderDetails" :value="order.relate == null ? '' : ('[' + order.relate.id + '] ' + order.relate.title)" />
+    </form>
+</template>

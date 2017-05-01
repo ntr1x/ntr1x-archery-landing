@@ -25,6 +25,22 @@ window.StoreFactoryLanding =
                         })
                     })
                 },
+
+                'landing/offers/id/get': ({ commit, state, rootState }, { id }) => {
+                    return Vue.http.get(`${endpoint}/store/offers/i/${id}`, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    })
+                },
+
+                'landing/offers/id/context': ({ commit, state, rootState }, { id }) => {
+                    return Vue.http.get(`${endpoint}/store/offers/i/${id}/context`, {
+                        headers: $.extend({}, {
+                            Authorization: rootState.security.principal.token || undefined
+                        })
+                    })
+                },
             }
         }
     }

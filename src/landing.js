@@ -18,6 +18,7 @@ window.Landing =
             store.registerModule('modals', new window.StoreFactoryModals(data.config))
             store.registerModule('uploads', new window.StoreFactoryUploads(data.config))
             store.registerModule('landing', new window.StoreFactoryLanding(data.config))
+            store.registerModule('yandex', new window.StoreFactoryYandex(data.config))
 
             store.commit('security/principal', data.principal)
             store.commit('portals/shared', data.shared)
@@ -105,6 +106,16 @@ window.Landing =
                 {
                     path: '/account/apply/alert',
                     component: Landing.LandingAccountApplyAlert,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/account/purchase/offers/i/:offer',
+                    component: Landing.LandingAccountPurchasePage,
+                    meta: { auth: true }
+                },
+                {
+                    path: '/account/purchase/alert',
+                    component: Landing.LandingAccountPurchaseAlert,
                     meta: { auth: true }
                 },
                 {
