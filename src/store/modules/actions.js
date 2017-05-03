@@ -11,13 +11,14 @@ window.StoreFactoryActions =
 
             actions: {
 
-                'actions/execute': ({ dispatch }, { $store, $page, $script, $context, $eval }) => {
+                'actions/execute': ({ dispatch }, { $store, $page, $script, $context, $event, $eval }) => {
 
                     if ($script != null) {
 
                         return $eval($script, {
                             $store,
                             $page,
+                            $event,
                             $context,
                         })
                     }

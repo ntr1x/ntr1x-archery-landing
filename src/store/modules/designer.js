@@ -29,6 +29,10 @@ window.StoreFactoryDesigner =
                 storage: null,
                 source: null,
 
+                container: {
+                    uuid: null
+                },
+
                 log: {
                     messages: [
                         { group: 'runtime', type: 'error', message: 'Cannot evaluate expression', time: '14:30:12.123' },
@@ -88,6 +92,7 @@ window.StoreFactoryDesigner =
                 },
 
                 'designer/content': (state, content) => {
+                    state.container.uuid = Core.UUID.random()
                     state.content = content;
                     state.page = (content.pages != null && content.pages.length) ? content.pages[0] : null;
                 },
@@ -156,7 +161,7 @@ window.StoreFactoryDesigner =
                 'designer/widgets/remove': (state, { parent, widget }) => { Core.Collection(parent, 'widgets').remove(widget) },
                 'designer/widgets/clear': (state, { parent }) => { Core.Collection(parent, 'widgets').clear() },
 
-                'designer/params/update': (state, { model, value }) => { Object.assign(model, value) },
+                'designer/params/update': (state, { model, value }) => { Object.assign(model, value, { uuid: Core.UUID.random() }) },
                 'designer/property/update': (state, { parent, value, property }) => { parent[property] = value },
 
                 'designer/items/create': (state, { parent, item, property }) => { Core.Collection(parent, property || 'items').create(item) },
@@ -187,6 +192,7 @@ window.StoreFactoryDesigner =
                                     .then(root => {
                                         c.pages = [
                                             {
+                                                uuid: Core.UUID.random(),
                                                 root: root,
                                                 type: 'page',
                                                 name: '',
